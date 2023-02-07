@@ -1,7 +1,7 @@
 # react-with-three
 # Run the following commands in your terminal
 
-1. install nodemodnode_modulesule `npm install` for install.
+1. install node_modules `npm install` for install.
 
 1. Run `npm start` for run.
 
