@@ -1,8 +1,9 @@
 # react-with-three
 # Run the following commands in your terminal
 
-npm install
-npm start
+1. install nodemodnode_modulesule `npm install` for install.
+
+1. Run `npm start` for run.
 
 # Then open [ on your web browser.
 
