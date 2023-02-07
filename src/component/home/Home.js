@@ -9,7 +9,7 @@ function Controls(props) {
   const { camera, gl } = useThree()
   const ref = useRef()
   useFrame(() => ref.current.update())
-  return <orbitControls ref={ref} target={[0, 0, 0]} {...props} args={[camera, gl.domElement]} />
+  return <orbitControls ref={ref} target={[70, 10, 0]} {...props} args={[camera, gl.domElement]} />
 }
 
 function Dome() {
@@ -25,8 +25,8 @@ function Dome() {
 function Home() {
   return (
     
-    <Canvas camera={{ position: [0, 0, 0.1] }}>
-    <Controls enableZoom={true} enablePan={false} enableDamping dampingFactor={0.2} rotateSpeed={-0.5} />
+    <Canvas orthographiccamera ={{ position: [5, -5, 5, -5] }}>
+    <Controls cursorZoom={true} enableZoom={true} MAX_ZOOM={0} MIN_ZOOM={0} enablePan={false} enableDamping dampingFactor={0.2} rotateSpeed={-0.5} />
     <Suspense fallback={null}>
       <Dome />
     </Suspense>
