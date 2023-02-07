@@ -1,5 +1,5 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
-.env
+#.env
 # dependencies
 node_modules
 /node_modules
@@ -12,5 +12,5 @@ yarn-error.log*
 
 
 # compiled output
-/build
+#/build
 
