@@ -12,5 +12,5 @@ yarn-error.log*
 
 
 # compiled output
-/build
+#/build
 
