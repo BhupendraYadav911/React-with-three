@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom'
 import React, { Suspense, useRef } from 'react'
-import './styles.css'
+import './styles.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 

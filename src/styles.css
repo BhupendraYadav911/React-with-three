@@ -34,3 +34,40 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
   color: black;
 }
+
+#image {
+  transform-origin: 0 0;
+  height: auto;
+  width: 100%;
+  /* cursor: grab; */
+}
+
+
+/* online code css */
+
+/* .container {
+  background-color: lightgrey;
+}
+.stage {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+#image {
+  transform-origin: 0 0;
+  height: auto;
+  width: 80%;
+  cursor: grab;
+}
+.actions {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1.5rem;
+  width: 100%;
+  background-color: lightgrey;
+}
+.action {
+  margin-right: 1rem;
+} */
