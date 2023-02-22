@@ -1,11 +1,13 @@
 import React from 'react';
 // import { Link, Route, Routes } from 'react-router-dom';
 // import About from './component/about/About';
-import Home from './component/home/Home';
+ import Home from './component/home/Home';
+import About from './component/about/About';
 function App() {
     return (
       <>
       <Home/>
+     
        {/* <li className="nav-item">
     <Link className="nav-link active" aria-current="page" to="/Home">Home</Link>
   </li>
