@@ -20,7 +20,8 @@ function Controls(props) {
 
 
 function Dome() {
-  const texture = useLoader(THREE.TextureLoader, '/showroom.jpg')
+  const texture = useLoader(THREE.TextureLoader, '/showroom.jpg');
+  console.log('hhhhhhhhhhh',texture);
   return (
     <mesh>
       <sphereBufferGeometry attach="geometry" args={[800, 60, 40]} />
