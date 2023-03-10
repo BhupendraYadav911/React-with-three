@@ -10,7 +10,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-
+HDFC-file-reactjs-360/node_modules
+/HDFC-file-reactjs-360/node_modules
 # compiled output
 #/build
 
