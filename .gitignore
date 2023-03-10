@@ -12,6 +12,9 @@ yarn-error.log*
 
 HDFC-file-reactjs-360/node_modules
 /HDFC-file-reactjs-360/node_modules
+backend/node_modules
+/backend/node_modules
+
 # compiled output
 #/build
 

@@ -1,0 +1,1653 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "0.1.9",
+        "title": "",
+        "description": "",
+        "license": {
+            "name": "",
+            "url": ""
+        }
+    },
+    "basePath": "/",
+    "tags": [],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "consumes": [
+        "application/json",
+        "multipart/form-data"
+    ],
+    "produces": [
+        "application/json",
+        "multipart/form-data"
+    ],
+    "paths": {
+        "/auth/signup-token": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Adds a new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "ghanshyam.digiprima@gmail.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/signup": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Add a new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "password",
+                                    "full_name",
+                                    "organization",
+                                    "job_id",
+                                    "token"
+                                ],
+                                "properties": {
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "full_name": {
+                                        "type": "string"
+                                    },
+                                    "organization": {
+                                        "type": "string"
+                                    },
+                                    "job_id": {
+                                        "type": "string"
+                                    },
+                                    "token": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "password": "123456",
+                                    "full_name": "ghanshyam",
+                                    "organization": "test",
+                                    "job_id": "",
+                                    "token": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/signup-invite": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Add a new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "password",
+                                    "full_name",
+                                    "invite_id",
+                                    "job_id"
+                                ],
+                                "properties": {
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "full_name": {
+                                        "type": "string"
+                                    },
+                                    "invite_id": {
+                                        "type": "string"
+                                    },
+                                    "job_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "password": "123456",
+                                    "full_name": "ghanshyam",
+                                    "invite_id": "",
+                                    "job_id": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Login user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "ghanshyam.digiprima@gmail.com",
+                                    "password": "123456"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/update-user-profile": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user profile",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "full_name",
+                                    "job_id",
+                                    "organization"
+                                ],
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string"
+                                    },
+                                    "organization": {
+                                        "type": "string"
+                                    },
+                                    "job_id": {
+                                        "type": "string"
+                                    },
+                                    "oldPassword": {
+                                        "type": "string"
+                                    },
+                                    "newPassword": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "full_name": "ghanshyam",
+                                    "organization": "test",
+                                    "job_id": "5e68df7243d3c262c0ab6fd5",
+                                    "oldPassword": "",
+                                    "newPassword": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/update-user-photo": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user photo",
+                "description": " `user_photo` field is required.",
+                "consumes": "multipart/form-data",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "user_photo": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/forgot-password": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "forgot password",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "ghanshyam.digiprima@gmail.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/get-all-users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get all users",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/job/get-all-jobs": {
+            "get": {
+                "tags": [
+                    "Job"
+                ],
+                "summary": "Get all Jobs",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/roadmap/create-roadmap": {
+            "post": {
+                "tags": [
+                    "Roadmap"
+                ],
+                "summary": "Roadmap create",
+                "description": "Create new `Roadmap`. `name` field is required.  `For Example {'name': 'My first roadmap'}`",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "My first roadmap"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/roadmap/find-roadmap": {
+            "get": {
+                "tags": [
+                    "Roadmap"
+                ],
+                "summary": "Get all roadmap",
+                "description": "Get all `Roadmap`.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/roadmap/get-roadmap-by-id/{roadmapId}": {
+            "post": {
+                "tags": [
+                    "Roadmap"
+                ],
+                "summary": "Get roadmap by id",
+                "description": "Get single `Roadmap`. by `roadmapId`. For Example `{'roadmapViewType': 'list'}` or `{'roadmapViewType': ''}`",
+                "parameters": [
+                    {
+                        "name": "roadmapId",
+                        "in": "path",
+                        "description": "The roadmap that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "roadmapViewType"
+                                ],
+                                "properties": {
+                                    "roadmapViewType": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "roadmapViewType": "list"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/roadmap/update-roadmap-name": {
+            "post": {
+                "tags": [
+                    "Roadmap"
+                ],
+                "summary": "Update Roadmap name",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "roadmapId",
+                                    "name"
+                                ],
+                                "properties": {
+                                    "roadmapId": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "roadmapId": "5e7b3042acf9154152f5595d",
+                                    "name": "test"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/roadmap/add-field": {
+            "put": {
+                "tags": [
+                    "Roadmap"
+                ],
+                "summary": "Add field",
+                "description": "A user can add two types of field - Text, List. For text field send -  `{'roadmapId': '5e4e519b56ed8136fe56efd1','field':{'name':'test','type':'text','label':'Test','placeholder':'Test'}`. For list field send - `{'roadmapId': '5e567245f5254814130a885c','field': {'name': 'test','type': 'list','label': 'Test','placeholder': 'Test','options': ['option1','option2']}}`",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "roadmapId",
+                                    "field"
+                                ],
+                                "properties": {
+                                    "roadmapId": {
+                                        "type": "string"
+                                    },
+                                    "field": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "label": {
+                                            "type": "string"
+                                        },
+                                        "placeholder": {
+                                            "type": "string"
+                                        },
+                                        "options": [
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "example": {
+                                    "roadmapId": "5e567245f5254814130a885c",
+                                    "field": {
+                                        "name": "test",
+                                        "type": "list",
+                                        "label": "Test",
+                                        "placeholder": "Test",
+                                        "options": [
+                                            "option1",
+                                            "option2"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/roadmap/edit-field": {
+            "put": {
+                "tags": [
+                    "Roadmap"
+                ],
+                "summary": "Edit field",
+                "description": "A user can edit two types of field - Text, List. For text field send `{'roadmapId': '5e60d05558a01f3c812024f3','field': {'fieldId': '5e60d6046a776b41d483012d','name': 'test','type': 'text','label': 'Test','placeholder': 'Test'}}`. For list field send - `{'roadmapId': '5e60d05558a01f3c812024f3','field': {'fieldId': '5e60d6046a776b41d483012d','name': 'test','type': 'list','label': 'Test','placeholder': 'Test','options': [{'_id': '5e60d6046a776b41d483012e','optionsValue': 'option1'},{'_id': '5e60d6046a776b41d483012f','optionsValue': 'option2'}]}}`",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "roadmapId",
+                                    "field"
+                                ],
+                                "properties": {
+                                    "roadmapId": {
+                                        "type": "string"
+                                    },
+                                    "field": {
+                                        "fieldId": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "label": {
+                                            "type": "string"
+                                        },
+                                        "placeholder": {
+                                            "type": "string"
+                                        },
+                                        "options": [
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "example": {
+                                    "roadmapId": "5e60d05558a01f3c812024f3",
+                                    "field": {
+                                        "fieldId": "5e60d6046a776b41d483012d",
+                                        "name": "test",
+                                        "type": "list",
+                                        "label": "Test",
+                                        "placeholder": "Test",
+                                        "options": [
+                                            {
+                                                "_id": "5e60d6046a776b41d483012e",
+                                                "optionsValue": "option1"
+                                            },
+                                            {
+                                                "_id": "5e60d6046a776b41d483012f",
+                                                "optionsValue": "option2"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/roadmap/delete-field/{roadmapId}": {
+            "delete": {
+                "tags": [
+                    "Roadmap"
+                ],
+                "summary": "Delete field roadmap",
+                "description": "Delete field roadmap.  `For Example {'fieldId': '5e7c76868e8c774297e6e557'}`",
+                "parameters": [
+                    {
+                        "name": "roadmapId",
+                        "in": "path",
+                        "description": "The roadmap that needs to be delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "fieldId"
+                                ],
+                                "properties": {
+                                    "fieldId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "fieldId": "5e7c76868e8c774297e6e557"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/roadmap/find-delete-roadmap/{roadmapId}": {
+            "delete": {
+                "tags": [
+                    "Roadmap"
+                ],
+                "summary": "Delete roadmap or field",
+                "description": "Pass `'roadmap'` in action field to delete a roadmap.  `For Example {'action': 'roadmap'}`",
+                "parameters": [
+                    {
+                        "name": "roadmapId",
+                        "in": "path",
+                        "description": "The roadmap that needs to be delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "action"
+                                ],
+                                "properties": {
+                                    "action": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "action": "roadmap"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/roadmap/add-roadmap-configuration": {
+            "post": {
+                "tags": [
+                    "Roadmap"
+                ],
+                "summary": "roadmap configuration",
+                "description": "add `or` update roadmap configuration",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "roadmapId",
+                                    "swimlane",
+                                    "listview"
+                                ],
+                                "properties": {
+                                    "roadmapId": {
+                                        "type": "string"
+                                    },
+                                    "swimlane": {},
+                                    "listview": {}
+                                },
+                                "example": {
+                                    "roadmapId": "5e6a215826620755184a9bf1",
+                                    "swimlane": {
+                                        "test": "test"
+                                    },
+                                    "listview": {
+                                        "test": "test"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/roadmap/get-roadmap-configuration/{roadmapId}": {
+            "post": {
+                "tags": [
+                    "Roadmap"
+                ],
+                "summary": "Get roadmap configuration by roadmap id",
+                "description": "Get single Roadmap configuration.",
+                "parameters": [
+                    {
+                        "name": "roadmapId",
+                        "in": "path",
+                        "description": "The roadmap that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/roadmap/create-duplicate-roadmap": {
+            "post": {
+                "tags": [
+                    "Roadmap"
+                ],
+                "summary": "Add duplicate roadmap",
+                "description": "Add duplicate `Roadmap`.   For Example `{'roadmapId': '5e69fc56cf28d53d3f917f1f','name':'test','share':'true'}`",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "roadmapId",
+                                    "name",
+                                    "share"
+                                ],
+                                "properties": {
+                                    "roadmapId": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "share": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "roadmapId": "5e69fc56cf28d53d3f917f1f",
+                                    "name": "test",
+                                    "share": "true"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/share/roadmap": {
+            "post": {
+                "tags": [
+                    "Share Roadmap"
+                ],
+                "summary": "Share a new roadmap",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "roadmapId",
+                                    "userEmail",
+                                    "permission"
+                                ],
+                                "properties": {
+                                    "roadmapId": {
+                                        "type": "string"
+                                    },
+                                    "userEmail": [
+                                        {
+                                            "type": "string"
+                                        }
+                                    ],
+                                    "permission": {
+                                        "add": {
+                                            "type": "boolean"
+                                        },
+                                        "edit": {
+                                            "type": "boolean"
+                                        },
+                                        "delete": {
+                                            "type": "boolean"
+                                        },
+                                        "view": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "roadmapId": "5e6f7502e85eef531931d6e1",
+                                    "userEmail": [
+                                        "rajesh.digiprima@gmail.com",
+                                        "ghanshyam.digiprima@gmail.com"
+                                    ],
+                                    "permission": {
+                                        "add": "false",
+                                        "edit": "false",
+                                        "delete": "false",
+                                        "view": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/share/share-update-user": {
+            "post": {
+                "tags": [
+                    "Share Roadmap"
+                ],
+                "summary": " Update user share roadmap",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "roadmapId",
+                                    "userId",
+                                    "permission"
+                                ],
+                                "properties": {
+                                    "roadmapId": {
+                                        "type": "string"
+                                    },
+                                    "userId": {
+                                        "type": "string"
+                                    },
+                                    "permission": {
+                                        "add": {
+                                            "type": "boolean"
+                                        },
+                                        "edit": {
+                                            "type": "boolean"
+                                        },
+                                        "delete": {
+                                            "type": "boolean"
+                                        },
+                                        "view": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "roadmapId": "5e6f7502e85eef531931d6e1",
+                                    "userId": "5e71c2a2bea17f2dbd424eaf",
+                                    "permission": {
+                                        "add": "false",
+                                        "edit": "false",
+                                        "delete": "false",
+                                        "view": "false"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/share/share-remove-roadmap/{shareId}": {
+            "delete": {
+                "tags": [
+                    "Share Roadmap"
+                ],
+                "summary": "Delete share roadmap",
+                "description": "Pass `'share'` in action field to delete a share roadmap or `'shareuser'` and userId to delete a field from the share roadmap. `userId` is required to delete a field from the share roadmap.",
+                "parameters": [
+                    {
+                        "name": "shareId",
+                        "in": "path",
+                        "description": "The share roadmap that needs to be delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "action"
+                                ],
+                                "properties": {
+                                    "action": {
+                                        "type": "string"
+                                    },
+                                    "userId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "action": "share",
+                                    "userId": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/share/share-delete-roadmap/{shareId}": {
+            "delete": {
+                "tags": [
+                    "Share Roadmap"
+                ],
+                "summary": "Delete share roadmap",
+                "description": "Pass `'share'` in action field to delete a share roadmap or `'shareuser'` and userId to delete a field from the share roadmap. `userId` is required to delete a field from the share roadmap.",
+                "parameters": [
+                    {
+                        "name": "shareId",
+                        "in": "path",
+                        "description": "The share roadmap that needs to be delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "action"
+                                ],
+                                "properties": {
+                                    "action": {
+                                        "type": "string"
+                                    },
+                                    "userId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "action": "share",
+                                    "userId": ""
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/feature/create-feature": {
+            "post": {
+                "tags": [
+                    "Feature"
+                ],
+                "summary": "Feature create",
+                "description": "Create new `feature`. `roadmapId` and `features` field is required. `For Example {'roadmapId': '5e60d05558a01f3c812024f3', 'order': 1,   'features': [{ 'fieldId': '5e60cd2fa731ab3a5b4e87b8', 'fieldValue': 'Title'}, {'fieldId': '5e60cd2fa731ab3a5b4e87b9','fieldValue': 'Start Date'},{'fieldId': '5e60cd2fa731ab3a5b4e87ba','fieldValue': 'End Date'}, {'fieldId': '5e60cd2fa731ab3a5b4e87bb','fieldValue': 'Description'}]}`",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "roadmapId",
+                                    "order",
+                                    "features"
+                                ],
+                                "properties": {
+                                    "roadmapId": {
+                                        "type": "string"
+                                    },
+                                    "order": {
+                                        "type": "number"
+                                    },
+                                    "features": [
+                                        {
+                                            "fieldId": {
+                                                "type": "string"
+                                            },
+                                            "fieldValue": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "example": {
+                                    "roadmapId": "5e60d05558a01f3c812024f3",
+                                    "order": 1,
+                                    "features": [
+                                        {
+                                            "fieldId": "5e60cd2fa731ab3a5b4e87b8",
+                                            "fieldValue": "Title"
+                                        },
+                                        {
+                                            "fieldId": "5e60cd2fa731ab3a5b4e87b9",
+                                            "fieldValue": "Start Date"
+                                        },
+                                        {
+                                            "fieldId": "5e60cd2fa731ab3a5b4e87ba",
+                                            "fieldValue": "End Date"
+                                        },
+                                        {
+                                            "fieldId": "5e60cd2fa731ab3a5b4e87bb",
+                                            "fieldValue": "Description"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/feature/create-multi-feature": {
+            "post": {
+                "tags": [
+                    "Feature"
+                ],
+                "summary": "Multiple feature create",
+                "description": "Create new `multiple feature`. `roadmapId` and `features` field is required.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "roadmapId",
+                                    "order",
+                                    "features"
+                                ],
+                                "properties": {
+                                    "roadmapId": {
+                                        "type": "string"
+                                    },
+                                    "order": {
+                                        "type": "number"
+                                    },
+                                    "features": [
+                                        {
+                                            "fieldId": {
+                                                "type": "string"
+                                            },
+                                            "fieldValue": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "example": {
+                                    "roadmapId": "5e81b67342ecaa16e4ec2ed7",
+                                    "order": 1,
+                                    "features": [
+                                        [
+                                            {
+                                                "fieldId": "5e6107cd46b4675fb6bf6ef1",
+                                                "fieldValue": "Title"
+                                            },
+                                            {
+                                                "fieldId": "5e6107cd46b4675fb6bf6ef2",
+                                                "fieldValue": "Start Date"
+                                            }
+                                        ],
+                                        [
+                                            {
+                                                "fieldId": "5e81c6d175e87c1ebc894b47",
+                                                "fieldValue": "Test"
+                                            },
+                                            {
+                                                "fieldId": "5e81d276af10ec228225d517",
+                                                "fieldValue": "Test1"
+                                            }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/feature/find-feature/{roadmapId}": {
+            "get": {
+                "tags": [
+                    "Feature"
+                ],
+                "summary": "Get all feature",
+                "description": "Get `feature`. by `roadmapId`.  `roadmapId` field is required.",
+                "parameters": [
+                    {
+                        "name": "roadmapId",
+                        "in": "path",
+                        "description": "The roadmap that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/feature/find-one-feature/{featureId}": {
+            "get": {
+                "tags": [
+                    "Feature"
+                ],
+                "summary": "Get feature by id",
+                "description": "Get single `feature`. by `featureId`.  `featureId` field is required.",
+                "parameters": [
+                    {
+                        "name": "featureId",
+                        "in": "path",
+                        "description": "The feature that needs to be fetched",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/feature/update-feature": {
+            "put": {
+                "tags": [
+                    "Feature"
+                ],
+                "summary": "Add `or` update single field value in feature",
+                "description": "Add `or` update single field value in feature.  For featureId field send `featureId:''`. and features like `features`: `{'fieldId':'','fieldValue':'Title'}`   `For Example {'featureId': '','features': {'fieldId': '','fieldValue': 'My test'}}`",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "featureId",
+                                    "features"
+                                ],
+                                "properties": {
+                                    "featureId": {
+                                        "type": "string"
+                                    },
+                                    "features": {
+                                        "fieldId": {
+                                            "type": "string"
+                                        },
+                                        "fieldValue": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "featureId": "",
+                                    "features": {
+                                        "fieldId": "",
+                                        "fieldValue": "My test"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/feature/update-multi-value-feature": {
+            "put": {
+                "tags": [
+                    "Feature"
+                ],
+                "summary": "Update multiple field value in single feature",
+                "description": "Update multiple field value in single feature. `For example  {'featureId': '5e8322e0cc29454fe5a6a7a1','features': [{'_id': '5e87355c88bc711bdde239cf','fieldId': '5e6107cd46b4675fb6bf6ef1','fieldValue': 'Test'},{'_id': '5e87355c88bc711bdde239d0','fieldId': '5e6107cd46b4675fb6bf6ef2','fieldValue': 'Test 1'}]}`",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "featureId",
+                                    "features"
+                                ],
+                                "properties": {
+                                    "featureId": {
+                                        "type": "string"
+                                    },
+                                    "features": [
+                                        {
+                                            "fieldId": {
+                                                "type": "string"
+                                            },
+                                            "fieldValue": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "example": {
+                                    "featureId": "5e8322e0cc29454fe5a6a7a1",
+                                    "features": [
+                                        {
+                                            "_id": "5e87355c88bc711bdde239cf",
+                                            "fieldId": "5e6107cd46b4675fb6bf6ef1",
+                                            "fieldValue": "Test"
+                                        },
+                                        {
+                                            "_id": "5e87355c88bc711bdde239d0",
+                                            "fieldId": "5e6107cd46b4675fb6bf6ef2",
+                                            "fieldValue": "Test 1"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/feature/delete-feature/{featureId}": {
+            "delete": {
+                "tags": [
+                    "Feature"
+                ],
+                "summary": "Delete feature ",
+                "description": "Delete a feature `For Example {'action': 'feature'}`",
+                "parameters": [
+                    {
+                        "name": "featureId",
+                        "in": "path",
+                        "description": "The feature that needs to be delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "action"
+                                ],
+                                "properties": {
+                                    "action": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "action": "feature"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/plan/get-all-plans": {
+            "get": {
+                "tags": [
+                    "Plan"
+                ],
+                "summary": "Get all plans",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/status-add": {
+            "post": {
+                "tags": [
+                    "Master Entry"
+                ],
+                "summary": "Add status",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "status_id",
+                                    "status_name",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "status_id": {
+                                        "type": "number"
+                                    },
+                                    "status_name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "status_id": 1,
+                                    "status_name": "Active",
+                                    "description": "After verification user is active"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/job/add-job": {
+            "post": {
+                "tags": [
+                    "Master Entry"
+                ],
+                "summary": "Add a new job",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "jobTitle",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "jobTitle": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "jobTitle": "Product Manager",
+                                    "description": "Product Manager"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/template/createTemplate": {
+            "post": {
+                "tags": [
+                    "Master Entry"
+                ],
+                "summary": "Add template",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "userid",
+                                    "name",
+                                    "fields"
+                                ],
+                                "properties": {
+                                    "userid": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "number"
+                                    },
+                                    "fields": [
+                                        {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "type": "string"
+                                            },
+                                            "label": {
+                                                "type": "string"
+                                            },
+                                            "placeholder": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "example": {
+                                    "userid": "null",
+                                    "name": "scratch",
+                                    "fields": [
+                                            {
+                                                "name": "Feature",
+                                                "type": "text",
+                                                "label": "Feature",
+                                                "placeholder": "Feature"
+                                            },
+                                            {
+                                                "name": "Description",
+                                                "type": "text",
+                                                "label": "Description",
+                                                "placeholder": "Description"
+                                            },
+                                            {
+                                                "name": "Start Date",
+                                                "type": "date",
+                                                "label": "Start Date",
+                                                "placeholder": "Start Date"
+                                            },
+                                            {
+                                                "name": "End Date",
+                                                "type": "date",
+                                                "label": "End Date",
+                                                "placeholder": "End Date"
+                                            },
+                                            {
+                                                "name": "Release",
+                                                "type": "list",
+                                                "label": "Release",
+                                                "placeholder": "Release",
+                                                "options":[
+                                                    {"optionsValue":"Parked"},
+                                                    {"optionsValue":"v1.0"},
+                                                    {"optionsValue":"v2.0"},
+                                                    {"optionsValue":"v3.0"},
+                                                    {"optionsValue":"no value"}
+                                                ]
+                                            },
+                                            {
+                                                "name": "Status",
+                                                "type": "list",
+                                                "label": "Status",
+                                                "placeholder": "Status",
+                                                "options":[
+                                                    {"optionsValue":"Design"},
+                                                    {"optionsValue":"Development"},
+                                                    {"optionsValue":"QA"},
+                                                    {"optionsValue":"UAT"},
+                                                    {"optionsValue":"no value"}
+                                                ]
+                                            },
+                                            {
+                                                "name": "Theme",
+                                                "type": "list",
+                                                "label": "Theme",
+                                                "placeholder": "Theme",
+                                                "options":[
+                                                {"optionsValue":"Monetization"},
+                                                    {"optionsValue":"Customer Acquisition"},
+                                                    {"optionsValue":"Growth"},
+                                                    {"optionsValue":"no value"}
+                                                ]
+                                            },
+                                            {
+                                                "name": "RAG Status",
+                                                "type": "list",
+                                                "label": "RAG Status",
+                                                "placeholder": "RAG Status",
+                                                "options":[
+                                                    {"optionsValue":"Red"},
+                                                    {"optionsValue":"Amber"},
+                                                    {"optionsValue":"Green"},
+                                                    {"optionsValue":"no value"}
+                                                ]
+                                            },
+                                            {
+                                                "name": "Strategic View",
+                                                "type": "list",
+                                                "label": "Strategic View",
+                                                "placeholder": "Strategic View",
+                                                "options":[
+                                                    {"optionsValue":"Now"},
+                                                    {"optionsValue":"Next"},
+                                                    {"optionsValue":"Later"},
+                                                    {"optionsValue":"no value"}
+                                                ]
+                                            },
+                                            {
+                                                "name": "Product Increment",
+                                                "type": "list",
+                                                "label": "Product Increment",
+                                                "placeholder": "Product Increment",
+                                                "options":[
+                                                    {"optionsValue":"2020.Q1"},
+                                                    {"optionsValue":"2020.Q2"},
+                                                    {"optionsValue":"2020.Q3"},
+                                                    {"optionsValue":"2020.Q4"},
+                                                    {"optionsValue":"no value"}
+                                                ]
+                                            }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}
