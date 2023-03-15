@@ -10,13 +10,14 @@ const UserProfileSchema = mongoose.Schema({
    // phone_code: { type: String },
    // phone_nymber: { type: String },
     //organization: { type: String },
-    organization_id: { type: Schema.Types.ObjectId, ref: 'Organizations' },
-    job_id: {type : Schema.Types.ObjectId, ref: 'Jobs' },
+    // organization_id: { type: Schema.Types.ObjectId, ref: 'Organizations' },
+    // job_id: {type : Schema.Types.ObjectId, ref: 'Jobs' },
     user_photo: { type: String, default: "" },
-    role: {type : Schema.Types.ObjectId, ref: 'Roles' },
-    status: {type : Schema.Types.ObjectId, ref: 'Status'},
-    token: {type : String},
-    subscription_expiry_date: {type: Date, default: ""},
+    role: { type: String, default: "" },
+    // role: {type : Schema.Types.ObjectId, ref: 'Roles' },
+    // status: {type : Schema.Types.ObjectId, ref: 'Status'},
+    // token: {type : String},
+    // subscription_expiry_date: {type: Date, default: ""},
 }, {
     timestamps: true
 });

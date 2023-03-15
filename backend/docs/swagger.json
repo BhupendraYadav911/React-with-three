@@ -85,9 +85,9 @@
                                 "required": [
                                     "password",
                                     "full_name",
-                                    "organization",
-                                    "job_id",
-                                    "token"
+                                    "email",
+                                    "role",
+                                    "user_photo"
                                 ],
                                 "properties": {
                                     "password": {
@@ -96,22 +96,22 @@
                                     "full_name": {
                                         "type": "string"
                                     },
-                                    "organization": {
+                                    "email": {
                                         "type": "string"
                                     },
-                                    "job_id": {
+                                    "role": {
                                         "type": "string"
                                     },
-                                    "token": {
+                                    "user_photo": {
                                         "type": "string"
                                     }
                                 },
                                 "example": {
-                                    "password": "123456",
-                                    "full_name": "ghanshyam",
-                                    "organization": "test",
-                                    "job_id": "",
-                                    "token": ""
+                                     "full_name":"Naveen Patel",
+                                     "email":"np.221196.np@gmail.com",
+                                     "password":"123456",
+                                     "role":"",
+                                     "user_photo":""
                                 }
                             }
                         }
@@ -196,8 +196,46 @@
                                     }
                                 },
                                 "example": {
-                                    "email": "ghanshyam.digiprima@gmail.com",
-                                    "password": "123456"
+                                   "email":"np.221196.np@gmail.com",
+                                   "password":"1234567"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+          "/auth/change-password": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Change Password",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "oldPassword",
+                                    "newPassword"
+                                ],
+                                "properties": {
+                                    "oldPassword": {
+                                        "type": "string"
+                                    },
+                                    "newPassword": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                   "oldPassword":"123456",
+                                   "newPassword":"1234567"
                                 }
                             }
                         }
