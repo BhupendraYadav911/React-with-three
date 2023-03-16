@@ -11,3 +11,10 @@ Use command to start single server
 NODE_ENV=dev node server.js
 NODE_ENV=production node server.js
 NODE_ENV=staging node server.js
+
+
+---------------new command------------
+
+nvm use v16.18.1
+npm install
+node server.js

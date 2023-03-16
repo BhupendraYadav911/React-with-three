@@ -17,35 +17,38 @@ function Controls(props) {
   </>
 
 }
+function handleClick() {
+  alert('jjjjjjjjjjjjj');
+}
 
 
 function Dome() {
-  const texture = useLoader(THREE.TextureLoader, '/showroom outline ref.jpg');
+  const texture = useLoader(THREE.TextureLoader, '/HDFC_360_SHOT_BG02_01.JPG');
   //console.log('hhhhhhhhhhh',texture);
 
 
-  const listener = new THREE.AudioListener();
-  console.log('hhhhhhhhhhh',texture, listener);
-  // create the PositionalAudio object (passing in the listener)
-  const sound = new THREE.PositionalAudio(listener);
-  const scene = new THREE.Scene()
-  // load a sound and set it as the PositionalAudio object's buffer
-  const audioLoader = new THREE.AudioLoader();
-  audioLoader.load('/crowd_02.mp4', function (buffer) {
-    sound.setBuffer(buffer);
-    sound.setRefDistance(20);
-    sound.play();
-  });
-  // create an object for the sound to play from
-  const sphere = new THREE.SphereGeometry(20, 32, 16);
-  const material = new THREE.MeshPhongMaterial({ color: 0xff2200 });
-  const mesh = new THREE.Mesh(sphere, material);
-  scene.add(mesh);
+  // const listener = new THREE.AudioListener();
+  // console.log('hhhhhhhhhhh',texture, listener);
+  // // create the PositionalAudio object (passing in the listener)
+  // const sound = new THREE.PositionalAudio(listener);
+  // const scene = new THREE.Scene()
+  // // load a sound and set it as the PositionalAudio object's buffer
+  // const audioLoader = new THREE.AudioLoader();
+  // audioLoader.load('/crowd_02.mp4', function (buffer) {
+  //   sound.setBuffer(buffer);
+  //   sound.setRefDistance(20);
+  //   sound.play();
+  // });
+  // // create an object for the sound to play from
+  // const sphere = new THREE.SphereGeometry(20, 32, 16);
+  // const material = new THREE.MeshPhongMaterial({ color: 0xff2200 });
+  // const mesh = new THREE.Mesh(sphere, material);
+  // scene.add(mesh);
 
-  // finally add the sound to the mesh
-  mesh.add(sound);
+  // // finally add the sound to the mesh
+  // mesh.add(sound);
   return (
-    <mesh>
+    <mesh onClick={handleClick}>
       <sphereBufferGeometry attach="geometry" args={[800, 60, 40]} />
       <meshBasicMaterial attach="material" map={texture} side={THREE.BackSide} />
     </mesh>
