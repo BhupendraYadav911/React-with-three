@@ -44,6 +44,7 @@ app.get('/', (req, res) => {
 });
 app.use(express.static('public'));
 app.use('/auth', routes.user);
+app.use('/setting', routes.setting);
 app.use('/roadmap', routes.roadmap);
 app.use('/feature', routes.feature);
 app.use('/template', routes.template);

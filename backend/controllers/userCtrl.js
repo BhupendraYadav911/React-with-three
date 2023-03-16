@@ -45,6 +45,103 @@ async function statusAdd(req, res) {
         return;
     });
 }
+async function signup(req, res) {
+    if (!req.body.full_name) {
+        return res.status(400).send(Response(400, 'Invalid request! Required full_name is missing'));
+    }
+    if (!req.body.email) {
+        return res.status(400).send(Response(400, 'Invalid request! Required email is missing'));
+    }
+    if (!req.body.password) {
+        return res.status(400).send(Response(400, 'Invalid request! Required password is missing'));
+    }
+    const emailExists = await User.findOne({ "email": req.body.email });
+    if (emailExists) {
+        return res.status(400).send(Response(400, 'Email already exists!.',emailExists));
+    }
+    else{
+        const userToBeSaved = new User();
+        userToBeSaved.full_name = req.body.full_name;
+        userToBeSaved.email = req.body.email;
+        userToBeSaved.role = req.body.role;
+        userToBeSaved.user_photo = req.body.user_photo;
+        userToBeSaved.password = bcrypt.hashSync(req.body.password, 10);
+        userToBeSaved.save();
+        return res.status(201).send(Response(200, "Registration Successful!.", userToBeSaved));
+    }
+
+};
+async function login(req, res) {
+     //const imageUrl = req.headers.origin;
+    if (!req.body.email) {
+        return res.status(400).send(Response(400, 'Invalid request! Required email are missing!'));
+    }
+    if (!req.body.password) {
+        return res.status(400).send(Response(400, 'Invalid request! Required password are missing!'));
+    }
+    User.findOne({ email: req.body.email }, function (err, user) {
+        if (err) {
+            res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+        }
+        else if (user != undefined) {
+            bcrypt.compare(req.body.password, user.password, function (err, result) {
+                if (result == true) {
+                    /* if (user.user_photo != "") {
+                        user.user_photo = imageUrl + user.user_photo;
+                    } */
+                    res.status(201);
+                    res.json({
+                        code: "200",
+                        message: "user login Successful",
+                        data: user,
+                        token: authenticate.getToken({
+                            userid: user._id,
+                            iat: Math.floor(Date.now() / 1000),
+                            // exp: Math.floor(Date.now() / 1000) + (60 * 60)
+                        })
+                    });
+                } else {
+                    return res.status(400).send(Response(400, 'Incorrect password!'));
+                }
+            });
+        }
+        else {
+            return res.status(400).send(Response(400, 'Email Address is not registered with us !'));
+        }
+    });
+}
+async function changePassword(req, res) {
+    if (!req.body.oldPassword && req.body.oldPassword == "") {
+        return res.json(Response(400, 'Required old password are missing!'));
+    }
+    if (!req.body.newPassword && req.body.newPassword == "") {
+        return res.json(Response(400, 'Required new password are missing!'));
+    }
+    const passUser = await User.findOne({ "_id": req.body.user._id });
+    if (passUser) {
+        bcrypt.compare(req.body.oldPassword, req.body.user.password, function (err, result) {
+            if (result == true) {
+                req.body.newPassword = bcrypt.hashSync(req.body.newPassword, saltRounds);
+                User.findOneAndUpdate(
+                    { _id: req.body.user._id },
+                    { $set: { "password": req.body.newPassword } },
+                    { new: true }
+                ).then(user => {
+                    if (!user) {
+                        return res.status(404).send(Response(404, `Invalid old password ${req.body.oldPassword}`));
+                    }
+                    res.status(201).send(Response(200, "Password updated successfully!", user));
+                }).catch(err => {
+                    res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+                });
+            } else {
+                res.json({ status: "false", response: "Incorrect old password !", data: {} });
+            }
+        });
+    } else {
+        res.json({ status: "false", response: "Email Address is missing !", data: {} });
+    }
+}
 async function signupEmail(req, res) {
     const sideURL = req.headers.origin;
     if (req && Object.keys(req.body).length > 0) {
@@ -126,52 +223,52 @@ async function signupEmail(req, res) {
         return res.status(400).send(Response(400, 'Required fields are missing'));
     }
 };
-async function signup(req, res) {
-    if (!req.body.full_name) {
-        return res.status(400).send(Response(400, 'Invalid request! Required full_name is missing'));
-    }
-    if (!req.body.password) {
-        return res.status(400).send(Response(400, 'Invalid request! Required password is missing'));
-    }
-    if (!req.body.organization) {
-        return res.status(400).send(Response(400, 'Invalid request! Required organization is missing'));
-    }
-    /* if (!req.body.phone_code) {
-        return res.status(400).send(Response(400, 'Invalid request! Required phone_code is missing'));
-    }
-    if (!req.body.phone_nymber) {
-        return res.status(400).send(Response(400, 'Invalid request! Required phone_nymber is missing'));
-    } */
-    if (!req.body.job_id) {
-        return res.status(400).send(Response(400, 'Invalid request! Required job_id is missing'));
-    }
-    if (!req.body.token) {
-        return res.status(400).send(Response(400, 'Invalid request! Required token is missing'));
-    }
-    const emailExists = await User.findOne({ "token": req.body.token });
-    if (emailExists) {
-        req.body.password = bcrypt.hashSync(req.body.password, saltRounds);
-        // save user organization
-        const newOrganization = {
-            organization: req.body.organization,
-        }
-        const OrganiUser = new Userorganization(newOrganization);
-        OrganiUser.save();
-        req.body.organization_id = OrganiUser._id;
-        await User.findOneAndUpdate({ _id: emailExists._id }, req.body, { new: true }
-        ).then(user => {
-            if (!user) {
-                return res.status(404).send(Response(404, `Invalid user`));
-            }
-            res.status(201).send(Response(200, "successfully updated!", user));
-        }).catch(err => {
-            res.status(500).send(Response(500, "Some error occurred while retrieving user."));
-        });
-    }
-    else {
-        return res.status(400).send(Response(400, 'Invalid token'));
-    }
-};
+// async function signup(req, res) {
+//     if (!req.body.full_name) {
+//         return res.status(400).send(Response(400, 'Invalid request! Required full_name is missing'));
+//     }
+//     if (!req.body.password) {
+//         return res.status(400).send(Response(400, 'Invalid request! Required password is missing'));
+//     }
+//     if (!req.body.organization) {
+//         return res.status(400).send(Response(400, 'Invalid request! Required organization is missing'));
+//     }
+//     /* if (!req.body.phone_code) {
+//         return res.status(400).send(Response(400, 'Invalid request! Required phone_code is missing'));
+//     }
+//     if (!req.body.phone_nymber) {
+//         return res.status(400).send(Response(400, 'Invalid request! Required phone_nymber is missing'));
+//     } */
+//     if (!req.body.job_id) {
+//         return res.status(400).send(Response(400, 'Invalid request! Required job_id is missing'));
+//     }
+//     if (!req.body.token) {
+//         return res.status(400).send(Response(400, 'Invalid request! Required token is missing'));
+//     }
+//     const emailExists = await User.findOne({ "token": req.body.token });
+//     if (emailExists) {
+//         req.body.password = bcrypt.hashSync(req.body.password, saltRounds);
+//         // save user organization
+//         const newOrganization = {
+//             organization: req.body.organization,
+//         }
+//         const OrganiUser = new Userorganization(newOrganization);
+//         OrganiUser.save();
+//         req.body.organization_id = OrganiUser._id;
+//         await User.findOneAndUpdate({ _id: emailExists._id }, req.body, { new: true }
+//         ).then(user => {
+//             if (!user) {
+//                 return res.status(404).send(Response(404, `Invalid user`));
+//             }
+//             res.status(201).send(Response(200, "successfully updated!", user));
+//         }).catch(err => {
+//             res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+//         });
+//     }
+//     else {
+//         return res.status(400).send(Response(400, 'Invalid token'));
+//     }
+// };
 async function signupInvite(req, res) {
     if (!req.body.full_name) {
         return res.status(400).send(Response(400, 'Invalid request! Required full_name is missing'));
@@ -245,77 +342,8 @@ async function signupInvite(req, res) {
         });
     }
 }
-async function login(req, res) {
-     //const imageUrl = req.headers.origin;
-    if (!req.body.email) {
-        return res.status(400).send(Response(400, 'Invalid request! Required email are missing!'));
-    }
-    if (!req.body.password) {
-        return res.status(400).send(Response(400, 'Invalid request! Required password are missing!'));
-    }
-    User.findOne({ email: req.body.email }, function (err, user) {
-        if (err) {
-            res.status(500).send(Response(500, "Some error occurred while retrieving user."));
-        }
-        else if (user != undefined) {
-            bcrypt.compare(req.body.password, user.password, function (err, result) {
-                if (result == true) {
-                    /* if (user.user_photo != "") {
-                        user.user_photo = imageUrl + user.user_photo;
-                    } */
-                    res.status(201);
-                    res.json({
-                        code: "200",
-                        message: "user login Successful",
-                        data: user,
-                        token: authenticate.getToken({
-                            userid: user._id,
-                            iat: Math.floor(Date.now() / 1000),
-                            // exp: Math.floor(Date.now() / 1000) + (60 * 60)
-                        })
-                    });
-                } else {
-                    return res.status(400).send(Response(400, 'Incorrect password!'));
-                }
-            });
-        }
-        else {
-            return res.status(400).send(Response(400, 'Email Address is not registered with us !'));
-        }
-    });
-}
-async function changePassword(req, res) {
-    if (!req.body.oldPassword && req.body.oldPassword == "") {
-        return res.json(Response(400, 'Required old password are missing!'));
-    }
-    if (!req.body.newPassword && req.body.newPassword == "") {
-        return res.json(Response(400, 'Required new password are missing!'));
-    }
-    const passUser = await User.findOne({ "_id": req.body.user._id });
-    if (passUser) {
-        bcrypt.compare(req.body.oldPassword, req.body.user.password, function (err, result) {
-            if (result == true) {
-                req.body.newPassword = bcrypt.hashSync(req.body.newPassword, saltRounds);
-                User.findOneAndUpdate(
-                    { _id: req.body.user._id },
-                    { $set: { "password": req.body.newPassword } },
-                    { new: true }
-                ).then(user => {
-                    if (!user) {
-                        return res.status(404).send(Response(404, `Invalid old password ${req.body.oldPassword}`));
-                    }
-                    res.status(201).send(Response(200, "Password updated successfully!", user));
-                }).catch(err => {
-                    res.status(500).send(Response(500, "Some error occurred while retrieving user."));
-                });
-            } else {
-                res.json({ status: "false", response: "Incorrect old password !", data: {} });
-            }
-        });
-    } else {
-        res.json({ status: "false", response: "Email Address is missing !", data: {} });
-    }
-}
+
+
 async function forgotPassword(req, res) {
     if (!req.body.email && req.body.email == "") {
         return res.status(400).send(Response(400, 'Invalid request! Required email are missing!'));
