@@ -14,7 +14,8 @@ HDFC-file-reactjs-360/node_modules
 /HDFC-file-reactjs-360/node_modules
 backend/node_modules
 /backend/node_modules
-
+website/node_modules
+/website/node_modules
 # compiled output
 #/build
 
