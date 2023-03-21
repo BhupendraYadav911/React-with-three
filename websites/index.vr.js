@@ -7,20 +7,27 @@ import {
   Text,
   Image,
   View,
-  VrButton
+  VrButton,
+  Animated
 } from 'react-vr';
 
 import ProductTile from './components/ProductTile';
 import testData from './data/testData';
+import ProductTile1 from './components/ProductTile1';
 
+const INFO_BUTTON_IMAGE = asset('help-desk.png');
+console.log(INFO_BUTTON_IMAGE,'asdfghj');
 export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      items: testData
+      textColor: 'blue',
+      items: testData,
+      isHovering: false,
     }
   }
-
+  
+ 
   renderColumns() {
     const columns = (() => {
       const items = this.state.items;
@@ -37,32 +44,94 @@ export default class App extends React.Component {
       return this.renderColumn(items, index);
     })
   }
-
+  handleEnter = () => {
+    console.log('stati',this.state.isHovering);
+    this.setState({ isHovering: true });
+  };
+  handleExit = () => {
+    this.setState({ isHovering: false });
+    // Animated.timing(this.opacity, { toValue: 0, duration: 200 }).start();
+  };
+ 
   renderColumn(items, index) {
     return (
-      <View
-        key={index}
+      <View  style={{
+        position: 'absolute',
+        layoutOrigin: [0.5, 0.5],
+        transform: [
+          {rotateY: (index * -15)},
+          {translateZ: -3}
+        ],
+      }}>
+         <Pano source={asset("hdfc.jpg")} />
+        {/* <Text
+          style={{
+            backgroundColor: "red",
+            padding: 0.01,
+            textAlign: "right",
+            textAlignVertical: "",
+            fontSize: 0.1,
+            layoutOrigin: [0.1, 0.10],
+            transform: [{ translate: [0, 0, -3] }]
+          }}
+        >
+          hello
+        </Text> */}
+         {/* <View style={{ flexDirection: 'row' , justifyContent: 'space-between'}}>
+         <VrButton
         style={{
-          position: 'absolute',
-          layoutOrigin: [0.5, 0.5],
-          transform: [
-            {rotateY: (index * -15)},
-            {translateZ: -3}
-          ],
+          // backgroundColor: this.state.backgroundColor,
+          borderColor: 'transparent',
+           marginTop:.60,
+           layoutOrigin: [0.01, 0.01],
+          alignItems: 'right',
+          padding: 0.01,
+          paddingLeft:0.040,
+          //paddingRight: 1.2,
         }}
+        // onEnter={this.onButtonEnter}
+        // onExit={this.onButtonExit}
+        // onClick={onClick}
       >
-        {items.map((item) => {
-          return (
-            <ProductTile
-              key={`${item.itemId}-${item.salePrice}-${item.name}`}
-              imageSource={asset(item.image)}
-              name={`${item.name.substring(0, 12)}...`}
-              price={item.salePrice}
-              animationDelay={(index + 1) * 250}
+         <Image
+        style={{
+          width: .15,
+          height: .15,
+        }}
+        source={asset('noun-cash.png')}
+      />
+      </VrButton>
+      <VrButton
+        style={{
+          borderColor: 'transparent',
+          marginTop:.60,
+                     layoutOrigin: [0.01, 0.01],
+                    alignItems: 'right',
+                    padding: 0.01,
+                    paddingLeft:0.050,
+                    marginLeft:0.20,
+        }}
+        // onEnter={this.onButtonEnter}
+        // onExit={this.onButtonExit}
+        // onClick={onClick}
+      >
+         <Image
+        style={{
+          width: .15,
+          height: .15,
+        }}
+        source={asset('noun-cash.png')}
+      />
+      </VrButton>
+      </View> */}
+      {/* <ProductTile1 animationDelay={(1000 + 1) * 550} /> */}
+      
+            <ProductTile animationDelay={(index + 1) * 550}
             />
-          );
-        })}
+         
+
       </View>
+// true on hover
     );
   }
 

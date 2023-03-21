@@ -17,8 +17,8 @@ class AddButton extends React.Component {
     super();
 
     this.state = {
-      textColor: '#8200FA',
-      backgroundColor: '#FFF',
+
+      isHovering: false,
     };
 
     this.onButtonEnter = this.onButtonEnter.bind(this);
@@ -26,50 +26,12 @@ class AddButton extends React.Component {
   }
 
   onButtonEnter() {
-    this.setState({
-      textColor: '#FFF',
-      backgroundColor: '#8200FA'
-    });
+    this.setState({ isHovering: true });
   }
 
   onButtonExit() {
-    this.setState({
-      textColor: '#8200FA',
-      backgroundColor: '#FFF'
-    });
-  }
 
-  render () {
-    const {onClick} = this.props;
-
-    return (
-      <VrButton
-        style={{
-          borderRadius: 0.01,
-          borderWidth: 0.005,
-          backgroundColor: this.state.backgroundColor,
-          borderColor: '#8200FA',
-          padding: 0.05,
-          paddingLeft: 0.1,
-          paddingRight: 0.1,
-        }}
-        onEnter={this.onButtonEnter}
-        onExit={this.onButtonExit}
-        onClick={onClick}
-      >
-        <Text
-          style={{
-            color: this.state.textColor,
-            fontWeight: '500',
-            textAlign: 'center',
-            textAlignVertical: 'center',
-            fontSize: 0.075
-          }}
-        >
-          Add To Cart
-        </Text>
-      </VrButton>
-    );
+    this.setState({ isHovering: false });
   }
 };
 
@@ -81,49 +43,32 @@ class ProductTile extends React.Component {
     super();
 
     this.state = {
+      isHovering: false,
+      isHovering2: false,
       translateY: new Animated.Value(0),
       opacity: new Animated.Value(0),
       rotateY: new Animated.Value(0),
       active: false,
     };
+    this.onButtonEnter = this.onButtonEnter.bind(this);
+    this.onButtonExit = this.onButtonExit.bind(this);
+    this.onButtonEnter1 = this.onButtonEnter1.bind(this);
+    this.onButtonExit1 = this.onButtonExit1.bind(this);
+  }
+  onButtonEnter() {
+    this.setState({ isHovering: true });
   }
 
-  renderProductName() {
-    return (
-      <Text
-        style={{
-          color: '#000',
-          fontSize: 0.075,
-        }}
-      >
-        {this.props.name}
-      </Text>
-    );
+  onButtonExit() {
+
+    this.setState({ isHovering: false });
+  }
+  onButtonEnter1() {
+    this.setState({ isHovering2: true });
   }
 
-  renderProductPrice() {
-    return (
-      <Text
-        style={{
-          color: '#000',
-          fontSize: 0.075,
-        }}
-      >
-        {`Price: $${(this.props.price || 0).toFixed(2)}`}
-      </Text>
-    );
-  }
-
-  renderProductImage() {
-    return (
-      <Image
-        style={{
-          width: .35,
-          height: .35,
-        }}
-        source={this.props.imageSource}
-      />
-    );
+  onButtonExit1() {
+    this.setState({ isHovering2: false });
   }
 
   render () {
@@ -131,8 +76,8 @@ class ProductTile extends React.Component {
       <Animated.View
         style={{
           position: 'relative',
-          backgroundColor: '#fff',
-          borderColor: '#ccc',
+          // backgroundColor: '#fff',
+          borderColor: 'transparent',
           borderWidth: 0.005,
           marginBottom: 0.1,
           opacity: this.state.opacity,
@@ -141,62 +86,177 @@ class ProductTile extends React.Component {
             {rotateY: this.state.rotateY}
           ]
         }}>
-        <View
-          style={{
-            backgroundColor: '#8200FA',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 0.05,
-            transform: [
-              {rotateY: 180},
-              {translateZ: 0.05}
-            ]
-          }}
-        >
+          <View style={{ flexDirection: 'row' , justifyContent: 'space-between'}}>
+         <VrButton
+        //  animationDelay={(1000 + 1) * 550} 
+        style={{
+          borderColor: 'transparent',
+           marginTop:.39,
+           marginBottom:.10,
+           layoutOrigin: [0.01, 0.01],
+          alignItems: 'right',
+          padding: 0.01,
+          paddingLeft:0.00,
+
+          //paddingRight: 1.2,
+        }}
+        onEnter={this.onButtonEnter}
+        onExit={this.onButtonExit}
+        // onClick={onClick}
+      >
+         <Image
+        style={{
+          width: .20,
+         height: .20,
+        }}
+        source={asset('help-desk.png')}
+      />
+      </VrButton>
+      {this.state.isHovering && (
+            <Animated.View
+            
+            style={{
+              flexDirection: 'row', 
+              position: 'absolute',
+              backgroundColor: 'white',
+              padding: 0.01,
+              borderRadius:0.11,
+              AlignVertical: 'right',
+              marginTop:0.4,
+              marginLeft:0.2,
+              layoutOrigin: [0.9, 0.1],
+              
+            }}
+          >
           <Text
+           style={{
+            color: 'red',
+            textAlign: 'center',
+            textAlignVertical: 'center',
+             paddingLeft: 0.01,
+             paddingRight: 0.2,
+            fontSize: 0.1,
+            
+             layoutOrigin: [0.1, 0.1],
+          }}>Service Desk</Text>
+             <Image
+        style={{
+          width: .20,
+          height: .20,
+        }}
+        source={asset('help-desk.png')}
+      />
+            
+          </Animated.View>
+        )}
+      <VrButton
+        style={{
+          borderColor: 'transparent',
+          marginTop:.39,
+          marginBottom:.10,
+                     layoutOrigin: [0.01, 0.01],
+                    alignItems: 'right',
+                    padding: 0.01,
+                    paddingLeft:0.00,
+                    marginLeft:0.90,
+        }}
+        onEnter={this.onButtonEnter1}
+        onExit={this.onButtonExit1}
+        // onClick={onClick}
+      >
+         <Image
+        style={{
+          width: .20,
+         height: .20,
+        }}
+        source={asset('noun-cash.png')}
+      />
+      </VrButton>
+      {this.state.isHovering2 && (
+        
+            <Animated.View
             style={{
-              textAlign: 'center',
-              textAlignVertical: 'center',
-              fontWeight: '500',
-              color: '#FFF'
+              flexDirection: 'row', 
+              position: 'absolute',
+              backgroundColor: 'white',
+              padding: 0.01,
+              borderRadius:0.11,
+              AlignVertical: 'left',
+              marginTop:0.4,
+              marginLeft:1.1,
+              layoutOrigin: [0.1, 0.1], 
+              // transition: '2s width ease',
             }}
           >
-            Added to Cart!
-          </Text>
-        </View>
-        <View
-          style={{
-            paddingLeft: 0.05,
-            paddingRight: 0.05,
-            padding: 0.1,
-            paddingTop: 0.1,
-            paddingBottom: 0.1,
-          }}
-        >
-          <View
-            style={{
-              alignItems: 'center'
-            }}
-          >
-            {this.renderProductImage()}
-          </View>
-          <View
-            style={{
-              marginBottom: 0.05
-            }}
-          >
-            {this.renderProductName()}
-            {this.renderProductPrice()}
-          </View>
-          <View>
-            <AddButton onClick={() => this.setState({active: true})} />
-          </View>
-        </View>
+          
+             <Image
+        style={{
+          width: .20,
+          height: .20,
+        }}
+        source={asset('noun-cash.png')}
+      />
+      <Text  
+      style={{
+            color: 'red',
+            textAlign: 'center',
+            textAlignVertical: 'center',
+             paddingLeft: 0.01,
+             paddingRight: 0.2,
+            fontSize: 0.1,
+             layoutOrigin: [0.1, 0.1],
+          }}>Popup here</Text>
+            
+          </Animated.View>
+          
+        )}
+      </View>
+       <View style={{ flexDirection: 'row' , justifyContent: 'space-between'}}>
+         <VrButton
+        style={{
+          borderColor: 'transparent',
+          //  marginTop:.39,
+           layoutOrigin: [0.01, 0.01],
+          alignItems: 'right',
+          padding: 0.01,
+          paddingLeft:0.00,
+          //paddingRight: 1.2,
+        }}
+        // onEnter={this.onButtonEnter}
+        // onExit={this.onButtonExit}
+        // onClick={onClick}
+      >
+         <Image
+        style={{
+          width: .20,
+         height: .20,
+        }}
+        source={asset('noun-cash.png')}
+      />
+      </VrButton>
+      <VrButton
+        style={{
+          borderColor: 'transparent',
+          // marginTop:.39,
+                     layoutOrigin: [0.01, 0.01],
+                    alignItems: 'right',
+                    padding: 0.01,
+                    paddingLeft:0.00,
+                    marginLeft:0.90,
+        }}
+        // onEnter={this.onButtonEnter}
+        // onExit={this.onButtonExit}
+        // onClick={onClick}
+      >
+         <Image
+        style={{
+          width: .20,
+         height: .20,
+        }}
+        source={asset('noun-cash.png')}
+      />
+      </VrButton>
+      </View>
       </Animated.View>
     );
   }
@@ -210,7 +270,8 @@ class ProductTile extends React.Component {
         {
           toValue: 0,
           duration: 750,
-          delay: this.props.animationDelay || 0
+          // delay: this.props.animationDelay || 0
+          delay:200,
         }
       ),
       Animated.timing(
@@ -218,7 +279,8 @@ class ProductTile extends React.Component {
         {
           toValue: 1,
           duration: 750,
-          delay: this.props.animationDelay || 0
+          delay:700,
+          // delay: this.props.animationDelay || 0
         }
       )
     ]).start();
