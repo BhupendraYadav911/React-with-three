@@ -4,8 +4,7 @@
   "description": "hdfc 360 image",
   "main": "server.js",
   "scripts": {
-    "start": "forever start server.js",
-    "stop": "forever stopall",
+    "start": " start server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "hdfc_360_image",
