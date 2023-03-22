@@ -1,0 +1,6 @@
+{
+  "name": "ConfirmPassword",
+  "version": "0.0.0",
+  "main": "ConfirmPassword.js",
+  "private": true
+}

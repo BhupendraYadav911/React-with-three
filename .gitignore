@@ -22,3 +22,17 @@ websites/build
 /build
 build
 
+admin/node_modules
+/admin/node_modules
+/admin//build
+ admin//build
+/admin/logs
+/admin/*.log
+/admin/npm-debug.log*
+/admin/yarn-debug.log*
+/admin/yarn-error.log*
+
+admin/npm-debug.log*
+admin/yarn-debug.log*
+admin/yarn-error.log*
+
