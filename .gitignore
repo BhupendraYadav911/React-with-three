@@ -17,6 +17,8 @@ backend/node_modules
 websites/node_modules
 /websites/node_modules
 websites/build/
+websites/build
 # compiled output
-#/build
+/build
+build
 
