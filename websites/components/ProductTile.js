@@ -45,7 +45,7 @@ class ProductTile extends React.Component {
     this.state = {
       isHovering: false,
       isHovering2: false,
-      translateY: new Animated.Value(0),
+      translateX: new Animated.Value(0),
       opacity: new Animated.Value(0),
       rotateY: new Animated.Value(0),
       active: false,
@@ -82,7 +82,7 @@ class ProductTile extends React.Component {
           marginBottom: 0.1,
           opacity: this.state.opacity,
           transform: [
-            {translateY: this.state.translateY},
+            {translateX: this.state.translateX},
             {rotateY: this.state.rotateY}
           ]
         }}>
@@ -173,7 +173,6 @@ class ProductTile extends React.Component {
       />
       </VrButton>
       {this.state.isHovering2 && (
-        
             <Animated.View
             style={{
               flexDirection: 'row', 
@@ -262,16 +261,16 @@ class ProductTile extends React.Component {
   }
 
   componentDidMount() {
-    this.state.translateY.setValue(1);
+    this.state.translateX.setValue(1);
     this.state.opacity.setValue(0);
     Animated.parallel([
       Animated.timing(
-        this.state.translateY,
+        this.state.translateX,
         {
           toValue: 0,
           duration: 750,
-          // delay: this.props.animationDelay || 0
-          delay:200,
+          delay: this.props.animationDelay || 0
+         
         }
       ),
       Animated.timing(
@@ -279,8 +278,7 @@ class ProductTile extends React.Component {
         {
           toValue: 1,
           duration: 750,
-          delay:700,
-          // delay: this.props.animationDelay || 0
+           delay: this.props.animationDelay || 0
         }
       )
     ]).start();

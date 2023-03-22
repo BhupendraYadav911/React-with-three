@@ -8,7 +8,8 @@ import {
   Image,
   View,
   VrButton,
-  Animated
+  Animated,
+  Video
 } from 'react-vr';
 
 import ProductTile from './components/ProductTile';
@@ -16,18 +17,21 @@ import testData from './data/testData';
 import ProductTile1 from './components/ProductTile1';
 
 const INFO_BUTTON_IMAGE = asset('help-desk.png');
-console.log(INFO_BUTTON_IMAGE,'asdfghj');
+console.log(INFO_BUTTON_IMAGE, 'asdfghj');
 export default class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       textColor: 'blue',
       items: testData,
       isHovering: false,
-    }
+    };
   }
-  
+
+
  
+
+
   renderColumns() {
     const columns = (() => {
       const items = this.state.items;
@@ -45,93 +49,109 @@ export default class App extends React.Component {
     })
   }
   handleEnter = () => {
-    console.log('stati',this.state.isHovering);
+    console.log('stati', this.state.isHovering);
     this.setState({ isHovering: true });
   };
   handleExit = () => {
     this.setState({ isHovering: false });
     // Animated.timing(this.opacity, { toValue: 0, duration: 200 }).start();
   };
- 
+
   renderColumn(items, index) {
     return (
-      <View  style={{
+      <View style={{
         position: 'absolute',
         layoutOrigin: [0.5, 0.5],
         transform: [
-          {rotateY: (index * -15)},
-          {translateZ: -3}
+          { rotateY: (index * -15) },
+          { translateZ: -3 }
         ],
+        flexDirection: 'row',
+        alignItems: 'flex-start',
       }}>
-         <Pano source={asset("hdfc.jpg")} />
-        {/* <Text
+        <Pano
+          source={asset("hdfc.jpg")} />
+
+        <Video
           style={{
-            backgroundColor: "red",
-            padding: 0.01,
-            textAlign: "right",
-            textAlignVertical: "",
-            fontSize: 0.1,
-            layoutOrigin: [0.1, 0.10],
-            transform: [{ translate: [0, 0, -3] }]
+            width: 0.36,
+            height: 1.2,
+            position: 'absolute',
+            top: 0.1,
+            left: 0.5,
           }}
-        >
-          hello
-        </Text> */}
-         {/* <View style={{ flexDirection: 'row' , justifyContent: 'space-between'}}>
-         <VrButton
-        style={{
-          // backgroundColor: this.state.backgroundColor,
-          borderColor: 'transparent',
-           marginTop:.60,
-           layoutOrigin: [0.01, 0.01],
-          alignItems: 'right',
-          padding: 0.01,
-          paddingLeft:0.040,
-          //paddingRight: 1.2,
-        }}
-        // onEnter={this.onButtonEnter}
-        // onExit={this.onButtonExit}
-        // onClick={onClick}
-      >
-         <Image
-        style={{
-          width: .15,
-          height: .15,
-        }}
-        source={asset('noun-cash.png')}
-      />
-      </VrButton>
-      <VrButton
-        style={{
-          borderColor: 'transparent',
-          marginTop:.60,
-                     layoutOrigin: [0.01, 0.01],
-                    alignItems: 'right',
-                    padding: 0.01,
-                    paddingLeft:0.050,
-                    marginLeft:0.20,
-        }}
-        // onEnter={this.onButtonEnter}
-        // onExit={this.onButtonExit}
-        // onClick={onClick}
-      >
-         <Image
-        style={{
-          width: .15,
-          height: .15,
-        }}
-        source={asset('noun-cash.png')}
-      />
-      </VrButton>
-      </View> */}
-      {/* <ProductTile1 animationDelay={(1000 + 1) * 550} /> */}
-      
-            <ProductTile animationDelay={(index + 1) * 550}
-            />
-         
+          source={asset("lady_center_start.mp4")}
+          muted={true}
+          autoPlay={true}
+
+          loop={true}
+          crossOrigin="anonymous"
+          play={true}
+        />
+        <Video
+          style={{
+            width: 0.36,
+            height: 1.11,
+            position: 'absolute',
+            top: -0.5,
+            left: 3,
+          }}
+          source={asset("lady_center_start.mp4")}
+          muted={true}
+          autoPlay={true}
+
+          loop={true}
+          crossOrigin="anonymous"
+          play={true}
+        />
+
+
+        <Video
+          style={{
+            width: 0.7,
+            height: 2,
+            position: 'absolute',
+            top: -1.4,
+            left: 5.69,
+            transform: [
+              { rotateY: -90 },
+            ],
+          }}
+          source={asset("lady_center_idle01.mp4")}
+          muted={true}
+          autoPlay={true}
+
+          loop={true}
+          crossOrigin="anonymous"
+          play={true}
+        />
+
+        <Video
+          style={{
+            width: 2.5,
+            height: 6.7,
+            position: 'absolute',
+            top: -5.33,
+            left: -20,
+            transform: [
+              // {rotateX: 30},
+              { rotateY: 75 },
+              { translateX: -7 },
+            ],
+          }}
+          source={asset("crowd_04.mp4")}
+          muted={true}
+          autoPlay={true}
+
+          loop={true}
+          crossOrigin="anonymous"
+          play={true}
+        />
+
+        <ProductTile  animationDelay={(index + 1) * 250} />
 
       </View>
-// true on hover
+      // true on hover
     );
   }
 
@@ -139,11 +159,7 @@ export default class App extends React.Component {
     return (
       <View>
         <View
-          style={{
-            transform: [
-              {rotateY: 30}
-            ]
-          }}
+         
         >
           {this.renderColumns()}
         </View>
