@@ -13,8 +13,8 @@ NODE_ENV=production node server.js
 NODE_ENV=staging node server.js
 
 
----------------new command------------
+---------------local command-----------
 
-nvm use v16.18.1
+nvm use v18.13.0
 npm install
-node server.js
+nodemon server.js
