@@ -8,7 +8,7 @@ import {
   VrButton,
   Animated,
 } from 'react-vr';
-
+import Accordion from './Accordion';
 /*
  AddButton Component
 */
@@ -256,6 +256,7 @@ class ProductTile extends React.Component {
       />
       </VrButton>
       </View>
+      {/* <Accordion animationDelay={(index + 1) * 250} /> */}
       </Animated.View>
     );
   }

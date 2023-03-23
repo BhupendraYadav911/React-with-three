@@ -15,6 +15,7 @@ import {
 import ProductTile from './components/ProductTile';
 import testData from './data/testData';
 import ProductTile1 from './components/ProductTile1';
+import Accordion from './components/Accordion';
 
 const INFO_BUTTON_IMAGE = asset('help-desk.png');
 console.log(INFO_BUTTON_IMAGE, 'asdfghj');
@@ -148,8 +149,8 @@ export default class App extends React.Component {
           play={true}
         />
 
-        <ProductTile  animationDelay={(index + 1) * 250} />
-
+        <ProductTile animationDelay={(index + 1) * 250} />
+        <Accordion/>
       </View>
       // true on hover
     );
@@ -159,8 +160,7 @@ export default class App extends React.Component {
     return (
       <View>
         <View
-         
-        >
+>
           {this.renderColumns()}
         </View>
       </View>
