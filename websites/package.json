@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node -e \"console.log('open browser at http://localhost:3009/vr/\\n\\n');\" && node node_modules/react-native/local-cli/cli.js start",
+    "start": "PORT=8081 node node_modules/react-native/local-cli/cli.js start",
     "bundle": "node node_modules/react-vr/scripts/bundle.js",
     "build": "react-scripts build",
-    "open": "node -e \"require('xopen')('http://localhost:3009/vr/')\"",
+    "open": "node -e \"require('xopen')('http://localhost:8081/vr/')\"",
     "devtools": "react-devtools",
     "test": "jest"
   },
