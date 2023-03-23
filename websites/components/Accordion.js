@@ -4,23 +4,40 @@ import { AppRegistry, View, VrButton, Text, Animated, Image, asset } from 'react
 class Accordion extends React.Component {
   constructor() {
     super()
-
     this.state = {
-      isHovering: false
+      isHovering: false, nested:false,
+      translateY: new Animated.Value(0),
+      opacity: new Animated.Value(0),
+      rotateY: new Animated.Value(0),
+      active: false,
     }
-
     this.onButtonEnter1 = this.onButtonEnter1.bind(this)
   }
   onButtonEnter1() {
     this.setState({ isHovering: true })
   }
+
+
+  // componentDidMount() {
+  //   setTimeout(() => {
+  //     this.setState({ isHovering: true })
+  //   }, 5000)
+  // }
   render() {
     return (
-      <View>
+      <Animated.View style={{
+        //AlignVertical: 'left',
+         layoutOrigin: [1.01, 0.1],
+         position: 'absolute',  zIndex: 100,
+  
+        // opacity: this.state.opacity,
+        transform: [
+          {translateY: this.state.translateY},
+          {rotateY: this.state.rotateY}
+        ]
+        }}>
         <View
           style={{
-            overflowX: 'scroll',
-            position:'relative',
             backgroundColor: 'white',
             borderTopLeftRadius: 0.03,
             borderTopRightRadius: 0.03,
@@ -59,7 +76,7 @@ class Accordion extends React.Component {
                   textAlign: 'center',
                   fontSize: 0.06,
                 }}>
-                orem ipsum dolor sit amet Donec nec aliquet libero. Vivamus rutrum erat sed arcu cursus
+                lorem ipsum dolor sit amet Donec nec aliquet libero. Vivamus rutrum erat sed arcu cursus
               </Text>
             </Animated.View>
           )}
@@ -185,10 +202,47 @@ class Accordion extends React.Component {
       />
      
             
-      </View>
-      </View>
+        </View>
+      </Animated.View>
     )
   }
-}
+  
+  componentDidMount() {
+    this.state.translateY.setValue(1);
+    this.state.opacity.setValue(0);
+    Animated.parallel([
+      Animated.timing(
+        this.state.translateY,
+        {
+          toValue: 0,
+          duration: 750,
+          delay: this.props.animationDelay || 0
+         
+        }
+      ),
+      Animated.timing(
+        this.state.opacity,
+        {
+          toValue: 1,
+          duration: 750,
+           delay: this.props.animationDelay || 0
+        }
+      )
+    ]).start();
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (this.state.active && !prevState.active) {
+      this.state.rotateY.setValue(0);
+      Animated.timing(
+        this.state.rotateY,
+        {
+          toValue: 180,
+          duration: 750
+        }
+      ).start();
+    }
+  }
+};
 
 export default Accordion;

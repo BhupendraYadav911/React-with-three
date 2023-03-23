@@ -149,8 +149,7 @@ export default class App extends React.Component {
           play={true}
         />
 
-        <ProductTile animationDelay={(index + 1) * 250} />
-        <Accordion/>
+        <ProductTile/>
       </View>
       // true on hover
     );
