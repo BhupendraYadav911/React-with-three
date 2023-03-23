@@ -79,36 +79,33 @@ async function login(req, res) {
     if (!req.body.password) {
         return res.status(400).send(Response(400, 'Invalid request! Required password are missing!'));
     }
-    User.findOne({ email: req.body.email }, function (err, user) {
-        if (err) {
-            res.status(500).send(Response(500, "Some error occurred while retrieving user."));
-        }
-        else if (user != undefined) {
-            bcrypt.compare(req.body.password, user.password, function (err, result) {
-                if (result == true) {
-                    /* if (user.user_photo != "") {
-                        user.user_photo = imageUrl + user.user_photo;
-                    } */
-                    res.status(201);
-                    res.json({
-                        code: "200",
-                        message: "user login Successful",
-                        data: user,
-                        token: authenticate.getToken({
-                            userid: user._id,
-                            iat: Math.floor(Date.now() / 1000),
-                            // exp: Math.floor(Date.now() / 1000) + (60 * 60)
-                        })
-                    });
-                } else {
-                    return res.status(400).send(Response(400, 'Incorrect password!'));
-                }
-            });
-        }
-        else {
-            return res.status(400).send(Response(400, 'Email Address is not registered with us !'));
-        }
-    });
+
+    const dataUser = await User.findOne({ "email": req.body.email });
+   
+    if(dataUser){
+        bcrypt.compare(req.body.password, dataUser.password, function (err, result) {
+            if (result == true) {
+                /* if (user.user_photo != "") {
+                    user.user_photo = imageUrl + user.user_photo;
+                } */
+                res.status(201);
+                res.json({
+                    code: "200",
+                    message: "user login Successful",
+                    data: dataUser,
+                    token: authenticate.getToken({
+                        userid: dataUser._id,
+                        iat: Math.floor(Date.now() / 1000),
+                        // exp: Math.floor(Date.now() / 1000) + (60 * 60)
+                    })
+                });
+            } else {
+                return res.status(400).send(Response(400, 'Incorrect password!'));
+            }
+        });
+    }else{
+        return res.status(400).send(Response(400, 'Email Address is not registered with us !'));  
+    }
 }
 async function changePassword(req, res) {
     if (!req.body.oldPassword && req.body.oldPassword == "") {
