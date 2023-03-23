@@ -12,7 +12,7 @@ router.options('*', cors.corsWithOptions, (req, res) => { res.sendStatus(200); }
 router.post('/status-add', cors.corsWithOptions, User.statusAdd);
 router.post('/signup-token', cors.corsWithOptions, User.signupEmail);
 router.post('/signup', cors.corsWithOptions, User.signup);
-router.post('/signup-invite', cors.corsWithOptions, User.signupInvite);
+
 router.post('/login', cors.corsWithOptions, User.login);
 router.post('/change-password', cors.corsWithOptions, authenticate.verifyUser, User.changePassword);
 router.post('/forgot-password', cors.corsWithOptions, User.forgotPassword);
@@ -22,5 +22,5 @@ router.post('/update-user-photo', cors.corsWithOptions, authenticate.verifyUser,
 router.post('/update-user-photo-test', cors.corsWithOptions, authenticate.verifyUser, User.updateUserPhotoTest);
 router.get('/get-all-users', cors.corsWithOptions, authenticate.verifyUser, User.getAllUsers);
 router.post('/delete-user', cors.corsWithOptions, authenticate.verifyUser, User.deleteUser);
-router.post('/invite-team-member', cors.corsWithOptions, authenticate.verifyUser, User.inviteTeamMember);
+
 module.exports = router;

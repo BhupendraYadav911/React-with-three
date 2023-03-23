@@ -331,6 +331,24 @@
                     }
                 }
             }
+        },
+        "/setting/banner": {
+            "get": {
+                "tags": [
+                    "Banners"
+                ],
+                "summary": "Get all Banners",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         }
     }
 }

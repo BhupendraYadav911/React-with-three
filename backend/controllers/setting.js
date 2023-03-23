@@ -86,9 +86,9 @@ async function addBanner(req, res) {
         moveFile(banner4, 'public/banners/' + fileName4) : Promise.resolve('No file present');
         
        passUser.banner1 = 'public/banners/' + req.files.banner1.name || passUser.banner1;
-        passUser.banner2 = 'public/banners/' + req.files.banner2.name || passUser.banner2;
-         passUser.banner3 = 'public/banners/' + req.files.banner3.name || passUser.banner3;
-          passUser.banner4 = 'public/banners/' + req.files.banner4.name || passUser.banner4;
+       passUser.banner2 = 'public/banners/' + req.files.banner2.name || passUser.banner2;
+       passUser.banner3 = 'public/banners/' + req.files.banner3.name || passUser.banner3;
+       passUser.banner4 = 'public/banners/' + req.files.banner4.name || passUser.banner4;
    passUser.save();
    return res.status(201).send(Response(200, "Banner update succcessfully!."));
    }

@@ -45,12 +45,6 @@ app.get('/', (req, res) => {
 app.use(express.static('public'));
 app.use('/auth', routes.user);
 app.use('/setting', routes.setting);
-app.use('/roadmap', routes.roadmap);
-app.use('/feature', routes.feature);
-app.use('/template', routes.template);
-app.use('/share', routes.share);
-app.use('/plan', routes.plan);
-app.use('/job', routes.job);
 // make the server listen to requests
 app.listen(PORT, () => {
   console.log(`Server running at: http://localhost:${PORT}/`);

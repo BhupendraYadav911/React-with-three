@@ -9,6 +9,6 @@ router.use(bodyParser.json());
 router.options('*', cors.corsWithOptions, (req, res) => { res.sendStatus(200); });
 
 /* SignUp End Point */
-router.put('/banner-setting', cors.corsWithOptions, Setting.addBanner);
-router.get('/banner', cors.corsWithOptions, Setting.getBanners);
+router.put('/banner-setting', cors.corsWithOptions, authenticate.verifyUser, Setting.addBanner);
+router.get('/banner', cors.corsWithOptions,authenticate.verifyUser, Setting.getBanners);
 module.exports = router;

@@ -3,10 +3,6 @@ const User = require('../models/user');
 const Status = require('../models/status');
 const Response = require('../lib/response');
 const Sendemail = require('../lib/sendemail');
-const Roadmapinvitation = require('../models/roadmapinvitation');
-const Share = require('../models/share');
-const Inviteteam = require('../models/inviteteam');
-const Userorganization = require('../models/userorganization');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
 const saltRounds = require('../config').saltRounds;
@@ -18,7 +14,6 @@ module.exports = {
     statusAdd: statusAdd,
     signupEmail: signupEmail,
     signup: signup,
-    signupInvite: signupInvite,
     login: login,
     changePassword: changePassword,
     forgotPassword: forgotPassword,
@@ -27,8 +22,7 @@ module.exports = {
     updateUserPhoto: updateUserPhoto,
     updateUserPhotoTest:updateUserPhotoTest,
     getAllUsers: getAllUsers,
-    deleteUser: deleteUser,
-    inviteTeamMember: inviteTeamMember
+    deleteUser: deleteUser
 };
 async function statusAdd(req, res) {
     const newUser = new Status(req.body);
@@ -266,79 +260,7 @@ async function signupEmail(req, res) {
 //         return res.status(400).send(Response(400, 'Invalid token'));
 //     }
 // };
-async function signupInvite(req, res) {
-    if (!req.body.full_name) {
-        return res.status(400).send(Response(400, 'Invalid request! Required full_name is missing'));
-    }
-    if (!req.body.password) {
-        return res.status(400).send(Response(400, 'Invalid request! Required password is missing'));
-    }
-    if (!req.body.job_id) {
-        return res.status(400).send(Response(400, 'Invalid request! Required job_id is missing'));
-    }
-    if (!req.body.invite_id) {
-        return res.status(400).send(Response(400, 'Invalid request! Required invite_id is missing'));
-    }
-    const inviteUserDetials = await Roadmapinvitation.find({ "_id": req.body.invite_id });
-    //newUser.save();
-    const emailExists = await User.findOne({ "email": inviteUserDetials[0].email });
-    if (emailExists) {
-        return res.status(400).send(Response(400, 'Email already exists!.', emailExists));
-    } else {
-        // find user by invited
-        const inviteByDetials = await User.findOne({ "_id": mongoose.Types.ObjectId(inviteUserDetials[0].created_by) });
-        // save user data
-        const newUser = new User();
-        const statusData = await Status.findOne();
-        if (inviteUserDetials[0].email) {
-            newUser.email = inviteUserDetials[0].email;
-            newUser.organization_id = inviteByDetials.organization_id;
-            newUser.full_name = req.body.full_name;
-            newUser.job_id = req.body.job_id;
-            newUser.password = bcrypt.hashSync(req.body.password, saltRounds);
-            const rand = () => Math.random(0).toString(36).substr(2);
-            const token = (length) => (rand() + rand() + new Date().getTime() + rand() + rand()).substr(0, length);
-            newUser.token = token(40);
-            newUser.status = mongoose.Types.ObjectId(statusData._id);
-        }
-        // console.log(newUser,'user');
-        newUser.save(async (err, User) => {
-            if (err) {
-                res.statusCode = 500;
-                res.setHeader('Content-Type', 'application/json');
-                res.json({ err: err });
-                return;
-            } else {
-                // update share roadmap
-                const emailInvite = await Roadmapinvitation.find({ "email": inviteUserDetials[0].email });
-                console.log(emailInvite, inviteUserDetials[0].email)
-                if (emailInvite.length > 0) {
-                    for (let i = 0; i < emailInvite.length; i++) {
-                        const newUserInvite = {
-                            "userId": newUser._id,
-                            "permission": {
-                                "add": emailInvite[i].permission.add,
-                                "edit": emailInvite[i].permission.edit,
-                                "delete": emailInvite[i].permission.delete,
-                                "view": emailInvite[i].permission.view
-                            }
-                        }
-                        await Share.findOneAndUpdate(
-                            { "roadmapId": emailInvite[i].roadmapId },
-                            {
-                                $push: { "sharedWith": newUserInvite }
-                            }, { new: true }
-                        );
-                    }
-                }
-                // send email to register email
-                /* let textSms = 'https://sidekick.hungryforwings.com/sign-up/details/' + newUser.token;
-                Sendemail(req.body.email, 'Activate your account', textSms); */
-                return res.status(201).send(Response(200, "Registration Successful!.", newUser));
-            }
-        });
-    }
-}
+
 
 
 async function forgotPassword(req, res) {
@@ -608,39 +530,5 @@ async function deleteUser(req, res) {
     }
     else {
         return res.status(400).send(Response(400, 'Invalid request! Required user ID is missing'));
-    }
-}
-async function inviteTeamMember(req, res) {
-    if (!req.body.inviteEmail) {
-        return res.status(400).send(Response(400, 'Invalid request! Required  inviteEmail is missing'));
-    }
-    if (req.body.inviteEmail.length < 1) {
-        return res.status(400).send(Response(400, 'Invalid request! Required  inviteEmail is missing'));
-    }
-    const alreadyUser = [];
-    for (let i = 0; i < req.body.inviteEmail.length; i++) {
-        const emailExists = await User.findOne({ "email": req.body.inviteEmail[i] });
-        if (!emailExists) {
-            const newObject = {
-                "userId": req.body.user._id,
-                "inviteEmail": req.body.inviteEmail[i],
-            }
-            const inviteTeam = new Inviteteam(newObject);
-            await inviteTeam.save().then(data => {
-                // send email to invite email
-                Sendemail(req.body.inviteEmail[i], 'Invite', 'Invite');
-            }).catch(err => {
-                res.status(500).send(Response(500, "Some error occurred while retrieving inviteTeam."));
-            });
-        }
-        else {
-            alreadyUser.push(req.body.inviteEmail[i]);
-        }
-    }
-    if (alreadyUser.length == req.body.inviteEmail.length) {
-        return res.status(201).send(Response(200, "All email already exists!.", {}));
-    }
-    else {
-        res.status(201).send(Response(200, "invite succcessfully!.", {}));
     }
 }
