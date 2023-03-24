@@ -9,7 +9,8 @@ import {
   TextField,
   Fade,
 } from "@material-ui/core";
-import { withRouter } from "react-router-dom";
+import { withRouter ,useHistory} from "react-router-dom";
+
 import classnames from "classnames";
 
 // styles
@@ -35,11 +36,16 @@ function Login(props) {
   var [nameValue, setNameValue] = useState("");
   var [loginValue, setLoginValue] = useState("admin@flatlogic.com");
   var [passwordValue, setPasswordValue] = useState("password");
+  const history = useHistory();
+  const passForget  = ()=>{
+    
+    history.push("/resetpassword");
+  }
 
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
-        <img src={logo} alt="logo" className={classes.logotypeImage} />
+        {/* <img src={logo} alt="logo" className={classes.logotypeImage} /> */}
         {/* <Typography className={classes.logotypeText}>
           Material Admin
           </Typography> */}
@@ -114,14 +120,7 @@ function Login(props) {
                       loginValue.length === 0 || passwordValue.length === 0
                     }
                     onClick={() =>
-                      loginUser(
-                        userDispatch,
-                        loginValue,
-                        passwordValue,
-                        props.history,
-                        setIsLoading,
-                        setError,
-                      )
+                      passForget()
                     }
                     
                     variant="contained"
