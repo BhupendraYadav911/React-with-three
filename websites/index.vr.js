@@ -30,7 +30,7 @@ export default class App extends React.Component {
   }
 
 
- 
+
 
 
   renderColumns() {
@@ -89,7 +89,7 @@ export default class App extends React.Component {
           crossOrigin="anonymous"
           play={true}
         />
-        <Video
+        {/* <Video
           style={{
             width: 0.36,
             height: 1.11,
@@ -104,10 +104,19 @@ export default class App extends React.Component {
           loop={true}
           crossOrigin="anonymous"
           play={true}
+        /> */}
+        <Image
+          style={{
+            width: 0.36,
+            height: 1.11,
+            position: 'absolute',
+            top: -0.5,
+            left: 3,
+          }}
+          source={asset('FK0I8JLVIAAqq1A.jpg')}
         />
 
-
-        <Video
+        {/* <Video
           style={{
             width: 0.7,
             height: 2,
@@ -125,9 +134,21 @@ export default class App extends React.Component {
           loop={true}
           crossOrigin="anonymous"
           play={true}
+        /> */}
+        <Image
+          style={{
+            width: 0.7,
+            height: 2,
+            position: 'absolute',
+            top: -1.3,
+            left: 6.5,
+            transform: [
+              { rotateY: -90 },
+            ],
+          }}
+          source={asset('c5fcf010802aff3dd4b852f645d37a2f.png')}
         />
-
-        <Video
+        {/* <Video
           style={{
             width: 2.5,
             height: 6.7,
@@ -147,9 +168,40 @@ export default class App extends React.Component {
           loop={true}
           crossOrigin="anonymous"
           play={true}
+        /> */}
+
+        <Image
+          style={{
+            width: 1.7,
+            height: 4.5,
+            position: 'absolute',
+            top: -3.0,
+            left:15,
+            righit:0,
+            transform: [
+              { rotateY: 90 },
+              // { translateX: -7.1 },
+            ],
+          }}
+          source={asset('c5fcf010802aff3dd4b852f645d37a2f.png')}
+        />
+        <Image
+          style={{
+            width: 2.4,
+            height: 7.1,
+            position: 'absolute',
+            top: -5.38,
+            left: -20,
+            transform: [
+              // {rotateX: 30},
+              { rotateY: 75 },
+              { translateX: -7.1 },
+            ],
+          }}
+          source={asset('et2-683x1024.jpg')}
         />
 
-        <ProductTile/>
+        <ProductTile />
       </View>
       // true on hover
     );
@@ -159,7 +211,7 @@ export default class App extends React.Component {
     return (
       <View>
         <View
->
+        >
           {this.renderColumns()}
         </View>
       </View>

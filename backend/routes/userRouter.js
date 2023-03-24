@@ -16,6 +16,8 @@ router.post('/signup', cors.corsWithOptions, User.signup);
 router.post('/login', cors.corsWithOptions, User.login);
 router.post('/change-password', cors.corsWithOptions, authenticate.verifyUser, User.changePassword);
 router.post('/forgot-password', cors.corsWithOptions, User.forgotPassword);
+
+router.post('/reset-password', cors.corsWithOptions, User.resetPassword);
 router.post('/logout-user', cors.corsWithOptions, authenticate.verifyUser, User.logoutUser);
 router.post('/update-user-profile', cors.corsWithOptions, authenticate.verifyUser, User.updateUserProfile);
 router.post('/update-user-photo', cors.corsWithOptions, authenticate.verifyUser, User.updateUserPhoto);

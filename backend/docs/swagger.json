@@ -38,39 +38,6 @@
         "multipart/form-data"
     ],
     "paths": {
-        "/auth/signup-token": {
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Adds a new user",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "required": [
-                                    "email"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "string"
-                                    }
-                                },
-                                "example": {
-                                    "email": "ghanshyam.digiprima@gmail.com"
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
         "/auth/signup": {
             "post": {
                 "tags": [
@@ -107,11 +74,11 @@
                                     }
                                 },
                                 "example": {
-                                     "full_name":"Naveen Patel",
-                                     "email":"np.221196.np@gmail.com",
-                                     "password":"123456",
-                                     "role":"",
-                                     "user_photo":""
+                                    "full_name": "Naveen Patel",
+                                    "email": "np.221196.np@gmail.com",
+                                    "password": "123456",
+                                    "role": "",
+                                    "user_photo": ""
                                 }
                             }
                         }
@@ -148,8 +115,8 @@
                                     }
                                 },
                                 "example": {
-                                   "email":"ghanshyam.digiprima@gmail.com",
-                                   "password":"123456"
+                                    "email": "ghanshyam.digiprima@gmail.com",
+                                    "password": "123456"
                                 }
                             }
                         }
@@ -162,7 +129,7 @@
                 }
             }
         },
-          "/auth/change-password": {
+        "/auth/change-password": {
             "post": {
                 "tags": [
                     "Users"
@@ -186,8 +153,8 @@
                                     }
                                 },
                                 "example": {
-                                   "oldPassword":"123456",
-                                   "newPassword":"1234567"
+                                    "oldPassword": "123456",
+                                    "newPassword": "1234567"
                                 }
                             }
                         }
@@ -314,6 +281,49 @@
                 }
             }
         },
+        "/auth/reset-password": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "reset password",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "resetToken",
+                                    "newPassword",
+                                    "confirmPassword"
+                                ],
+                                "properties": {
+                                    "resetToken": {
+                                        "type": "string"
+                                    },
+                                    "newPassword": {
+                                        "type": "string"
+                                    },
+                                    "confirmPassword": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "resetToken": "123456",
+                                    "newPassword": "123456",
+                                    "confirmPassword": "123456"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "/auth/get-all-users": {
             "get": {
                 "tags": [
@@ -341,6 +351,92 @@
                 "requestBody": {
                     "content": {
                         "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/setting/add-banner": {
+            "post": {
+                "tags": [
+                    "Banners"
+                ],
+                "summary": "Add a new banner",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "name",
+                                    "banner_type",
+                                    "banner_url"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "banner_type": {
+                                        "type": "string"
+                                    },
+                                    "banner_url": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "test",
+                                    "banner_type": "banner1",
+                                    "banner_url": "asdaDDAD"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/setting/upadte-banner": {
+            "put": {
+                "tags": [
+                    "Banners"
+                ],
+                "summary": "update banner",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "bannerId",
+                                    "name",
+                                    "banner_url"
+                                ],
+                                "properties": {
+                                    "bannerId": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "banner_url": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "bannerId": "641d3e71a4f657a0317b6450",
+                                    "name": "test",
+                                    "banner_url": "asdaDDAD"
+                                }
+                            }
+                        }
                     }
                 },
                 "responses": {

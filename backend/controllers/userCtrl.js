@@ -17,10 +17,11 @@ module.exports = {
     login: login,
     changePassword: changePassword,
     forgotPassword: forgotPassword,
+    resetPassword: resetPassword,
     logoutUser: logoutUser,
     updateUserProfile: updateUserProfile,
     updateUserPhoto: updateUserPhoto,
-    updateUserPhotoTest:updateUserPhotoTest,
+    updateUserPhotoTest: updateUserPhotoTest,
     getAllUsers: getAllUsers,
     deleteUser: deleteUser
 };
@@ -51,9 +52,9 @@ async function signup(req, res) {
     }
     const emailExists = await User.findOne({ "email": req.body.email });
     if (emailExists) {
-        return res.status(400).send(Response(400, 'Email already exists!.',emailExists));
+        return res.status(400).send(Response(400, 'Email already exists!.', emailExists));
     }
-    else{
+    else {
         const userToBeSaved = new User();
         userToBeSaved.full_name = req.body.full_name;
         userToBeSaved.email = req.body.email;
@@ -66,7 +67,7 @@ async function signup(req, res) {
 
 };
 async function login(req, res) {
-     //const imageUrl = req.headers.origin;
+    //const imageUrl = req.headers.origin;
     if (!req.body.email) {
         return res.status(400).send(Response(400, 'Invalid request! Required email are missing!'));
     }
@@ -75,8 +76,8 @@ async function login(req, res) {
     }
 
     const dataUser = await User.findOne({ "email": req.body.email });
-   
-    if(dataUser){
+
+    if (dataUser) {
         bcrypt.compare(req.body.password, dataUser.password, function (err, result) {
             if (result == true) {
                 /* if (user.user_photo != "") {
@@ -97,8 +98,8 @@ async function login(req, res) {
                 return res.status(400).send(Response(400, 'Incorrect password!'));
             }
         });
-    }else{
-        return res.status(400).send(Response(400, 'Email Address is not registered with us !'));  
+    } else {
+        return res.status(400).send(Response(400, 'Email Address is not registered with us !'));
     }
 }
 async function changePassword(req, res) {
@@ -270,17 +271,18 @@ async function forgotPassword(req, res) {
     const passUser = await User.findOne({ "email": req.body.email });
     if (passUser) {
         const yourString = randStr.generate(8);
-        const passReset = bcrypt.hashSync(yourString, saltRounds);
+        const resetToken = bcrypt.hashSync(yourString, saltRounds);
+
         User.findOneAndUpdate(
             { _id: passUser._id },
-            { $set: { "password": passReset } },
+            { $set: { "password_reset_token": resetToken } },
             { new: true }
         ).then(user => {
             if (!user) {
                 /*  return res.status(404).send(Response(404, `Invalid old password ${req.body.oldPassword}`)); */
             }
             // send email to register email
-            Sendemail(req.body.email, 'Forgot password', 'Your password is' + ' ' + yourString);
+            Sendemail(req.body.email, 'Forgot password', resetToken);
             res.status(201).send(Response(200, "Please check your email for reset instructions! "));
         }).catch(err => {
             res.status(500).send(Response(500, "Some error occurred while retrieving user."));
@@ -288,6 +290,43 @@ async function forgotPassword(req, res) {
     }
     else {
         return res.status(400).send(Response(400, 'Email Address is not registered with us !'));
+    }
+}
+async function resetPassword(req, res) {
+    if (!req.body.resetToken && req.body.resetToken == "") {
+        return res.json(Response(400, 'Required reset token are missing!'));
+    }
+    if (!req.body.newPassword && req.body.newPassword == "") {
+        return res.json(Response(400, 'Required new password are missing!'));
+    }
+    if (!req.body.confirmPassword && req.body.confirmPassword == "") {
+        return res.json(Response(400, 'Required confirm password  are missing!'));
+    }
+    const passUser = await User.findOne({ "password_reset_token": req.body.resetToken });
+
+    if (passUser) {
+        // bcrypt.compare(req.body.confirmPassword, req.body.newPassword, function (err, result) {
+        //     console.log('passUser',req.body,result);
+        //     if (result == true) {
+        req.body.newPassword = bcrypt.hashSync(req.body.newPassword, saltRounds);
+        User.findOneAndUpdate(
+            { _id: passUser._id },
+            { $set: { "password": req.body.newPassword ,"password_reset_token": ''} },
+            { new: true }
+        ).then(user => {
+            if (!user) {
+                //return res.status(404).send(Response(404, `Invalid old password ${req.body.oldPassword}`));
+            }
+            res.status(201).send(Response(200, "You have successfully reset your password.", {}));
+        }).catch(err => {
+            res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+        });
+        //     } else {
+        //         res.json({ status: "false", response: "The password and confirmation password do not match.", data: {} });
+        //     }
+        // });
+    } else {
+        return res.json(Response(400, 'Password reset token invalid. Please try clicking on the link in your email again.'));
     }
 }
 
@@ -417,9 +456,9 @@ async function updateUserProfile(req, res) {
                 if (!user) {
                     return res.status(404).send(Response(404, `Invalid user ${user}`));
                 }
-               /*  if (user.user_photo != "") {
-                    user.user_photo = imageUrl + user.user_photo;
-                } */
+                /*  if (user.user_photo != "") {
+                     user.user_photo = imageUrl + user.user_photo;
+                 } */
                 res.status(201).send(Response(200, "Profile updated successfully!", user));
             }).catch(err => {
                 res.status(500).send(Response(500, "Some error occurred while retrieving user."));
@@ -439,22 +478,56 @@ async function moveFile(file, somePlace) {
     });
 }
 async function updateUserPhoto(req, res) {
-        if (!req.files || Object.keys(req.files).length === 0) {
-            return res.json(Response(400, 'No files were uploaded!'));
-        }
-        let sampleFile = req.files.user_photo;
-        if (sampleFile.size > "1000000") {
-            return res.json(Response(400, 'File size must under 1mb!'));
-        }
-        let fileName = sampleFile.name;
-        let file_url = "/images/" + fileName;
-        //let file_url = "/home/dell/Projects/backend-dev/public/images/" + fileName;
-        //const imageUrl = req.headers.origin;
-        // Use the mv() method to place the file somewhere on your server
-        const fileMovePromise = req.files ?
-            moveFile(sampleFile, 'public/images/' + fileName) : Promise.resolve('No file present');
-        fileMovePromise.then(() => {
-            // do other stuff
+    if (!req.files || Object.keys(req.files).length === 0) {
+        return res.json(Response(400, 'No files were uploaded!'));
+    }
+    let sampleFile = req.files.user_photo;
+    if (sampleFile.size > "1000000") {
+        return res.json(Response(400, 'File size must under 1mb!'));
+    }
+    let fileName = sampleFile.name;
+    let file_url = "/images/" + fileName;
+    //let file_url = "/home/dell/Projects/backend-dev/public/images/" + fileName;
+    //const imageUrl = req.headers.origin;
+    // Use the mv() method to place the file somewhere on your server
+    const fileMovePromise = req.files ?
+        moveFile(sampleFile, 'public/images/' + fileName) : Promise.resolve('No file present');
+    fileMovePromise.then(() => {
+        // do other stuff
+        User.findOneAndUpdate(
+            { _id: req.body.user._id },
+            {
+                $set: {
+                    "user_photo": file_url
+                }
+            }, { new: true }
+        ).then(user => {
+            if (!user) {
+                return res.status(404).send(Response(404, `Invalid user ${user}`));
+            }
+            //user.user_photo = imageUrl + user.user_photo;
+            res.status(201).send(Response(200, "Profile updated successfully!", user));
+        });
+    }).catch(err => {
+        res.status(500).send(Response(500, err));
+    });
+}
+async function updateUserPhotoTest(req, res) {
+    if (!req.files || Object.keys(req.files).length === 0) {
+        return res.json(Response(400, 'No files were uploaded!'));
+    }
+    let sampleFile = req.files.user_photo;
+    if (sampleFile.size > "1000000") {
+        return res.json(Response(400, 'File size must under 1mb!'));
+    }
+    let fileName = sampleFile.name;
+    let file_url = "/images/" + fileName;
+    //const imageUrl = req.headers.origin;
+    // Use the mv() method to place the file somewhere on your server
+    sampleFile.mv('public/images/' + fileName, function (err) {
+        if (err) {
+            res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+        } else {
             User.findOneAndUpdate(
                 { _id: req.body.user._id },
                 {
@@ -468,45 +541,11 @@ async function updateUserPhoto(req, res) {
                 }
                 //user.user_photo = imageUrl + user.user_photo;
                 res.status(201).send(Response(200, "Profile updated successfully!", user));
-            });
-        }).catch(err => {
-           res.status(500).send(Response(500, err));
-        });
-}
-async function updateUserPhotoTest(req, res) {
-        if (!req.files || Object.keys(req.files).length === 0) {
-            return res.json(Response(400, 'No files were uploaded!'));
-        }
-        let sampleFile = req.files.user_photo;
-        if (sampleFile.size > "1000000") {
-            return res.json(Response(400, 'File size must under 1mb!'));
-        }
-        let fileName = sampleFile.name;
-        let file_url = "/images/" + fileName;
-        //const imageUrl = req.headers.origin;
-        // Use the mv() method to place the file somewhere on your server
-        sampleFile.mv('public/images/' + fileName, function (err) {
-            if (err) {
+            }).catch(err => {
                 res.status(500).send(Response(500, "Some error occurred while retrieving user."));
-            } else {
-                User.findOneAndUpdate(
-                    { _id: req.body.user._id },
-                    {
-                        $set: {
-                            "user_photo": file_url
-                        }
-                    }, { new: true }
-                ).then(user => {
-                    if (!user) {
-                        return res.status(404).send(Response(404, `Invalid user ${user}`));
-                    }
-                    //user.user_photo = imageUrl + user.user_photo;
-                    res.status(201).send(Response(200, "Profile updated successfully!", user));
-                }).catch(err => {
-                    res.status(500).send(Response(500, "Some error occurred while retrieving user."));
-                });
-            }
-        });
+            });
+        }
+    });
 }
 async function getAllUsers(req, res) {
     await User.find()

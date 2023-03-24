@@ -18,6 +18,7 @@ const UserProfileSchema = mongoose.Schema({
     // status: {type : Schema.Types.ObjectId, ref: 'Status'},
     // token: {type : String},
     // subscription_expiry_date: {type: Date, default: ""},
+    password_reset_token:{ type: String, default: "" },
 }, {
     timestamps: true
 });
