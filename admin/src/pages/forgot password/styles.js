@@ -134,7 +134,7 @@ export default makeStyles(theme => ({
     width: "100%",
     marginTop: theme.spacing(1),
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
   },
   forgetButton: {

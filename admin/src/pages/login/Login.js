@@ -29,8 +29,6 @@ function Login(props) {
   var [nameValue, setNameValue] = useState('')
   var [loginValue, setLoginValue] = useState('')
   var [passwordValue, setPasswordValue] = useState('')
-  var [newloginValue, setNewLoginValue] = useState('')
-  var [newpasswordValue, setNewPasswordValue] = useState('')
 
   const history = useHistory()
   const forgotPage = () => {
@@ -68,7 +66,7 @@ function Login(props) {
   }
   const emailValidation = (event) => {
     const newuseremail = event.target.value
-    setNewLoginValue(newuseremail)
+    setLoginValue(newuseremail)
     if (emailRegex.test(newuseremail)) {
       setEmailValid(true)
       setErrorMessage(null)
@@ -207,7 +205,7 @@ function Login(props) {
                     input: classes.textField
                   }
                 }}
-                value={newloginValue}
+                value={loginValue}
                 onChange={emailValidation}
                 // onChange={e => setLoginValue(e.target.value)}
                 margin="normal"
@@ -224,8 +222,8 @@ function Login(props) {
                     input: classes.textField
                   }
                 }}
-                value={newpasswordValue}
-                onChange={(e) => setNewPasswordValue(e.target.value)}
+                value={passwordValue}
+                onChange={(e) => setPasswordValue(e.target.value)}
                 margin="normal"
                 placeholder="Password"
                 type="password"
@@ -237,7 +235,7 @@ function Login(props) {
                 ) : (
                   <Button
                     onClick={() => loginUser(userDispatch, loginValue, passwordValue, props?.history, setIsLoading, setError)}
-                    disabled={!emailValid || newpasswordValue.length === 0 || nameValue.length === 0}
+                    disabled={!emailValid || passwordValue.length === 0 || nameValue.length === 0}
                     size="large"
                     variant="contained"
                     color="primary"

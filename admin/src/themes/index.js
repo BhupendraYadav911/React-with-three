@@ -1,6 +1,6 @@
 import defaultTheme from "./default";
 
-import { createMuiTheme } from "@material-ui/core";
+import { unstable_createMuiStrictModeTheme } from "@material-ui/core";
 
 const overrides = {
   typography: {
@@ -26,7 +26,7 @@ const overrides = {
 };
 
 const themes = {
-  default: createMuiTheme({ ...defaultTheme, ...overrides }),
+  default: unstable_createMuiStrictModeTheme({ ...defaultTheme, ...overrides }),
 };
 
 export default themes;
