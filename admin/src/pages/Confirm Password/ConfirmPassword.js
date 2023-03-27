@@ -2,22 +2,22 @@ import React, { useState } from "react";
 import {
   Grid,
   CircularProgress,
-  Typography,
+  // Typography,
   Button,
   Tabs,
   Tab,
   TextField,
-  Fade,
+  // Fade,
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
-import classnames from "classnames";
+// import classnames from "classnames";
 
 // styles
 import useStyles from "./styles";
 
 // logo
-import logo from "./logo.svg";
-import google from "../../images/google.svg";
+// import logo from "./logo.svg";
+// import google from "../../images/google.svg";
 
 // context
 import { useUserDispatch, loginUser } from "../../context/UserContext";
@@ -32,7 +32,7 @@ function Login(props) {
   var [isLoading, setIsLoading] = useState(false);
   var [error, setError] = useState(null);
   var [activeTabId, setActiveTabId] = useState(0);
-  var [nameValue, setNameValue] = useState("");
+  // var [nameValue, setNameValue] = useState("");
   var [loginValue, setLoginValue] = useState("admin@flatlogic.com");
   var [passwordValue, setPasswordValue] = useState("password");
   var [passwordValue1, setPasswordValue1] = useState("ConfirmPassword");
@@ -40,7 +40,7 @@ function Login(props) {
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
-        <img src={logo} alt="logo" className={classes.logotypeImage} />
+        {/* <img src={logo} alt="logo" className={classes.logotypeImage} /> */}
         {/* <Typography className={classes.logotypeText}>
           Material Admin
           </Typography> */}

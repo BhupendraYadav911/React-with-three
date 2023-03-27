@@ -38,8 +38,10 @@ function Login(props) {
   var [passwordValue, setPasswordValue] = useState("password");
   const history = useHistory();
   const passForget  = ()=>{
-    
     history.push("/resetpassword");
+  }
+  const Back  = ()=>{
+    history.push("/login");
   }
 
   return (
@@ -112,6 +114,15 @@ function Login(props) {
                 fullWidth
               /> */}
               <div className={classes.formButtons1}>
+                <Button
+                  color="primary"
+                  size="large"
+                  onClick={() =>
+                    Back()
+                  }                  
+                >
+                  Back
+                </Button>
                 {isLoading ? (
                   <CircularProgress size={26} className={classes.loginLoader} />
                 ) : (
@@ -128,16 +139,9 @@ function Login(props) {
                     size="large"
                      
                   >
-                   Request password reset link
+                   Reset password link
                   </Button>
                 )}
-                {/* <Button
-                  color="primary"
-                  size="large"
-                  className={classes.forgetButton}
-                >
-                  Forget Password
-                </Button> */}
               </div>
             </React.Fragment>
           )}

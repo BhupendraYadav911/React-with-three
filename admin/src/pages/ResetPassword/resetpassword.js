@@ -9,7 +9,7 @@ import {
   TextField,
   Fade,
 } from "@material-ui/core";
-import { withRouter } from "react-router-dom";
+import { withRouter,useHistory } from "react-router-dom";
 import classnames from "classnames";
 
 // styles
@@ -35,6 +35,10 @@ function Login(props) {
   var [nameValue, setNameValue] = useState("");
   var [loginValue, setLoginValue] = useState("admin@flatlogic.com");
   var [passwordValue, setPasswordValue] = useState("password");
+  const history = useHistory();
+  const Back  = ()=>{
+    history.push("/login");
+  }
 
   return (
     <Grid container className={classes.container}>
@@ -152,6 +156,15 @@ function Login(props) {
                 fullWidth
               /> */}
               <div className={classes.formButtons1}>
+              <Button
+                  color="primary"
+                  size="large"
+                  onClick={() =>
+                    Back()
+                  }                  
+                >
+                  Back
+                </Button>
                 {isLoading ? (
                   <CircularProgress size={26} className={classes.loginLoader} />
                 ) : (

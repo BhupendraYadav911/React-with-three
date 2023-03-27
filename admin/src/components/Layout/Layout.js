@@ -6,15 +6,15 @@ import {
   withRouter,
 } from "react-router-dom";
 import classnames from "classnames";
-import {Box, IconButton, Link} from '@material-ui/core'
-import Icon from '@mdi/react'
+// import {Box, IconButton, Link} from '@material-ui/core'
+// import Icon from '@mdi/react'
 
 //icons
-import {
-  mdiFacebook as FacebookIcon,
-  mdiTwitter as TwitterIcon,
-  mdiGithub as GithubIcon,
-} from '@mdi/js'
+// import {
+//   mdiFacebook as FacebookIcon,
+//   mdiTwitter as TwitterIcon,
+//   mdiGithub as GithubIcon,
+// } from '@mdi/js'
 
 // styles
 import useStyles from "./styles";
@@ -55,7 +55,7 @@ function Layout(props) {
             <Switch>
               <Route path="/app/dashboard" component={Dashboard} />
               <Route path="/app/typography" component={Typography} />
-              <Route path="/app/tables" component={Tables} />
+              <Route path="/app/banners" component={Tables} />
               <Route path="/app/notifications" component={Notifications} />
               <Route
                 exact
