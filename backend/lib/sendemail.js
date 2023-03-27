@@ -5,7 +5,7 @@
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 module.exports = function (toData, subjectData,resetToken) {
-    console.log('hhhhhhhhhhhhhhhhhhhhhhhhhh',resetToken);
+  return new Promise(function(resolve, reject) {
     /* let transport = nodemailer.createTransport({
         host: 'smtp.mailtrap.io',
         port: 2525,
@@ -117,5 +117,7 @@ module.exports = function (toData, subjectData,resetToken) {
                       </body>
                     </html>` // html body
     });
+    
     resolve(info)
+  });
 }
