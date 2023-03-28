@@ -37,7 +37,7 @@ const structure = [
   //   link: "/app/typography",
   //   icon: <TypographyIcon />,
   // },
-  { id: 2, label: "Banners", link: "/app/banners", icon: <TableIcon /> },
+  { id: 2, label: "Banners", link: "/app/bannerlist", icon: <TableIcon /> },
   // {
   //   id: 3,
   //   label: "Notifications",

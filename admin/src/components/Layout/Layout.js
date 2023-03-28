@@ -31,7 +31,7 @@ import Maps from "../../pages/maps";
 import Tables from "../../pages/tables";
 import Icons from "../../pages/icons";
 import Charts from "../../pages/charts";
-
+import BannerList from "../../pages/banner-list/BannerList";
 // context
 import { useLayoutState } from "../../context/LayoutContext";
 
@@ -55,7 +55,8 @@ function Layout(props) {
             <Switch>
               <Route path="/app/dashboard" component={Dashboard} />
               <Route path="/app/typography" component={Typography} />
-              <Route path="/app/banners" component={Tables} />
+              {/* <Route path="/app/banners" component={Tables} /> */}
+              <Route path="/app/bannerlist" component={BannerList} />
               <Route path="/app/notifications" component={Notifications} />
               <Route
                 exact

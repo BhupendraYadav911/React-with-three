@@ -205,6 +205,78 @@
                 }
             }
         },
+        "/auth/change-password": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Change Password",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "oldPassword",
+                                    "newPassword"
+                                ],
+                                "properties": {
+                                    "oldPassword": {
+                                        "type": "string"
+                                    },
+                                    "newPassword": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "oldPassword": "123456",
+                                    "newPassword": "1234567"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/update-user-profile": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user profile",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "full_name"
+                                ],
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string"
+                                    }
+                                    
+                                },
+                                "example": {
+                                    "full_name": "test"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "/auth/get-all-users": {
             "get": {
                 "tags": [

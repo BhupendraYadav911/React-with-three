@@ -29,10 +29,6 @@ export default class App extends React.Component {
     };
   }
 
-
-
-
-
   renderColumns() {
     const columns = (() => {
       const items = this.state.items;
@@ -72,7 +68,7 @@ export default class App extends React.Component {
       }}>
         <Pano
           source={asset("hdfc.jpg")} />
-
+         {/* center bannar */}
         <Video
           style={{
             width: 0.36,
@@ -89,6 +85,44 @@ export default class App extends React.Component {
           crossOrigin="anonymous"
           play={true}
         />
+       {/* left bannar */}
+       {/* <Video
+          style={{
+            width: 2.5,
+            height: 6.7,
+            position: 'absolute',
+            top: -5.33,
+            left: -20,
+            transform: [
+              { rotateY: 75 },
+              { translateX: -7 },
+            ],
+          }}
+          source={asset("crowd_04.mp4")}
+          muted={true}
+          autoPlay={true}
+
+          loop={true}
+          crossOrigin="anonymous"
+          play={true}
+        /> */}
+        <Image
+          style={{
+            width: 2.5,
+            height: 6.7,
+            position: 'absolute',
+            top: -5.33,
+            left: -20,
+            transform: [
+              { rotateY: 75 },
+              { translateX: -7 },
+            ],
+          }}
+          source={asset('c5fcf010802aff3dd4b852f645d37a2f.png')}
+        />
+
+
+
         {/* <Video
           style={{
             width: 0.36,
@@ -105,7 +139,7 @@ export default class App extends React.Component {
           crossOrigin="anonymous"
           play={true}
         /> */}
-        <Image
+         <Image
           style={{
             width: 0.36,
             height: 1.11,
@@ -135,7 +169,7 @@ export default class App extends React.Component {
           crossOrigin="anonymous"
           play={true}
         /> */}
-        <Image
+         <Image
           style={{
             width: 0.7,
             height: 2,
@@ -148,17 +182,18 @@ export default class App extends React.Component {
           }}
           source={asset('c5fcf010802aff3dd4b852f645d37a2f.png')}
         />
+         
+        {/* righit bannar */}
         {/* <Video
           style={{
-            width: 2.5,
-            height: 6.7,
+            width: 8,
+            height: 10,
             position: 'absolute',
             top: -5.33,
-            left: -20,
+            left: 45,
             transform: [
-              // {rotateX: 30},
               { rotateY: 75 },
-              { translateX: -7 },
+              { translateX: -16 },
             ],
           }}
           source={asset("crowd_04.mp4")}
@@ -169,33 +204,16 @@ export default class App extends React.Component {
           crossOrigin="anonymous"
           play={true}
         /> */}
-
         <Image
           style={{
-            width: 1.7,
-            height: 4.5,
+            width: 4.3,
+            height: 14,
             position: 'absolute',
-            top: -3.0,
-            left:15,
-            righit:0,
+            top: -10.33,
+            left: 40,
             transform: [
-              { rotateY: 90 },
-              // { translateX: -7.1 },
-            ],
-          }}
-          source={asset('c5fcf010802aff3dd4b852f645d37a2f.png')}
-        />
-        <Image
-          style={{
-            width: 2.4,
-            height: 7.1,
-            position: 'absolute',
-            top: -5.38,
-            left: -20,
-            transform: [
-              // {rotateX: 30},
               { rotateY: 75 },
-              { translateX: -7.1 },
+              { translateX: -12 },
             ],
           }}
           source={asset('et2-683x1024.jpg')}
