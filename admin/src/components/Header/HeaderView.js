@@ -282,6 +282,14 @@ const Header = ({ classes, isSidebarOpened, toggleSidebar, ...props }) => (
         >
           <AccountIcon className={classes.profileMenuIcon} /> Messages
         </MenuItem>
+    
+
+
+
+
+
+
+
         <div className={classes.profileMenuUser}>
           <Typography
             className={classes.profileMenuLink}
