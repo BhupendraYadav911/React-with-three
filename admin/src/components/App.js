@@ -33,8 +33,6 @@ export default function App() {
         <PublicRoute path="/forgot" component={forgot} />
 
         <PublicRoute path='/resetpassword' component={resetpassword} />
-
-        <PublicRoute path="/resetpassword" component={resetpassword} />
         <PublicRoute path="/ConfirmPassword" component={ConfirmPassword} />
         {/* <PublicRoute path="/changePassword" component={changePassword} /> */}
         <Route component={Error} />
