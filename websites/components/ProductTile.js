@@ -139,8 +139,7 @@ class ProductTile extends React.Component {
               paddingLeft: 0.0,
               marginLeft: 0.9
             }}
-            onEnter={this.onButtonEnter1}
-            onExit={this.onButtonExit1}
+           
             // onClick={onClick}
           >
             <Image
@@ -148,43 +147,47 @@ class ProductTile extends React.Component {
                 width: 0.2,
                 height: 0.2
               }}
+              onEnter={this.onButtonEnter1}
+              onExit={this.onButtonExit1}
               source={asset('noun-cash.png')}
             />
           </VrButton>
           {this.state.isHovering2 && (
-            <Animated.View
-              style={{
-                flexDirection: 'row',
-                // position: 'relative',
-                backgroundColor: 'white',
-                padding: 0.01,
-                borderRadius: 0.11,
-                AlignVertical: 'left',
-                marginTop: 0.4,
-                marginLeft: 1.1,
-                layoutOrigin: [0.1, 0.1]
-                // transition: '2s width ease',
-              }}>
-              <Image
-                style={{
-                  width: 0.2,
-                  height: 0.2
-                }}
-                source={asset('noun-cash.png')}
-              />
+             <Animated.View
+             style={{
+               flexDirection: 'row',
+               position: 'absolute',
+               backgroundColor: 'white',
+               padding: 0.01,
+               borderRadius: 0.11,
+               AlignVertical: 'left',
+               marginTop: 0.4,
+               marginLeft: 0.2,
+               layoutOrigin: [-0.9,0.1],
+
+             }}>
+            
+             <Image
+               style={{
+                 width: 0.2,
+                 height: 0.2
+               }}
+               source={asset('help-desk.png')}
+             />
               <Text
-                style={{
-                  color: 'red',
-                  textAlign: 'center',
-                  textAlignVertical: 'center',
-                  paddingLeft: 0.01,
-                  paddingRight: 0.2,
-                  fontSize: 0.1,
-                  layoutOrigin: [0.1, 0.1]
-                }}>
-                Popup here
-              </Text>
-            </Animated.View>
+               style={{
+                 color: 'red',
+                 textAlign: 'center',
+                 textAlignVertical: 'center',
+                 paddingLeft: 0.01,
+                 paddingRight: 0.2,
+                 fontSize: 0.1,
+
+                 layoutOrigin: [0.1, 0.1]
+               }}>
+             popup here
+             </Text>
+           </Animated.View>
           )}
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -198,8 +201,8 @@ class ProductTile extends React.Component {
               paddingLeft: 0.0
               //paddingRight: 1.2,
             }}
-            onEnter={this.onButtonEnter}
-            onExit={this.onButtonExit}
+            // onEnter={this.onButtonEnter}
+            // onExit={this.onButtonExit}
             // onClick={onClick}
           >
             <Image
@@ -207,7 +210,8 @@ class ProductTile extends React.Component {
                 width: 0.2,
                 height: 0.2
               }}
-              source={asset('noun-cash.png')}
+              source={asset('noun-financial.png')}
+              
             />
           </VrButton>
           <VrButton
@@ -220,8 +224,8 @@ class ProductTile extends React.Component {
               paddingLeft: 0.0,
               marginLeft: 0.9
             }}
-            onEnter={this.onButtonEnter}
-            onExit={this.onButtonExit}
+            // onEnter={this.onButtonEnter}
+            // onExit={this.onButtonExit}
             // onClick={onClick}
           >
             <Image
@@ -229,7 +233,7 @@ class ProductTile extends React.Component {
                 width: 0.2,
                 height: 0.2
               }}
-              source={asset('noun-cash.png')}
+              source={asset('card.png')}
             />
           </VrButton>
         </View>

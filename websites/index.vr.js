@@ -9,11 +9,13 @@ import {
   View,
   VrButton,
   Animated,
-  Video
+  Video,TextInput
 } from 'react-vr';
 
 import ProductTile from './components/ProductTile';
 import testData from './data/testData';
+import Voice from './components/Voice';
+import Visit from './components/Visit';
 import ProductTile1 from './components/ProductTile1';
 import Accordion from './components/Accordion';
 
@@ -200,8 +202,12 @@ export default class App extends React.Component {
           }}
           source={asset('et2-683x1024.jpg')}
         />
+        <Visit/>
 
         <ProductTile />
+        <Voice/>
+        
+
       </View>
       // true on hover
     );
