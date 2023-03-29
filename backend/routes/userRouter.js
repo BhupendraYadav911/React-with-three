@@ -23,6 +23,7 @@ router.post('/update-user-profile', cors.corsWithOptions, authenticate.verifyUse
 router.post('/update-user-photo', cors.corsWithOptions, authenticate.verifyUser, User.updateUserPhoto);
 router.post('/update-user-photo-test', cors.corsWithOptions, authenticate.verifyUser, User.updateUserPhotoTest);
 router.get('/get-all-users', cors.corsWithOptions, authenticate.verifyUser, User.getAllUsers);
+router.get('/current-user', cors.corsWithOptions, authenticate.verifyUser, User.currentUser);
 router.post('/delete-user', cors.corsWithOptions, authenticate.verifyUser, User.deleteUser);
 
 module.exports = router;

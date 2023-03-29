@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react'
+
 import {
   AppBar,
   Toolbar,
   IconButton,
-  InputBase,
+  // InputBase,
   Menu,
   MenuItem,
   Fab,
-  Link
+  // Link
 } from "@material-ui/core";
 import {
   Menu as MenuIcon,
-  MailOutline as MailIcon,
-  NotificationsNone as NotificationsIcon,
+  // MailOutline as MailIcon,
+  // NotificationsNone as NotificationsIcon,
   Person as AccountIcon,
-  Search as SearchIcon,
+  // Search as SearchIcon,
   Send as SendIcon,
   ArrowBack as ArrowBackIcon,
 } from "@material-ui/icons";
@@ -24,7 +25,7 @@ import classNames from "classnames";
 import useStyles from "./styles";
 
 // components
-import { Badge, Typography, Button } from "../Wrappers";
+import { Typography } from "../Wrappers";
 import Notification from "../Notification/Notification";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
@@ -34,7 +35,10 @@ import {
   useLayoutDispatch,
   toggleSidebar,
 } from "../../context/LayoutContext";
-import { useUserDispatch, signOut } from "../../context/UserContext";
+import { useUserDispatch, signOut, currentUser } from "../../context/UserContext";
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
+var baseURL = "http://103.120.178.54:3010";
 
 const messages = [
   {
@@ -91,7 +95,7 @@ const notifications = [
 
 export default function Header(props) {
   var classes = useStyles();
-
+  const history = useHistory()
   // global
   var layoutState = useLayoutState();
   var layoutDispatch = useLayoutDispatch();
@@ -99,11 +103,45 @@ export default function Header(props) {
 
   // local
   var [mailMenu, setMailMenu] = useState(null);
-  var [isMailsUnread, setIsMailsUnread] = useState(true);
+  // var [isMailsUnread, setIsMailsUnread] = useState(true);
   var [notificationsMenu, setNotificationsMenu] = useState(null);
-  var [isNotificationsUnread, setIsNotificationsUnread] = useState(true);
+  // var [isNotificationsUnread, setIsNotificationsUnread] = useState(true);
   var [profileMenu, setProfileMenu] = useState(null);
-  var [isSearchOpen, setSearchOpen] = useState(false);
+  // var [isSearchOpen, setSearchOpen] = useState(false);
+  const [currentUserDetails, setCurrentUserDetails] = useState(null);
+  const changePasswordRedict = () => {
+    history.push('/app/changepassword')
+  }
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: baseURL + '/auth/current-user',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      data: {}
+    }
+  
+    axios(config)
+      .then((response) => {
+        if (response.data.code == 200) {
+          console.log('if', response.data.data);
+          setCurrentUserDetails(response.data.data)
+        } else {
+          console.log('else', response);
+          
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+  
+        // dispatch({ type: 'LOGIN_FAILURE' })
+      })
+
+  }, [])
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -289,16 +327,16 @@ export default function Header(props) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              John Smith
+             {currentUserDetails?.full_name}
             </Typography>
-            <Typography
+            {/* <Typography
               className={classes.profileMenuLink}
               component="a"
               color="primary"
               href="https://flatlogic.com"
             >
               Flalogic.com
-            </Typography>
+            </Typography> */}
           </div>
           <MenuItem
             className={classNames(
@@ -324,6 +362,14 @@ export default function Header(props) {
           >
             <AccountIcon className={classes.profileMenuIcon} /> Messages
           </MenuItem> */}
+          <MenuItem
+            className={classNames(
+              classes.profileMenuItem,
+              classes.headerMenuItem,
+            )}
+            onClick={changePasswordRedict}>
+            <AccountIcon className={classes.profileMenuIcon} /> Change Password
+          </MenuItem>
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}

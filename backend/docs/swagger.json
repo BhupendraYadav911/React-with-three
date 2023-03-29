@@ -129,125 +129,6 @@
                 }
             }
         },
-        "/auth/change-password": {
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Change Password",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "required": [
-                                    "oldPassword",
-                                    "newPassword"
-                                ],
-                                "properties": {
-                                    "oldPassword": {
-                                        "type": "string"
-                                    },
-                                    "newPassword": {
-                                        "type": "string"
-                                    }
-                                },
-                                "example": {
-                                    "oldPassword": "123456",
-                                    "newPassword": "1234567"
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
-        "/auth/update-user-profile": {
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Update user profile",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "required": [
-                                    "full_name",
-                                    "job_id",
-                                    "organization"
-                                ],
-                                "properties": {
-                                    "full_name": {
-                                        "type": "string"
-                                    },
-                                    "organization": {
-                                        "type": "string"
-                                    },
-                                    "job_id": {
-                                        "type": "string"
-                                    },
-                                    "oldPassword": {
-                                        "type": "string"
-                                    },
-                                    "newPassword": {
-                                        "type": "string"
-                                    }
-                                },
-                                "example": {
-                                    "full_name": "ghanshyam",
-                                    "organization": "test",
-                                    "job_id": "5e68df7243d3c262c0ab6fd5",
-                                    "oldPassword": "",
-                                    "newPassword": ""
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
-        "/auth/update-user-photo": {
-            "post": {
-                "tags": [
-                    "Users"
-                ],
-                "summary": "Update user photo",
-                "description": " `user_photo` field is required.",
-                "consumes": "multipart/form-data",
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "user_photo": {
-                                        "type": "string",
-                                        "format": "binary"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
         "/auth/forgot-password": {
             "post": {
                 "tags": [
@@ -324,12 +205,102 @@
                 }
             }
         },
+        "/auth/change-password": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Change Password",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "oldPassword",
+                                    "newPassword"
+                                ],
+                                "properties": {
+                                    "oldPassword": {
+                                        "type": "string"
+                                    },
+                                    "newPassword": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "oldPassword": "123456",
+                                    "newPassword": "1234567"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/update-user-profile": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user profile",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "full_name"
+                                ],
+                                "properties": {
+                                    "full_name": {
+                                        "type": "string"
+                                    }
+                                    
+                                },
+                                "example": {
+                                    "full_name": "test"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "/auth/get-all-users": {
             "get": {
                 "tags": [
                     "Users"
                 ],
                 "summary": "Get all users",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/auth/current-user": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get current user",
                 "requestBody": {
                     "content": {
                         "application/json": {}

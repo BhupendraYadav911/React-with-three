@@ -5,7 +5,7 @@
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 module.exports = function (toData, subjectData,resetToken) {
-    console.log('hhhhhhhhhhhhhhhhhhhhhhhhhh',resetToken);
+  return new Promise(function(resolve, reject) {
     /* let transport = nodemailer.createTransport({
         host: 'smtp.mailtrap.io',
         port: 2525,
@@ -47,8 +47,7 @@ module.exports = function (toData, subjectData,resetToken) {
     //         return res.status(201).send(Response(200, "Registration Successful!."));
     //     }
     // });
-
-    const url = 'http://103.120.178.54:3011/reset-password?token='+resetToken;
+    const url = 'http://103.120.178.54:3011/#/resetpassword/token='+resetToken;
     const transporter = nodemailer.createTransport({
         service: "gmail",
         host: "smtp.gmail.com",
@@ -117,5 +116,7 @@ module.exports = function (toData, subjectData,resetToken) {
                       </body>
                     </html>` // html body
     });
+    
     resolve(info)
+  });
 }

@@ -23,6 +23,7 @@ module.exports = {
     updateUserPhoto: updateUserPhoto,
     updateUserPhotoTest: updateUserPhotoTest,
     getAllUsers: getAllUsers,
+    currentUser: currentUser,
     deleteUser: deleteUser
 };
 async function statusAdd(req, res) {
@@ -311,7 +312,7 @@ async function resetPassword(req, res) {
         req.body.newPassword = bcrypt.hashSync(req.body.newPassword, saltRounds);
         User.findOneAndUpdate(
             { _id: passUser._id },
-            { $set: { "password": req.body.newPassword ,"password_reset_token": ''} },
+            { $set: { "password": req.body.newPassword, "password_reset_token": '' } },
             { new: true }
         ).then(user => {
             if (!user) {
@@ -398,12 +399,12 @@ async function updateUserProfile(req, res) {
     if (!req.body.full_name) {
         return res.json(Response(400, 'Required full_name are missing!'));
     }
-    if (!req.body.job_id) {
-        return res.json(Response(400, 'Required job_id are missing!'));
-    }
-    if (req.body.newPassword && req.body.newPassword != "" && !req.body.oldPassword) {
-        return res.json(Response(400, 'Required old password are missing!'));
-    }
+    // if (!req.body.job_id) {
+    //     return res.json(Response(400, 'Required job_id are missing!'));
+    // }
+    // if (req.body.newPassword && req.body.newPassword != "" && !req.body.oldPassword) {
+    //     return res.json(Response(400, 'Required old password are missing!'));
+    // }
     const passUser = await User.findOne({ "_id": req.body.user._id });
     //const imageUrl = req.headers.origin;
     if (passUser) {
@@ -413,58 +414,72 @@ async function updateUserProfile(req, res) {
         if (!req.body.phone_nymber) {
             req.body.phone_nymber = req.body.user.phone_nymber;
         } */
-        if (req.body.newPassword && req.body.newPassword != "") {
-            bcrypt.compare(req.body.oldPassword, req.body.user.password, function (err, result) {
-                if (result == true) {
-                    req.body.newPassword = bcrypt.hashSync(req.body.newPassword, saltRounds);
-                    User.findOneAndUpdate(
-                        { _id: req.body.user._id },
-                        {
-                            $set: {
-                                "full_name": req.body.full_name,
-                                "organization": req.body.organization,
-                                "job_id": req.body.job_id,
-                                "password": req.body.newPassword
-                            }
-                        }, { new: true }
-                    ).then(user => {
-                        if (!user) {
-                            return res.status(404).send(Response(404, `Invalid user ${user}`));
-                        }
-                        /* if (user.user_photo != "") {
-                            user.user_photo = imageUrl + user.user_photo;
-                        } */
-                        res.status(201).send(Response(200, "Profile updated successfully!", user));
-                    }).catch(err => {
-                        res.status(500).send(Response(500, "Some error occurred while retrieving user."));
-                    });
-                } else {
-                    return res.status(400).send(Response(400, 'Incorrect old password!'));
-                }
-            });
-        } else {
-            User.findOneAndUpdate(
-                { _id: req.body.user._id },
-                {
-                    $set: {
-                        "full_name": req.body.full_name,
-                        "organization": req.body.organization,
-                        "job_id": req.body.job_id
-                    }
-                }, { new: true }
-            ).then(user => {
-                if (!user) {
-                    return res.status(404).send(Response(404, `Invalid user ${user}`));
-                }
-                /*  if (user.user_photo != "") {
-                     user.user_photo = imageUrl + user.user_photo;
-                 } */
-                res.status(201).send(Response(200, "Profile updated successfully!", user));
-            }).catch(err => {
-                res.status(500).send(Response(500, "Some error occurred while retrieving user."));
-            });
-        }
+        // if (req.body.newPassword && req.body.newPassword != "") {
+        //     bcrypt.compare(req.body.oldPassword, req.body.user.password, function (err, result) {
+        //         if (result == true) {
+        //             req.body.newPassword = bcrypt.hashSync(req.body.newPassword, saltRounds);
+        //             User.findOneAndUpdate(
+        //                 { _id: req.body.user._id },
+        //                 {
+        //                     $set: {
+        //                         "full_name": req.body.full_name,
+        //                     }
+        //                 }, { new: true }
+        //             ).then(user => {
+        //                 if (!user) {
+        //                     return res.status(404).send(Response(404, `Invalid user ${user}`));
+        //                 }
+        //                 /* if (user.user_photo != "") {
+        //                     user.user_photo = imageUrl + user.user_photo;
+        //                 } */
+        //                 res.status(201).send(Response(200, "Profile updated successfully!", {}));
+        //             }).catch(err => {
+        //                 res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+        //             });
+        //         } else {
+        //             return res.status(400).send(Response(400, 'Incorrect old password!'));
+        //         }
+        //     });
+        // } else {
+        //     User.findOneAndUpdate(
+        //         { _id: req.body.user._id },
+        //         {
+        //             $set: {
+        //                 "full_name": req.body.full_name
+        //             }
+        //         }, { new: true }
+        //     ).then(user => {
+        //         if (!user) {
+        //             return res.status(404).send(Response(404, `Invalid user ${user}`));
+        //         }
+        //         /*  if (user.user_photo != "") {
+        //              user.user_photo = imageUrl + user.user_photo;
+        //          } */
+        //         res.status(201).send(Response(200, "Profile updated successfully!", {}));
+        //     }).catch(err => {
+        //         res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+        //     });
+        // }
         //console.log('updatedField', updatedField);
+
+        User.findOneAndUpdate(
+            { _id: req.body.user._id },
+            {
+                $set: {
+                    "full_name": req.body.full_name
+                }
+            }, { new: true }
+        ).then(user => {
+            if (!user) {
+                return res.status(404).send(Response(404, `Invalid user ${user}`));
+            }
+            /*  if (user.user_photo != "") {
+                 user.user_photo = imageUrl + user.user_photo;
+             } */
+            res.status(201).send(Response(200, "Profile updated successfully!", {}));
+        }).catch(err => {
+            res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+        });
     } else {
         return res.status(400).send(Response(400, 'Email Address is missing !'));
     }
@@ -554,6 +569,27 @@ async function getAllUsers(req, res) {
         }).catch(err => {
             res.status(500).send(Response(500, "Some error occurred while retrieving user."));
         });
+}
+async function currentUser(req, res) {
+    if (req.body.user && req.body.user._id) {
+        const userId = req.body.user._id
+        await User.findOne({ "_id": userId })
+            .then(users => {
+                const sendData = {
+                    "_id": users._id,
+                    "user_photo": users.user_photo,
+                    "role": users.role,
+                    "full_name": users.full_name,
+                    "email": users.email,
+                }
+                res.status(201).send(Response(200, "User data succcessfully!.", sendData));
+            }).catch(err => {
+                res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+            });
+    } else {
+        res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+    }
+
 }
 async function deleteUser(req, res) {
     if (req.body.userId != "" && req.body.userId != null) {

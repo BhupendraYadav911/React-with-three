@@ -41,7 +41,7 @@ export default function Tables() {
   const classes = useStyles();
   return (
     <>
-      <PageTitle title="Tables" />
+      <PageTitle title="Banners" />
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <MUIDataTable
