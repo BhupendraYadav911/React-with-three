@@ -60,8 +60,6 @@ function Layout(props) {
               <Route path="/app/bannerlist" component={BannerList} />
 
               <Route path="/app/banners" component={Tables} />
-              <Route path="/app/changePassword" component={pages} />
-
               <Route path="/app/notifications" component={Notifications} />
               <Route
                 exact
