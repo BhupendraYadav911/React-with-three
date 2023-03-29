@@ -295,6 +295,24 @@
                 }
             }
         },
+        "/auth/current-user": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get current user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {}
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
         "/setting/banner": {
             "get": {
                 "tags": [

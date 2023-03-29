@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react'
+
 import {
   AppBar,
   Toolbar,
@@ -24,7 +25,7 @@ import classNames from "classnames";
 import useStyles from "./styles";
 
 // components
-import {  Typography } from "../Wrappers";
+import { Typography } from "../Wrappers";
 import Notification from "../Notification/Notification";
 import UserAvatar from "../UserAvatar/UserAvatar";
 
@@ -34,9 +35,10 @@ import {
   useLayoutDispatch,
   toggleSidebar,
 } from "../../context/LayoutContext";
-import { useUserDispatch, signOut } from "../../context/UserContext";
-
-
+import { useUserDispatch, signOut, currentUser } from "../../context/UserContext";
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
+var baseURL = "http://localhost:3010";
 
 const messages = [
   {
@@ -93,7 +95,7 @@ const notifications = [
 
 export default function Header(props) {
   var classes = useStyles();
-
+  const history = useHistory()
   // global
   var layoutState = useLayoutState();
   var layoutDispatch = useLayoutDispatch();
@@ -106,6 +108,40 @@ export default function Header(props) {
   // var [isNotificationsUnread, setIsNotificationsUnread] = useState(true);
   var [profileMenu, setProfileMenu] = useState(null);
   // var [isSearchOpen, setSearchOpen] = useState(false);
+  const [currentUserDetails, setCurrentUserDetails] = useState(null);
+  const changePasswordRedict = () => {
+    history.push('/app/changepassword')
+  }
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: baseURL + '/auth/current-user',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      data: {}
+    }
+  
+    axios(config)
+      .then((response) => {
+        if (response.data.code == 200) {
+          console.log('if', response.data.data);
+          setCurrentUserDetails(response.data.data)
+        } else {
+          console.log('else', response);
+          
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+  
+        // dispatch({ type: 'LOGIN_FAILURE' })
+      })
+
+  }, [])
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -291,7 +327,7 @@ export default function Header(props) {
         >
           <div className={classes.profileMenuUser}>
             <Typography variant="h4" weight="medium">
-              John Smith
+             {currentUserDetails?.full_name}
             </Typography>
             {/* <Typography
               className={classes.profileMenuLink}
@@ -326,16 +362,14 @@ export default function Header(props) {
           >
             <AccountIcon className={classes.profileMenuIcon} /> Messages
           </MenuItem> */}
-         
-      
-
-          
-
-
-
-
-
-
+          <MenuItem
+            className={classNames(
+              classes.profileMenuItem,
+              classes.headerMenuItem,
+            )}
+            onClick={changePasswordRedict}>
+            <AccountIcon className={classes.profileMenuIcon} /> Change Password
+          </MenuItem>
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}

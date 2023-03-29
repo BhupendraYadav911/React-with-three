@@ -47,8 +47,7 @@ module.exports = function (toData, subjectData,resetToken) {
     //         return res.status(201).send(Response(200, "Registration Successful!."));
     //     }
     // });
-
-    const url = 'http://103.120.178.54:3011/reset-password?token='+resetToken;
+    const url = 'http://103.120.178.54:3011/#/resetpassword/token='+resetToken;
     const transporter = nodemailer.createTransport({
         service: "gmail",
         host: "smtp.gmail.com",

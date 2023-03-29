@@ -15,7 +15,7 @@ export default function Error() {
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotype}>
-        <img className={classes.logotypeIcon} src={logo} alt="logo" />
+        {/* <img className={classes.logotypeIcon} src={logo} alt="logo" /> */}
         <Typography variant="h3" color="white" className={classes.logotypeText}>
           Material Admin
         </Typography>

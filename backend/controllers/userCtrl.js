@@ -23,6 +23,7 @@ module.exports = {
     updateUserPhoto: updateUserPhoto,
     updateUserPhotoTest: updateUserPhotoTest,
     getAllUsers: getAllUsers,
+    currentUser: currentUser,
     deleteUser: deleteUser
 };
 async function statusAdd(req, res) {
@@ -311,7 +312,7 @@ async function resetPassword(req, res) {
         req.body.newPassword = bcrypt.hashSync(req.body.newPassword, saltRounds);
         User.findOneAndUpdate(
             { _id: passUser._id },
-            { $set: { "password": req.body.newPassword ,"password_reset_token": ''} },
+            { $set: { "password": req.body.newPassword, "password_reset_token": '' } },
             { new: true }
         ).then(user => {
             if (!user) {
@@ -568,6 +569,27 @@ async function getAllUsers(req, res) {
         }).catch(err => {
             res.status(500).send(Response(500, "Some error occurred while retrieving user."));
         });
+}
+async function currentUser(req, res) {
+    if (req.body.user && req.body.user._id) {
+        const userId = req.body.user._id
+        await User.findOne({ "_id": userId })
+            .then(users => {
+                const sendData = {
+                    "_id": users._id,
+                    "user_photo": users.user_photo,
+                    "role": users.role,
+                    "full_name": users.full_name,
+                    "email": users.email,
+                }
+                res.status(201).send(Response(200, "User data succcessfully!.", sendData));
+            }).catch(err => {
+                res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+            });
+    } else {
+        res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+    }
+
 }
 async function deleteUser(req, res) {
     if (req.body.userId != "" && req.body.userId != null) {
