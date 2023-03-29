@@ -38,7 +38,7 @@ import {
 import { useUserDispatch, signOut, currentUser } from "../../context/UserContext";
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
-var baseURL = "http://localhost:3010";
+var baseURL = "http://103.120.178.54:3010";
 
 const messages = [
   {
