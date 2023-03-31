@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 
-export default makeStyles((theme) => ({
+export default makeStyles(theme => ({
   container: {
     height: "100vh",
     width: "100vw",
@@ -39,17 +39,17 @@ export default makeStyles((theme) => ({
     },
   },
   formContainer: {
-    width: "40%",
-    height: "60%",
+    width: "30%",
+    height: "50%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor:"white",
+    borderRadius: '7px',
     boxShadow: "1px 4px 12px black",
     margin: "4em",
     padding: "2em",
-    borderRadius: '7px',
     [theme.breakpoints.down("md")]: {
       width: "50%",
     },
@@ -114,14 +114,30 @@ export default makeStyles((theme) => ({
   errorMessage: {
     textAlign: "center",
   },
-
+  textFieldUnderline: {
+    "&:before": {
+      borderBottomColor: theme.palette.primary.light,
+    },
+    "&:after": {
+      borderBottomColor: theme.palette.primary.main,
+    },
+    "&:hover:before": {
+      borderBottomColor: `${theme.palette.primary.light} !important`,
+    },
+  },
+  textField: {
+    borderBottomColor: theme.palette.background.light,
+  },
   formButtons: {
     width: "100%",
     marginTop: theme.spacing(4),
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    
   },
+    
+
 
   formButtons1: {
     width: "100%",
@@ -129,6 +145,7 @@ export default makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+   
   },
 
   forgetButton: {

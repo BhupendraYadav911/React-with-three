@@ -46,6 +46,10 @@ export default makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
+    boxShadow: "1px 4px 12px black",
+    borderRadius: '7px',
+    margin: "4em",
+    padding: "2em",
     [theme.breakpoints.down("md")]: {
       width: "50%",
     },

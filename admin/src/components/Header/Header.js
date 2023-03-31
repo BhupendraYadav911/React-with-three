@@ -112,6 +112,9 @@ export default function Header(props) {
   const changePasswordRedict = () => {
     history.push('/app/changepassword')
   }
+  const profileRedict = () => {
+    history.push('/app/profile')
+  }
   useEffect(() => {
     const token = localStorage.getItem('token');
     let config = {
@@ -338,14 +341,6 @@ export default function Header(props) {
               Flalogic.com
             </Typography> */}
           </div>
-          <MenuItem
-            className={classNames(
-              classes.profileMenuItem,
-              classes.headerMenuItem,
-            )}
-          >
-            <AccountIcon className={classes.profileMenuIcon} /> Profile
-          </MenuItem>
           {/* <MenuItem
             className={classNames(
               classes.profileMenuItem,
@@ -362,6 +357,14 @@ export default function Header(props) {
           >
             <AccountIcon className={classes.profileMenuIcon} /> Messages
           </MenuItem> */}
+            <MenuItem
+            className={classNames(
+              classes.profileMenuItem,
+              classes.headerMenuItem,
+            )}
+            onClick={profileRedict}>
+            <AccountIcon className={classes.profileMenuIcon} />Profile
+          </MenuItem>
           <MenuItem
             className={classNames(
               classes.profileMenuItem,
