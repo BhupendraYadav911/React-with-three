@@ -29,7 +29,6 @@ class Accordion extends React.Component {
         //AlignVertical: 'left',
          layoutOrigin: [1.01, 0.1],
          position: 'absolute',  zIndex: 100,
-  
         // opacity: this.state.opacity,
         transform: [
           {translateY: this.state.translateY},
