@@ -40,8 +40,8 @@ class Voice extends React.Component {
           >
             <Image
               style={{
-                width: 0.2,
-                height: 0.2
+                width: 0.170,
+                height: 0.170
               }}
               source={asset('noun-voice.png')}
               onEnter={this.onButtonEnter}
@@ -67,7 +67,7 @@ class Voice extends React.Component {
                 AlignVertical: 'right',
                  marginTop: -0.03,
                 // marginLeft: 0.2,
-                layoutOrigin: [-0.1, -22.1],
+                layoutOrigin: [-0.1, -20.0],
 
               }}>
                   <Image
