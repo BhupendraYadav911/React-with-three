@@ -24,7 +24,7 @@ class Visit extends React.Component {
   render() {
     return (
       <View >
-     
+   
           <Animated.View
               style={{
                 // flexDirection: 'row',
@@ -35,22 +35,25 @@ class Visit extends React.Component {
                
                 //  marginTop: -0.03,
                 // marginLeft: 0.2,
-                layoutOrigin: [0.1, -2.90],
+                layoutOrigin: [0.1, -1.02],
+                // layoutOrigin: [0.1, -2.90],
 
               }}>
-                  
-
-              <View style={styles.tooltip}>
-           
-            <Text style={styles.tooltipText}>Visit Kiosk</Text>
-           </View>
-           {/* <Image
+                     <Image
                 style={{
+                  layoutOrigin: [-6.1, -3.1],
                   width: 0.06,
                   height: 0.06,
                 }}
-                source={asset('arrow.png')}
-              /> */}
+                source={asset('down1.png')}
+              />
+                
+              <View style={styles.tooltip}>
+           
+            <Text style={styles.tooltipText}>Visit Kiosk</Text>
+           
+           </View>
+        
             </Animated.View>
        </View>
        

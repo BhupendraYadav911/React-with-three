@@ -9,7 +9,7 @@ import {
   View,
   VrButton,
   Animated,
-  Video,TextInput
+  Video
 } from 'react-vr';
 
 import ProductTile from './components/ProductTile';
@@ -221,11 +221,10 @@ export default class App extends React.Component {
           source={asset('et2-683x1024.jpg')}
         />
         <Visit/>
-
+       
+      
         <ProductTile />
         <Voice/>
-        
-
       </View>
       // true on hover
     );
