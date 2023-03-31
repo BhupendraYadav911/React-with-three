@@ -10,7 +10,9 @@ import {
   TextField,
 } from "@material-ui/core";
 import classNames from "classnames";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
+// styles
+// styles
 // styles
 import useStyles from "./styles";
 function ChangePassword(props) {
@@ -23,7 +25,9 @@ function ChangePassword(props) {
           <Tab label="Change Password" classes={{ root: classes.tab }} />
           <TextField
             id="Current Password"
+            style={{ width: 400, border: " 1px solid ", borderRadius: "4px" }}
             InputProps={{
+              disableUnderline: true,
               classes: {
                 underline: classes.textFieldUnderline,
                 input: classes.textField,
@@ -32,11 +36,12 @@ function ChangePassword(props) {
             margin="normal"
             placeholder="Current Password"
             type="password"
-            style={{width:400}}
           />
           <TextField
             id="New Password"
+            style={{ width: 400, border: " 1px solid ", borderRadius: "4px" }}
             InputProps={{
+              disableUnderline: true,
               classes: {
                 underline: classes.textFieldUnderline,
                 input: classes.textField,
@@ -45,11 +50,12 @@ function ChangePassword(props) {
             margin="normal"
             placeholder="New Password"
             type="password"
-            style={{width:400}}
           />
           <TextField
             id="Confirm Password"
+            style={{ width: 400, border: " 1px solid ", borderRadius: "4px" }}
             InputProps={{
+              disableUnderline: true,
               classes: {
                 underline: classes.textFieldUnderline,
                 input: classes.textField,
@@ -58,13 +64,12 @@ function ChangePassword(props) {
             margin="normal"
             placeholder="Confirm Password"
             type="password"
-            style={{width:400}}
           />
           <div>
-          <div className={classes.creatingButtonContainer}>
-            <Button   variant="contained" color="primary" size="large">
-              Change Password
-            </Button>
+            <div className={classes.creatingButtonContainer}>
+              <Button variant="contained" color="primary" size="large">
+                Change Password
+              </Button>
             </div>
           </div>
         </React.Fragment>

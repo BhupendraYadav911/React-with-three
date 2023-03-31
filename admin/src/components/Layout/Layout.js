@@ -34,6 +34,7 @@ import Charts from "../../pages/charts";
 import BannerList from "../../pages/banner-list/BannerList";
 import ChangePassword from "../../pages/changepassword/ChangePassword";
 import Edit from "../../pages/edit/Edit";
+import Profile from "../../pages/profile/Profile";
 // context
 import { useLayoutState } from "../../context/LayoutContext";
 
@@ -63,6 +64,7 @@ function Layout(props) {
               <Route path="/app/changepassword" component={ChangePassword} />
               <Route path="/app/notifications" component={Notifications} />
               <Route path="/app/edit" component={Edit} />
+              <Route path="/app/profile" component={Profile}/>
               <Route
                 exact
                 path="/app/ui"
