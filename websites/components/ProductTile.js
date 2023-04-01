@@ -20,6 +20,7 @@ class ProductTile extends React.Component {
       translateY: new Animated.Value(0),
       opacity: new Animated.Value(0),
       rotateY: new Animated.Value(0),
+      translateX: new Animated.Value(0),
       active: false
     }
     this.onButtonEnter = this.onButtonEnter.bind(this)
@@ -69,9 +70,10 @@ class ProductTile extends React.Component {
             style={{
               
               borderColor: 'transparent',
-              marginTop: 0.39,
+              marginTop: 0.65,
+              // marginTop: 0.39,
               marginBottom: 0.1,
-              layoutOrigin: [0.01, 0.01],
+              layoutOrigin: [-0.82, 0.20],
               alignItems: 'right',
               padding: 0.01,
               paddingLeft: 0.0
@@ -83,8 +85,8 @@ class ProductTile extends React.Component {
           >
             <Image
               style={{
-                width: 0.2,
-                height: 0.2
+                width: 0.170,
+                height: 0.170
               }}
               source={asset('help-desk.png')}
               onEnter={this.onButtonEnter}
@@ -97,12 +99,19 @@ class ProductTile extends React.Component {
                 flexDirection: 'row',
                 position: 'absolute',
                 backgroundColor: 'white',
-                padding: 0.01,
-                borderRadius: 0.11,
+                //  padding: 0.03 0.04,
+                paddingTop:0.04,
+                paddingBottom:0.01,
+                // paddingLeft: 0.04,
+                paddingRight:0.04,
+                borderRadius: 0.10,
                 AlignVertical: 'right',
                 marginTop: 0.4,
-                marginLeft: 0.2,
-                layoutOrigin: [0.9, 0.1],
+                marginLeft: 0.199,
+                layoutOrigin: [0.85,-1.268],
+               
+                
+                // layoutOrigin: [0.9, 0.1],
 
               }}>
               <Text
@@ -110,20 +119,21 @@ class ProductTile extends React.Component {
                   color: 'red',
                   textAlign: 'center',
                   textAlignVertical: 'center',
-                  paddingLeft: 0.01,
-                  paddingRight: 0.2,
+                  // paddingLeft: 0.01,
+                   paddingRight: 0.2,
                   fontSize: 0.1,
-
+                  // transform: translateX(-2.1),
+                
                   layoutOrigin: [0.1, 0.1]
                 }}>
                 Service Desk
               </Text>
               <Image
                 style={{
-                  width: 0.2,
-                  height: 0.2
+                  width: 0.105,
+                  height: 0.090
                 }}
-                source={asset('help-desk.png')}
+                source={asset('help-hover.png')}
               />
             </Animated.View>
           )}
@@ -131,9 +141,9 @@ class ProductTile extends React.Component {
           <VrButton
             style={{
               borderColor: 'transparent',
-              marginTop: 0.39,
+              marginTop: 0.65,
               marginBottom: 0.1,
-              layoutOrigin: [0.01, 0.01],
+              layoutOrigin: [-0.62, 0.20],
               alignItems: 'right',
               padding: 0.01,
               paddingLeft: 0.0,
@@ -144,8 +154,8 @@ class ProductTile extends React.Component {
           >
             <Image
               style={{
-                width: 0.2,
-                height: 0.2
+                width: 0.170,
+                height: 0.170
               }}
               onEnter={this.onButtonEnter1}
               onExit={this.onButtonExit1}
@@ -158,19 +168,22 @@ class ProductTile extends React.Component {
                flexDirection: 'row',
                position: 'absolute',
                backgroundColor: 'white',
-               padding: 0.01,
+               padding: 0.0076,
+            
+              
                borderRadius: 0.11,
                AlignVertical: 'left',
                marginTop: 0.4,
                marginLeft: 0.2,
-               layoutOrigin: [-0.9,0.1],
+               layoutOrigin: [-1.13,-1.09],
+              //layoutOrigin: [-0.62, 0.20],
 
              }}>
             
              <Image
                style={{
-                 width: 0.2,
-                 height: 0.2
+                 width: 0.170,
+                 height: 0.170
                }}
                source={asset('help-desk.png')}
              />
@@ -195,7 +208,8 @@ class ProductTile extends React.Component {
             style={{
               borderColor: 'transparent',
               //  marginTop:.39,
-              layoutOrigin: [0.01, 0.01],
+              // layoutOrigin: [0.01, 0.01],
+              layoutOrigin: [-0.82, 0.35],
               alignItems: 'right',
               padding: 0.01,
               paddingLeft: 0.0
@@ -207,8 +221,8 @@ class ProductTile extends React.Component {
           >
             <Image
               style={{
-                width: 0.2,
-                height: 0.2
+                width: 0.170,
+                height: 0.170
               }}
               source={asset('noun-financial.png')}
               
@@ -218,7 +232,8 @@ class ProductTile extends React.Component {
             style={{
               borderColor: 'transparent',
               // marginTop:.39,
-              layoutOrigin: [0.01, 0.01],
+              // layoutOrigin: [0.01, 0.01],
+              layoutOrigin: [-0.62, 0.35],
               alignItems: 'right',
               padding: 0.01,
               paddingLeft: 0.0,
@@ -230,8 +245,8 @@ class ProductTile extends React.Component {
           >
             <Image
               style={{
-                width: 0.2,
-                height: 0.2
+                width: 0.170,
+                height: 0.170
               }}
               source={asset('card.png')}
             />
@@ -243,10 +258,10 @@ class ProductTile extends React.Component {
   }
 
   componentDidMount() {
-    this.state.translateY.setValue(1)
+    this.state.translateX.setValue(1)
     this.state.opacity.setValue(0)
     Animated.parallel([
-      Animated.timing(this.state.translateY, {
+      Animated.timing(this.state.translateX, {
         toValue: 0,
         duration: 750,
         delay: this.props.animationDelay || 0

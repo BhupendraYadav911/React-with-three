@@ -77,7 +77,7 @@ export default class App extends React.Component {
             height: 1.2,
             position: 'absolute',
             top: 0.1,
-            left: 0.5,
+            left: 0.6,
           }}
           source={asset("lady_center_start.mp4")}
           muted={true}
@@ -110,14 +110,14 @@ export default class App extends React.Component {
         /> */}
         <Image
           style={{
-            width: 2.5,
-            height: 6.7,
+            width: 2.7,
+            height: 6.6,
             position: 'absolute',
-            top: -5.33,
+            top: -4.8,
             left: -20,
             transform: [
-              { rotateY: 75 },
-              { translateX: -7 },
+               { rotateY: 88 },
+               { translateX: -6.8},
             ],
           }}
           source={asset('c5fcf010802aff3dd4b852f645d37a2f.png')}
@@ -144,10 +144,10 @@ export default class App extends React.Component {
          <Image
           style={{
             width: 0.36,
-            height: 1.11,
+            height: 1.06,
             position: 'absolute',
-            top: -0.5,
-            left: 3,
+            top: -0.39,
+            left: 3.100,
           }}
           source={asset('FK0I8JLVIAAqq1A.jpg')}
         />
@@ -177,7 +177,7 @@ export default class App extends React.Component {
             height: 2,
             position: 'absolute',
             top: -1.3,
-            left: 6.5,
+            left: 6.7,
             transform: [
               { rotateY: -90 },
             ],
@@ -208,11 +208,11 @@ export default class App extends React.Component {
         /> */}
         <Image
           style={{
-            width: 4.3,
-            height: 14,
+            width: 4.1,
+            height: 12,
             position: 'absolute',
-            top: -10.33,
-            left: 40,
+            top: -9.0,
+            left: 36,
             transform: [
               { rotateY: 75 },
               { translateX: -12 },

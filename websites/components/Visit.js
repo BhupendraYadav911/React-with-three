@@ -35,7 +35,7 @@ class Visit extends React.Component {
                
                 //  marginTop: -0.03,
                 // marginLeft: 0.2,
-                layoutOrigin: [0.1, -1.02],
+                layoutOrigin: [0.3, -2.0],
                 // layoutOrigin: [0.1, -2.90],
 
               }}>
@@ -55,6 +55,7 @@ class Visit extends React.Component {
            </View>
         
             </Animated.View>
+            
        </View>
        
     )
@@ -69,17 +70,18 @@ const styles = StyleSheet.create({
    
     position: 'absolute',
     backgroundColor: '#4092DF',
-     padding: 0.02,
-    borderRadius: 0.05,
-    width:0.60,
-    layoutOrigin: [-0.20, -0.35],
+     padding: 0.01,
+    borderRadius: 0.02,
+    width:0.40,
+    layoutOrigin: [-0.5, -0.80],
    
     
 
   },
   tooltipText: {
     color: 'white',
-    fontSize: 0.1,
+    fontSize: 0.08,
+    fontWeight:'400',
     textAlign: 'center',
   },
 });
