@@ -39,7 +39,7 @@ class ProductTile extends React.Component {
     })
   }
   onButtonExit() {
-    //this.setState({ isHovering: false })
+    this.setState({ nested: false })
   }
   onButtonEnter1() {
     this.setState({ isHovering2: true })
@@ -137,7 +137,7 @@ class ProductTile extends React.Component {
               />
             </Animated.View>
           )}
-          {this.state.nested && <Accordion animationDelay={(1 + 1) * 50} />}
+          {this.state.nested && <Accordion animationDelay={(1 + 1) * 50}  onExit={this.onButtonExit} />}
           <VrButton
             style={{
               borderColor: 'transparent',

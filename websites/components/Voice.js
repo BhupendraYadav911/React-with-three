@@ -24,7 +24,41 @@ class Voice extends React.Component {
   render() {
     return (
       <View >
-        <Animated.View>
+          
+        
+        <Animated.View style={{ flexDirection: 'row',}}>
+        <View
+          style={{
+            layoutOrigin: [1.2, -7.7],
+            backgroundColor: 'white',
+            borderRadius:0.1,
+            flexDirection: 'row',
+                position: 'absolute',
+                padding:0.02,
+            width:1.2
+           
+
+          }}>
+            <Text  style={{    color: '#8B8B8B',
+                  textAlign: 'center',
+                  textAlignVertical: 'center',
+                  paddingLeft: 0.04,
+                  padding: 0.02,
+                  marginLeft:0.120,
+                  fontSize: 0.08,
+                  layoutOrigin: [0.1, 0.1]}}>Type your query here...</Text>
+                   <Image
+                style={{
+                  width: 0.07,
+                  height: 0.07,
+                  marginTop:0.04,
+                  marginLeft:0.09
+                }}
+                source={asset('send.png')}
+              />
+           
+     
+          </View>
       <VrButton
             style={{
             //  borderColor: 'black',
@@ -32,7 +66,7 @@ class Voice extends React.Component {
             borderRadius:50,
               marginTop: 0.39,
               marginBottom: 0.1,
-              layoutOrigin: [1.0, -5.0],
+              layoutOrigin: [0.7, -5.0],
               alignItems: 'right',
               padding: 0.02,
               // paddingLeft: 0.0,
@@ -67,7 +101,7 @@ class Voice extends React.Component {
                 AlignVertical: 'right',
                  marginTop: -0.03,
                 // marginLeft: 0.2,
-                layoutOrigin: [-0.1, -20.0],
+                layoutOrigin: [-0.9, -19.6],
 
               }}>
                   <Image
@@ -111,7 +145,7 @@ const styles = StyleSheet.create({
   },
   tooltipText: {
     color: 'black',
-    fontSize: 0.1,
+    fontSize:0.09,
     textAlign: 'center',
   },
 });
