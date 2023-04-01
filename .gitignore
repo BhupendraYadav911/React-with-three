@@ -16,8 +16,8 @@ backend/node_modules
 /backend/node_modules
 websites/node_modules
 /websites/node_modules
-websites/build/
-websites/build
+websites/vr/build/
+websites/vr/build
 # compiled output
 
 
