@@ -16,8 +16,10 @@ import ProductTile from './components/ProductTile';
 import testData from './data/testData';
 import Voice from './components/Voice';
 import Visit from './components/Visit';
+import Chat from './components/chat';
 import ProductTile1 from './components/ProductTile1';
 import Accordion from './components/Accordion';
+
 
 const INFO_BUTTON_IMAGE = asset('help-desk.png');
 console.log(INFO_BUTTON_IMAGE, 'asdfghj');
@@ -63,15 +65,20 @@ export default class App extends React.Component {
         layoutOrigin: [0.5, 0.5],
         transform: [
           { rotateY: (index * -15) },
-          { translateZ: -3 }
+          { translateZ: -3 },
         ],
+        // transform: [
+        //   { translate: [0, 0, -2] },
+        //   { scale: zoom },
+        // ],
+    
         flexDirection: 'row',
         alignItems: 'flex-start',
       }}>
         <Pano
           source={asset("hdfc.jpg")} />
          {/* center bannar */}
-        <Video
+        {/* <Video
           style={{
             width: 0.36,
             height: 1.2,
@@ -86,6 +93,17 @@ export default class App extends React.Component {
           loop={true}
           crossOrigin="anonymous"
           play={true}
+        /> */}
+        <Image
+          style={{
+            width: 0.66,
+            height: 1.3,
+            position: 'absolute',
+            top: 0.1,
+            left: 0.4,
+          }}
+          source={asset("women.png")}
+         
         />
        {/* left bannar */}
        {/* <Video
@@ -110,20 +128,26 @@ export default class App extends React.Component {
         /> */}
         <Image
           style={{
-            width: 2.7,
-            height: 6.6,
+            width: 2.25,
+            height: 6.7,
             position: 'absolute',
-            top: -4.8,
-            left: -20,
+            top: -4.9,
+            left: -19.59,
             transform: [
-               { rotateY: 88 },
+               { rotateY: 81 },
+               { rotateX: 6 },
                { translateX: -6.8},
+               { rotate: -0.1 },
             ],
           }}
-          source={asset('c5fcf010802aff3dd4b852f645d37a2f.png')}
+          source={asset('hdfc2.jpeg')}
+          // source={asset('c5fcf010802aff3dd4b852f645d37a2f.png')}
         />
 
-
+<View >
+   
+            
+       </View>
 
         {/* <Video
           style={{
@@ -143,13 +167,17 @@ export default class App extends React.Component {
         /> */}
          <Image
           style={{
-            width: 0.36,
-            height: 1.06,
+            width: 0.329,
+            height: 1.04,
             position: 'absolute',
-            top: -0.39,
-            left: 3.100,
+            top: -0.37,
+            left: 3.12,
+            transform: [
+              { rotate: -1.3 },
+           ],
           }}
-          source={asset('FK0I8JLVIAAqq1A.jpg')}
+          // source={asset('FK0I8JLVIAAqq1A.jpg')}
+          source={asset('hdfc4.jpg')}
         />
 
         {/* <Video
@@ -174,15 +202,16 @@ export default class App extends React.Component {
          <Image
           style={{
             width: 0.7,
-            height: 2,
+            height: 2.06,
             position: 'absolute',
-            top: -1.3,
+            top: -1.23,
             left: 6.7,
             transform: [
               { rotateY: -90 },
+              { rotate: -1.3 },
             ],
           }}
-          source={asset('c5fcf010802aff3dd4b852f645d37a2f.png')}
+          source={asset('hdfc3.jpeg')}
         />
          
         {/* righit bannar */}
@@ -207,24 +236,27 @@ export default class App extends React.Component {
           play={true}
         /> */}
         <Image
-          style={{
-            width: 4.1,
-            height: 12,
-            position: 'absolute',
-            top: -9.0,
-            left: 36,
-            transform: [
-              { rotateY: 75 },
-              { translateX: -12 },
-            ],
-          }}
-          source={asset('et2-683x1024.jpg')}
-        />
+         style={{
+          width: 4.1,
+          height: 11.8,
+          position: 'absolute',
+          top: -9.1,
+          left: 32,
+          transform: [
+            { rotateY: -76 },
+            { translateX: 12.1 },
+            { rotate: -1.8 },
+          ],
+        }}
+        source={asset('hdfc5.png')}
+      />
         <Visit/>
        
       
         <ProductTile />
+        
         <Voice/>
+        {/* <Chat/> */}
       </View>
       // true on hover
     );

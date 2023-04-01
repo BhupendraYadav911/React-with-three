@@ -3,10 +3,12 @@ import { AppRegistry, View, VrButton, Text, Animated, Image, asset } from 'react
 
 class Accordion extends React.Component {
   constructor() {
+
+ 
     super()
     this.state = {
       isHovering: false, nested:false,
-      translateY: new Animated.Value(0),
+      translateZ: new Animated.Value(0),
       opacity: new Animated.Value(0),
       rotateY: new Animated.Value(0),
       active: false,
@@ -25,13 +27,16 @@ class Accordion extends React.Component {
   // }
   render() {
     return (
+      
       <Animated.View style={{
         //AlignVertical: 'left',
-         layoutOrigin: [1.01, 0.1],
-         position: 'absolute',  zIndex: 100,
-        // opacity: this.state.opacity,
+         layoutOrigin: [0.9, 0.3],
+        //  layoutOrigin: [1.01, 0.1],
+         position: 'absolute', 
+          zIndex: 100,
+         opacity: this.state.opacity,
         transform: [
-          {translateY: this.state.translateY},
+          {translateZ: this.state.translateZ},
           {rotateY: this.state.rotateY}
         ]
         }}>
@@ -205,16 +210,16 @@ class Accordion extends React.Component {
       </Animated.View>
     )
   }
-  
+ 
   componentDidMount() {
-    this.state.translateY.setValue(1);
-    this.state.opacity.setValue(0);
+    this.state.translateZ.setValue(1);
+    //this.state.opacity.setValue(0);
     Animated.parallel([
       Animated.timing(
-        this.state.translateY,
+        this.state.translateZ,
         {
           toValue: 0,
-          duration: 750,
+          duration: 2000,
           delay: this.props.animationDelay || 0
          
         }
@@ -223,7 +228,7 @@ class Accordion extends React.Component {
         this.state.opacity,
         {
           toValue: 1,
-          duration: 750,
+          duration: 2750,
            delay: this.props.animationDelay || 0
         }
       )
@@ -236,7 +241,7 @@ class Accordion extends React.Component {
       Animated.timing(
         this.state.rotateY,
         {
-          toValue: 180,
+          toValue: 90,
           duration: 750
         }
       ).start();
