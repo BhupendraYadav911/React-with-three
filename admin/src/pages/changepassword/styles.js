@@ -40,26 +40,28 @@ export default makeStyles((theme) => ({
   },
   formContainer: {
     width: "45%",
-    height: "50%",
+    height: "63%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
-    boxShadow: "1px 4px 12px black",
-    borderRadius: '7px',
+    boxShadow: "0 2px 8px 1px rgb(64 60 67 / 24%)",
+    borderRadius: "7px",
     margin: "4em",
     padding: "2em",
     [theme.breakpoints.down("md")]: {
       width: "50%",
     },
   },
+
   form: {
     width: 320,
   },
   tab: {
     fontWeight: 400,
     fontSize: 18,
+    paddingBottom:30,
   },
   greeting: {
     fontWeight: 500,
@@ -125,9 +127,12 @@ export default makeStyles((theme) => ({
       borderBottomColor: `${theme.palette.primary.light} !important`,
     },
   },
+
   textField: {
-    borderBottomColor: theme.palette.background.light,
+    width: 500,
+    height:"3px",
   },
+
   formButtons: {
     width: "100%",
     marginTop: theme.spacing(4),

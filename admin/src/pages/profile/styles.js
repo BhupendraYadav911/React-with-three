@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
 
-export default makeStyles(theme => ({
+export default makeStyles((theme) => ({
   container: {
     height: "100vh",
     width: "100vw",
@@ -45,9 +45,9 @@ export default makeStyles(theme => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor:"white",
-    borderRadius: '7px',
-    boxShadow: "1px 4px 12px black",
+    backgroundColor: "white",
+    borderRadius: "7px",
+    boxShadow: "0 2px 8px 1px rgb(64 60 67 / 24%)",
     margin: "4em",
     padding: "2em",
     [theme.breakpoints.down("md")]: {
@@ -60,6 +60,7 @@ export default makeStyles(theme => ({
   tab: {
     fontWeight: 400,
     fontSize: 18,
+    paddingBottom: 30,
   },
   greeting: {
     fontWeight: 500,
@@ -125,8 +126,10 @@ export default makeStyles(theme => ({
       borderBottomColor: `${theme.palette.primary.light} !important`,
     },
   },
+
   textField: {
-    borderBottomColor: theme.palette.background.light,
+    width: 300,
+    height: "3px",
   },
   formButtons: {
     width: "100%",
@@ -134,10 +137,7 @@ export default makeStyles(theme => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    
   },
-    
-
 
   formButtons1: {
     width: "100%",
@@ -145,7 +145,6 @@ export default makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-   
   },
 
   forgetButton: {

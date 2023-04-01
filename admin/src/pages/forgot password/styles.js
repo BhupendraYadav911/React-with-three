@@ -121,7 +121,8 @@ export default makeStyles(theme => ({
     },
   },
   textField: {
-    borderBottomColor: theme.palette.background.light,
+    width: 300,
+    height: "3px",
   },
   formButtons: {
     width: "100%",

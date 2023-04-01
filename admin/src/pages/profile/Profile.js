@@ -26,18 +26,29 @@ function Profile(props) {
             margin="normal"
             placeholder=" Email"
             type="email"
-            InputProps={{ disableUnderline: true }}
-            style={{ width: 320, border: " 1px solid ", borderRadius: "4px" }}
+            variant="outlined"
+            InputProps={{
+              disableUnderline: true,
+              classes: {
+                underline: classes.textFieldUnderline,
+                input: classes.textField,
+              },
+            }}
           />
           <TextField
             id="Name"
             margin="normal"
             placeholder="Name"
             type="text"
-            InputProps={{ disableUnderline: true }}
-            style={{ width: 320, border: " 1px solid ", borderRadius: "4px" }}
+            variant="outlined"
+            InputProps={{
+              disableUnderline: true,
+              classes: {
+                underline: classes.textFieldUnderline,
+                input: classes.textField,
+              },
+            }}
           />
-
           <div>
             <div className={classes.creatingButtonContainer}>
               <Button

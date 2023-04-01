@@ -129,7 +129,8 @@ function Login(props) {
                 margin="normal"
                 placeholder="Email Adress"
                 type="email"
-                fullWidth
+                
+                variant="outlined"
               />
               <div className={`message ${isValid ? 'success' : 'error'}`}>{message}</div>
               <TextField
@@ -145,7 +146,7 @@ function Login(props) {
                 margin="normal"
                 placeholder="Password"
                 type="password"
-                fullWidth
+                variant="outlined"
               />
               <div className={classes.formButtons}>
                 {isLoading ? (
@@ -195,7 +196,7 @@ function Login(props) {
                 margin="normal"
                 placeholder="Full Name"
                 type="text"
-                fullWidth
+                 variant="outlined"
               />
               <TextField
                 id="newuseremail"
@@ -211,7 +212,7 @@ function Login(props) {
                 margin="normal"
                 placeholder="Email Adress"
                 type="newuseremail"
-                fullWidth
+                variant="outlined"
               />
               <div className={`errormessage ${emailValid ? 'success' : 'error'}`}>{errormessage}</div>
               <TextField
@@ -227,7 +228,7 @@ function Login(props) {
                 margin="normal"
                 placeholder="Password"
                 type="password"
-                fullWidth
+                variant="outlined"
               />
               <div className={classes.creatingButtonContainer}>
                 {isLoading ? (
