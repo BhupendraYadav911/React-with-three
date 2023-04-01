@@ -15,9 +15,9 @@ async function moveFile(file, somePlace) {
     });
 }
 async function addBanner(req, res) {
-    if (req.body.user.role != 'admin') {
-        return res.status(403).send(Response(403, 'Not allowed'));
-    }
+    // if (req.body.user.role != 'admin') {
+    //     return res.status(403).send(Response(403, 'Not allowed'));
+    // }
     if (!req.body.name) {
         return res.status(400).send(Response(400, 'Invalid request! Required banner name is missing'));
     }
