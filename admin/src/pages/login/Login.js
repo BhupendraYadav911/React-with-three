@@ -10,8 +10,8 @@ import { useHistory } from 'react-router-dom'
 import useStyles from './styles'
 
 // logo
-// import logo from './logo.svg'
 // import google from '../../images/google.svg'
+import newbanner from './newbanner.avif'
 
 // context
 import { useUserDispatch, loginUser } from '../../context/UserContext'
@@ -79,12 +79,13 @@ function Login(props) {
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
-        {/* <img src={logo} alt="logo" className={classes.logotypeImage} /> */}
+        <img src={newbanner} alt="newbanner" className={classes.imagetypeContainer} />
         {/* <Typography className={classes.logotypeText}>
           Material Admin
           </Typography> */}
       </div>
-
+      
+      <Grid  className={classes.container1}>
       <div className={classes.formContainer}>
         {error == true ? (
           <Typography color="secondary" className={classes.errorMessage}>
@@ -92,29 +93,13 @@ function Login(props) {
           </Typography>
         ) : null}
         <div className={classes.form}>
-          <Tabs value={activeTabId} onChange={(e, id) => setActiveTabId(id)} indicatorColor="primary" textColor="primary" centered>
+          {/* <Tabs value={activeTabId} onChange={(e, id) => setActiveTabId(id)} indicatorColor="primary" textColor="primary" centered> */}
+          <Tabs centered>
             <Tab label="Login" classes={{ root: classes.tab }} />
-            <Tab label="New User" classes={{ root: classes.tab }} />
+            {/* <Tab label="New User" classes={{ root: classes.tab }} /> */}
           </Tabs>
           {activeTabId === 0 && (
             <React.Fragment>
-              {/* <Typography variant="h1" className={classes.greeting}>
-                Good Morning, User
-              </Typography> */}
-              {/* <Button size="large" className={classes.googleButton}>
-                <img src={google} alt="google" className={classes.googleIcon} />
-                &nbsp;Sign in with Google
-              </Button> */}
-              {/* <div className={classes.formDividerContainer}>
-                <div className={classes.formDivider} />
-                <Typography className={classes.formDividerWord}>or</Typography>
-                <div className={classes.formDivider} />
-              </div> */}
-              {/* <alpha in={error}>
-                <Typography color="secondary" className={classes.errorMessage}>
-                  Something is wrong with your login or password :
-                </Typography>
-              </alpha> */}
               <TextField
                 id="email"
                 InputProps={{
@@ -268,6 +253,7 @@ function Login(props) {
         © 2014-{new Date().getFullYear()} <a style={{ textDecoration: 'none', color: 'inherit' }} href="https://flatlogic.com" rel="noopener noreferrer" target="_blank">Flatlogic</a>, LLC. All rights reserved.
         </Typography> */}
       </div>
+      </Grid>
     </Grid>
   )
 }

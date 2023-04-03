@@ -11,14 +11,11 @@ import {
 } from "@material-ui/core";
 import { withRouter ,useHistory} from "react-router-dom";
 
-import classnames from "classnames";
 
 // styles
 import useStyles from "./styles";
 
-// logo
-import logo from "./logo.svg";
-import google from "../../images/google.svg";
+import newbanner from '../login/newbanner.avif'
 
 // context
 import { useUserDispatch, loginUser } from "../../context/UserContext";
@@ -34,54 +31,39 @@ function Login(props) {
   var [error, setError] = useState(null);
   var [activeTabId, setActiveTabId] = useState(0);
   var [nameValue, setNameValue] = useState("");
-  var [loginValue, setLoginValue] = useState("admin@flatlogic.com");
+  var [loginValue, setLoginValue] = useState("");
   var [passwordValue, setPasswordValue] = useState("password");
   const history = useHistory();
   const passForget  = ()=>{
     
     history.push("/resetpassword");
   }
+  const Backbtn  = ()=>{
+    
+    history.push("/login");
+  }
 
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
+      <img src={newbanner} alt="newbanner" className={classes.imagetypeContainer} />
         {/* <img src={logo} alt="logo" className={classes.logotypeImage} /> */}
         {/* <Typography className={classes.logotypeText}>
           Material Admin
           </Typography> */}
       </div>
+      <Grid  className={classes.container1}>
+
       <div className={classes.formContainer}>
         <div className={classes.form}>
-          <Tabs
-            value={activeTabId}
-            onChange={(e, id) => setActiveTabId(id)}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
+          <Tabs centered
           >
             <Tab label="Forgot Password" classes={{ root: classes.tab }} />
             {/* <Tab label="New User" classes={{ root: classes.tab }} /> */}
           </Tabs>
           {activeTabId === 0 && (
             <React.Fragment>
-              {/* <Typography variant="h1" className={classes.greeting}>
-                Good Morning, User
-              </Typography> */}
-              {/* <Button size="large" className={classes.googleButton}>
-                <img src={google} alt="google" className={classes.googleIcon} />
-                &nbsp;Sign in with Google
-              </Button> */}
-              {/* <div className={classes.formDividerContainer}>
-                <div className={classes.formDivider} />
-                <Typography className={classes.formDividerWord}>or</Typography>
-                <div className={classes.formDivider} />
-              </div> */}
-              {/* <Fade in={error}>
-                <Typography color="secondary" className={classes.errorMessage}>
-                  Something is wrong with your login or password :(
-                </Typography>
-              </Fade> */}
-              <TextField
+                    <TextField
                 id="email"
                 InputProps={{
                   classes: {
@@ -112,6 +94,17 @@ function Login(props) {
                 fullWidth
               /> */}
               <div className={classes.formButtons1}>
+                  <Button
+                    onClick={() =>
+                      Backbtn()
+                    }
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                     
+                  >
+                   Back
+                  </Button>
                 {isLoading ? (
                   <CircularProgress size={26} className={classes.loginLoader} />
                 ) : (
@@ -128,7 +121,7 @@ function Login(props) {
                     size="large"
                      
                   >
-                   Request password reset link
+                   Reset password Link
                   </Button>
                 )}
                 {/* <Button
@@ -251,7 +244,9 @@ function Login(props) {
         © 2014-{new Date().getFullYear()} <a style={{ textDecoration: 'none', color: 'inherit' }} href="https://flatlogic.com" rel="noopener noreferrer" target="_blank">Flatlogic</a>, LLC. All rights reserved.
         </Typography> */}
       </div>
+      </Grid>
     </Grid>
+
   );
 }
 

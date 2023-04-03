@@ -19,8 +19,7 @@ import {
   Upload
 } from 'antd';
 import {TextField} from "@material-ui/core"
-import { Base64 } from "js-base64";
-import type { UploadProps } from 'antd';
+
 import { UploadOutlined } from '@ant-design/icons';
 import { useUserDispatch, updateBanner,getBanner } from '../../context/UserContext'
 import {
