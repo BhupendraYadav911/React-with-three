@@ -1,10 +1,12 @@
 import React from 'react'
 import { AppRegistry,StyleSheet, View, VrButton, Text, Animated, Image, asset } from 'react-vr'
+import Chat from './chat'
 class Voice extends React.Component {
   constructor() {
     super()
     this.state = {
       showTooltip: false,
+      chatting:false,
       translateY: new Animated.Value(0),
       opacity: new Animated.Value(0),
       rotateY: new Animated.Value(0),
@@ -12,6 +14,8 @@ class Voice extends React.Component {
     }
     this.onButtonEnter = this.onButtonEnter.bind(this)
     this.onButtonExit = this.onButtonExit.bind(this)
+    this.onButtonEnter2 = this.onButtonEnter2.bind(this)
+    this.onButtonExit2 = this.onButtonExit2.bind(this)
   }
  
   onButtonEnter() {
@@ -20,6 +24,13 @@ class Voice extends React.Component {
 
   onButtonExit() {
     this.setState({ showTooltip: false })
+  }
+  onButtonEnter2() {
+    this.setState({ chatting: true })
+  }
+
+  onButtonExit2() {
+    this.setState({ chatting: false })
   }
   render() {
     return (
@@ -54,11 +65,14 @@ class Voice extends React.Component {
                   marginTop:0.04,
                   marginLeft:0.09
                 }}
+                onEnter={this.onButtonEnter2}
+             
                 source={asset('send.png')}
               />
            
      
           </View>
+          {this.state.chatting && <Chat onExit={this.onButtonExit2} />}
       <VrButton
             style={{
             //  borderColor: 'black',
