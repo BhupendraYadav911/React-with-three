@@ -20,7 +20,7 @@ import {
   Upload
 } from 'antd';
 import {TextField} from "@material-ui/core"
-import type { UploadProps } from 'antd';
+
 import { UploadOutlined } from '@ant-design/icons';
 import {
   Grid,
