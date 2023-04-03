@@ -11,8 +11,12 @@ const routes = require('./routes/index');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 app.use(fileUpload());
+
+app.use(express.json({limit: '25mb'}));
+app.use(express.urlencoded({limit: '25mb'}));
 swaggerUi = require('swagger-ui-express'),
 swaggerDocument = require('./docs/swagger.json');
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //var FileStore = require('session-file-store')(session);
