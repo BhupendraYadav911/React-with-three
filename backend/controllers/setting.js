@@ -15,9 +15,9 @@ async function moveFile(file, somePlace) {
     });
 }
 async function addBanner(req, res) {
-    // if (req.body.user.role != 'admin') {
-    //     return res.status(403).send(Response(403, 'Not allowed'));
-    // }
+    if (req.body.user.role != 'admin') {
+        return res.status(403).send(Response(403, 'Not allowed'));
+    }
     if (!req.body.name) {
         return res.status(400).send(Response(400, 'Invalid request! Required banner name is missing'));
     }
@@ -63,7 +63,7 @@ async function upadteBanner(req, res) {
     }
     await Setting.findOneAndUpdate(
         { _id: req.body.bannerId },
-        { $set: { "name": req.body.name, "banner_url": req.body.banner_url } },
+        { $set: { "name": req.body.name, "banner_url": req.body.banner_url,"banner_type":req.body.banner_type } },
         { new: true }
     ).then(banner => {
         if (!banner) {

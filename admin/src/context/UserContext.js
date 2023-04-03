@@ -1,5 +1,10 @@
 import React from 'react'
 import axios from 'axios'
+import {
+ message
+} from 'antd';
+ const access_token = localStorage.getItem('token')
+
 
 var UserStateContext = React.createContext()
 var UserDispatchContext = React.createContext()
@@ -46,7 +51,7 @@ function useUserDispatch() {
   return context
 }
 
-export { UserProvider, useUserState, useUserDispatch, loginUser, forgetPass, resetPassUser, signOut, currentUser }
+export { UserProvider, useUserState, useUserDispatch, loginUser, forgetPass, resetPassUser, signOut, currentUser,updateBanner ,getBanner,changePassword}
 
 // ###########################################################
 
@@ -202,4 +207,72 @@ function currentUser() {
 
   //     // dispatch({ type: 'LOGIN_FAILURE' })
   //   })
+}
+
+
+
+function getBanner(setData){
+  fetch('http://localhost:3010/setting/banner')
+    .then(response => response.json())
+      .then(json => setData(json.data))
+}
+
+
+function updateBanner(value,setIsModalOpen,setSuccess){
+ 
+ var authAuthorization =
+        'Bearer ' +
+        `${access_token}`;
+
+
+ fetch("http://localhost:3010/setting/upadte-banner", {
+  method: "PUT",
+    headers: {
+          Authorization: authAuthorization,
+          'Content-Type': 'application/json',
+        },
+  body: value,
+})
+  .then((response) => response.json())
+  .then((result) => {
+    getBanner();
+    setTimeout(()=>{
+      setIsModalOpen(false)
+    },2000)
+     setSuccess({
+              message: 'Banner update successfully',
+            });
+     
+   })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+  
+}
+
+function changePassword(value,setSuccess,setIsTrue){
+ var authAuthorization =
+        'Bearer ' +
+        `${access_token}`;
+
+
+ fetch("http://localhost:3010/auth/change-password", {
+  method: "POST",
+    headers: {
+          Authorization: authAuthorization,
+          'Content-Type': 'application/json',
+        },
+  body: value,
+})
+  .then((response) => response.json())
+  .then((result) => {
+    setIsTrue(true)
+   setSuccess({
+              message: 'password change successfully',
+            });
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
+  
 }

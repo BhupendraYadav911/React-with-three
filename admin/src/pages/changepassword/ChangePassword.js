@@ -1,20 +1,19 @@
 import React, { useState } from "react";
-
+import {
+ message,
+ Alert
+} from 'antd';
 import { Grid, Button, Tab, TextField } from "@material-ui/core";
 import classNames from "classnames";
-import { useHistory } from "react-router-dom";
+import { useHistory ,useParams} from "react-router-dom";
+import { useUserDispatch, updateBanner,changePassword } from '../../context/UserContext'
 // styles
 
 import useStyles from "./styles";
 function ChangePassword(props) {
-  var classes = useStyles();
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log("You clicked submit.");
-  }
-
-  const [input, setTextField] = useState({
+  const[success,setSuccess]=useState('')
+  const[isTrue,setIsTrue]=useState(false)
+   const [input, setTextField] = useState({
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
@@ -25,6 +24,21 @@ function ChangePassword(props) {
     newPassword: "",
     confirmPassword: "",
   });
+  var classes = useStyles();
+    const id = useParams();
+    var value = JSON.stringify({
+        _id:id,
+        oldPassword:input.currentPassword,
+        newPassword:input.newPassword
+      })
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    changePassword(value,setSuccess,setIsTrue)
+
+  }
+
+ 
 
   const onTextFieldChange = (e) => {
    
@@ -81,6 +95,12 @@ function ChangePassword(props) {
       <div className={classes.formContainer}>
         <React.Fragment>
           <Tab label="Change Password" classes={{ root: classes.tab }} />
+         {success && (
+                <Alert
+                  message={success.message}
+                  type="success"
+                />
+              )}
           <form onSubmit={handleSubmit}>
             <TextField
               id="Current Password"
