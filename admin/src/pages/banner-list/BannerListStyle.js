@@ -149,4 +149,7 @@ export default makeStyles(theme => ({
     width:70,
     height:70
   },
+  bannerTable:{
+    overflow:'auto'
+  }
 }));

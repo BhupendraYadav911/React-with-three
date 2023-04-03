@@ -5,9 +5,15 @@ class ThankPage extends React.Component {
 
     constructor() {
         super()
-
+        this.state = {
+            msg: false
+          }
+        this.onButtonExit3 = this.onButtonExit3.bind(this)
    }
-    
+   onButtonExit3() {
+    console.log('aaaaaaaaaaaa');
+    this.setState({ msg: false })
+  }
     render() {
         return (
             <Animated.View>
@@ -71,7 +77,7 @@ class ThankPage extends React.Component {
           paddingRight: 0.1,
         }}
       >
-        <Text
+        <Text  onEnter={this.onButtonExit3}
           style={{
             color: '#fffff',
             fontWeight: '500',
