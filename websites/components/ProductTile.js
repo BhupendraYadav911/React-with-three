@@ -2,6 +2,7 @@
 import React from 'react'
 import { asset, View, Image, Text, VrButton, Animated } from 'react-vr'
 import Accordion from './Accordion'
+import ThankPage from './thanksPage'
 /*
  AddButton Component
 
@@ -17,12 +18,15 @@ class ProductTile extends React.Component {
       isHovering: false,
       isHovering2: false,
       nested: false,
+      msg: true,
       translateY: new Animated.Value(0),
       opacity: new Animated.Value(0),
       rotateY: new Animated.Value(0),
       translateX: new Animated.Value(0),
       active: false
     }
+    this.onButtonEnter3 = this.onButtonEnter3.bind(this)
+    this.onButtonExit3 = this.onButtonExit3.bind(this)
     this.onButtonEnter = this.onButtonEnter.bind(this)
     this.onButtonExit = this.onButtonExit.bind(this)
     this.onButtonEnter1 = this.onButtonEnter1.bind(this)
@@ -44,9 +48,15 @@ class ProductTile extends React.Component {
   onButtonEnter1() {
     this.setState({ isHovering2: true })
   }
-
   onButtonExit1() {
     this.setState({ isHovering2: false })
+  }
+  onButtonEnter3() {
+    this.setState({ msg: true })
+  }
+
+  onButtonExit3() {
+    this.setState({ msg: false })
   }
 
   render() {
@@ -71,17 +81,12 @@ class ProductTile extends React.Component {
               
               borderColor: 'transparent',
               marginTop: 0.65,
-              // marginTop: 0.39,
               marginBottom: 0.1,
               layoutOrigin: [-0.82, 0.20],
               alignItems: 'right',
               padding: 0.01,
               paddingLeft: 0.0
-
-              //paddingRight: 1.2,
             }}
-           
-            // onClick={onClick}
           >
             <Image
               style={{
@@ -99,10 +104,8 @@ class ProductTile extends React.Component {
                 flexDirection: 'row',
                 position: 'absolute',
                 backgroundColor: 'white',
-                //  padding: 0.03 0.04,
                 paddingTop:0.04,
                 paddingBottom:0.01,
-                // paddingLeft: 0.04,
                 paddingRight:0.04,
                 borderRadius: 0.10,
                 AlignVertical: 'right',
@@ -110,20 +113,14 @@ class ProductTile extends React.Component {
                 marginLeft: 0.199,
                 layoutOrigin: [0.85,-1.268],
                
-                
-                // layoutOrigin: [0.9, 0.1],
-
               }}>
               <Text
                 style={{
                   color: 'red',
                   textAlign: 'center',
                   textAlignVertical: 'center',
-                  // paddingLeft: 0.01,
                    paddingRight: 0.2,
                   fontSize: 0.1,
-                  // transform: translateX(-2.1),
-                
                   layoutOrigin: [0.1, 0.1]
                 }}>
                 Service Desk
@@ -215,24 +212,24 @@ class ProductTile extends React.Component {
               paddingLeft: 0.0
               //paddingRight: 1.2,
             }}
-            // onEnter={this.onButtonEnter}
-            // onExit={this.onButtonExit}
-            // onClick={onClick}
+             
           >
+
             <Image
               style={{
                 width: 0.170,
                 height: 0.170
               }}
+            onEnter={this.onButtonExit3}
               source={asset('noun-financial.png')}
               
             />
           </VrButton>
+          {this.state.msg&& <ThankPage   />}
+          {/* <ThankPage/> */}
           <VrButton
             style={{
               borderColor: 'transparent',
-              // marginTop:.39,
-              // layoutOrigin: [0.01, 0.01],
               layoutOrigin: [-0.62, 0.35],
               alignItems: 'right',
               padding: 0.01,
@@ -252,8 +249,10 @@ class ProductTile extends React.Component {
             />
           </VrButton>
         </View>
+        
         {/* <Accordion animationDelay={(1 + 1) * 2800} /> */}
       </Animated.View>
+      
     )
   }
 

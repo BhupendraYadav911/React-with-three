@@ -5,36 +5,85 @@ class ThankPage extends React.Component {
 
     constructor() {
         super()
-    }
+
+   }
+    
     render() {
         return (
+            <Animated.View>
             <View style={{
                 //flexDirection: 'column',
                 padding: 0.11,
+                width:1.3,
                 backgroundColor: "#fff",
-                flexDirection: 'row',
                 position: 'absolute',
                 borderRadius: 0.10,
+                layoutOrigin: [1.2, 0.5],
             }}>
                 <Animated.View style={{
-                    flexDirection: 'row',
+                   
                     padding: 0.11,
-                    backgroundColor: "red",
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                        
                 }}>
                     <Image
                         style={{
-                            width: 0.2,
-                            height: 0.2,
+                            marginTop: -0.07,
+                            marginBottom: 0.14,
+                            width: 0.3,
+                            height: 0.3,
                         }}
                         source={asset('0402f191875dee6fa4cdec21c5a0bd1a.png')}
                     />
-                    <Text style={{
-                        fontSize: 0.2,
-                        color: '#000'
-                    }}>Thanks!
-                    </Text>
+                     
+          <Text
+            style={{
+              textAlign: 'center',
+              textAlignVertical: 'center',
+              fontWeight: '500',
+              color: '#000000'
+            }}
+          >
+          Thank You!
+          </Text>
+          <Text
+            style={{
+                marginBottom: 0.11,
+              textAlign: 'center',
+              textAlignVertical: 'center',
+              color: '#000000',
+              fontSize:0.07
+            }}
+          >
+         Thanks! you will receive a copy of this communication on your registered Email id. Please expect a response within 10 working days. 
+          </Text>
+        
                 </Animated.View>
-                <Animated.View style={{
+                <VrButton
+        style={{
+          borderRadius: 0.03,
+          borderWidth: 0.005,
+          backgroundColor:'#4092DF',
+          borderColor: '#4092DF',
+          padding: 0.05,
+          paddingLeft: 0.1,
+          paddingRight: 0.1,
+        }}
+      >
+        <Text
+          style={{
+            color: '#fffff',
+            fontWeight: '500',
+            textAlign: 'center',
+            textAlignVertical: 'center',
+            fontSize: 0.075
+          }}
+        >
+         OK
+        </Text>
+      </VrButton>
+                {/* <Animated.View style={{
                     flexDirection: 'row',
                     padding: 0.11,
                     backgroundColor: "#fff",
@@ -45,9 +94,10 @@ class ThankPage extends React.Component {
                             backgroundColor: "blue",
                         }}>OK</Text>
                     </VrButton>
-                </Animated.View>
+                </Animated.View> */}
 
             </View >
+            </Animated.View>
         )
     }
 };

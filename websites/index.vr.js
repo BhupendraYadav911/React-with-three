@@ -19,7 +19,7 @@ import Visit from './components/Visit';
 import Chat from './components/chat';
 import ProductTile1 from './components/ProductTile1';
 import Accordion from './components/Accordion';
-import ThankPage from './components/thanksPage';
+// import ThankPage from './components/thanksPage';
 
 const INFO_BUTTON_IMAGE = asset('help-desk.png');
 console.log(INFO_BUTTON_IMAGE, 'asdfghj');
@@ -258,7 +258,7 @@ export default class App extends React.Component {
         <Voice/>
         {/* <Chat/> */}
 
-        <ThankPage/>
+        {/* <ThankPage/> */}
       </View>
       
       // true on hover
