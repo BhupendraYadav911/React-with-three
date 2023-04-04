@@ -48,8 +48,6 @@ useEffect(()=>{
 getBanner(setData);
 },[0])
 
-
-
 const handleOk =()=>{
    let value = JSON.stringify({
         bannerId:editedBanner._id,
@@ -57,16 +55,7 @@ const handleOk =()=>{
         banner_type:banner_type,
         banner_url:banner_url
       })
-  updateBanner(value,setIsModalOpen,setSuccess);
-
-
-
-// let myPromise = new Promise(function(myResolve, myReject) {
-// updateBanner(value,setIsModalOpen,setSuccess)
-// });
-
-  // const ress =  updateBanner(value,setIsModalOpen,setSuccess)
-  // console.log(ress)
+  updateBanner(value,setIsModalOpen,setSuccess.setData);
 }
 
  const handleCancel = () => {
@@ -182,7 +171,6 @@ const columns = [
             InputProps={{ disableUnderline: true }}
             style={{ width: 320, border: " 1px solid ",borderRadius: '4px' }}
           />
-          {`data:image/jpeg;base64,${editedBanner.banner_url}`}
          <input type="file" name="file" onChange={handleFileInputChange} />
 
        </>)}

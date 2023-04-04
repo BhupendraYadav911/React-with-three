@@ -47,7 +47,8 @@ export default makeStyles((theme) => ({
     alignItems: "center",
     backgroundColor: "white",
     boxShadow: "0 2px 8px 1px rgb(64 60 67 / 24%)",
-    borderRadius: "7px",
+    borderRadius: "30px",
+    textAlign:'center',
     margin: "4em",
     padding: "2em",
     [theme.breakpoints.down("md")]: {
@@ -155,4 +156,10 @@ export default makeStyles((theme) => ({
       bottom: theme.spacing(2),
     },
   },
+  err:{
+    display:'flex',
+    color:'red',
+    justifyContent:'center',
+    textAlign:'center'
+  }
 }));

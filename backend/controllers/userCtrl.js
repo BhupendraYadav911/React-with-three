@@ -461,12 +461,12 @@ async function updateUserProfile(req, res) {
         //     });
         // }
         //console.log('updatedField', updatedField);
-
-        User.findOneAndUpdate(
+if(!req.body.user_photo){
+ User.findOneAndUpdate(
             { _id: req.body.user._id },
             {
                 $set: {
-                    "full_name": req.body.full_name
+                    "full_name": req.body.full_name,
                 }
             }, { new: true }
         ).then(user => {
@@ -476,10 +476,36 @@ async function updateUserProfile(req, res) {
             /*  if (user.user_photo != "") {
                  user.user_photo = imageUrl + user.user_photo;
              } */
-            res.status(201).send(Response(200, "Profile updated successfully!", {}));
+            res.status(201).send(Response(200, "Profile name update successfully!", {}));
         }).catch(err => {
             res.status(500).send(Response(500, "Some error occurred while retrieving user."));
         });
+}
+if(req.body.user_photo && req.body.full_name){
+User.findOneAndUpdate(
+            { _id: req.body.user._id },
+            {
+                $set: {
+                    "full_name": req.body.full_name,
+                    "user_photo":req.body.user_photo
+                }
+            }, { new: true }
+        ).then(user => {
+            if (!user) {
+                return res.status(404).send(Response(404, `Invalid user ${user}`));
+            }
+            /*  if (user.user_photo != "") {
+                 user.user_photo = imageUrl + user.user_photo;
+             } */
+            res.status(201).send(Response(200, "Profile update successfully!", {}));
+        }).catch(err => {
+            res.status(500).send(Response(500, "Some error occurred while retrieving user."));
+        });
+}
+
+
+
+       
     } else {
         return res.status(400).send(Response(400, 'Email Address is missing !'));
     }

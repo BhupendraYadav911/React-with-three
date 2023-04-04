@@ -47,6 +47,7 @@ export default makeStyles((theme) => ({
     alignItems: "center",
     backgroundColor: "white",
     borderRadius: "7px",
+    borderRadius:30,
     boxShadow: "0 2px 8px 1px rgb(64 60 67 / 24%)",
     margin: "4em",
     padding: "2em",
@@ -162,4 +163,14 @@ export default makeStyles((theme) => ({
       bottom: theme.spacing(2),
     },
   },
+  image:{
+    width:100,
+    height:100,
+    borderRadius:52
+  },
+  circle:{
+    borderRadius:52,
+    width:50,
+    height:50
+  }
 }));

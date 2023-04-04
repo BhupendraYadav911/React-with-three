@@ -51,7 +51,7 @@ function useUserDispatch() {
   return context
 }
 
-export { UserProvider, useUserState, useUserDispatch, loginUser, forgetPass, resetPassUser, signOut, currentUser,updateBanner ,getBanner,changePassword}
+export { UserProvider, useUserState, useUserDispatch, loginUser, forgetPass, resetPassUser, signOut, currentUser,updateBanner ,getBanner,changePassword,updateProfile,getProfile}
 
 // ###########################################################
 
@@ -101,6 +101,7 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
     setError(true)
     setIsLoading(false)
   }
+  
 }
 function forgetPass(emailValue) {
 
@@ -212,67 +213,215 @@ function currentUser() {
 
 
 function getBanner(setData){
-  fetch('http://localhost:3010/setting/banner')
-    .then(response => response.json())
-      .then(json => setData(json.data))
+
+ const token = localStorage.getItem('token');
+    let config = {
+      method: 'GET',
+      maxBodyLength: Infinity,
+      url:'http://localhost:3010/setting/banner',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  axios(config)
+      .then((response) => {
+     console.log(response.data.data)
+     setData(response.data.data)
+      })
+      .catch((error) => {
+        console.log(error)
+  
+        // dispatch({ type: 'LOGIN_FAILURE' })
+      })
+
+
+
+
+
+
+
+
+
+  // fetch('http://localhost:3010/setting/banner')
+  //   .then(response => response.json())
+  //     .then(json => setData(json.data))
 }
 
 
-function updateBanner(value,setIsModalOpen,setSuccess){
- 
- var authAuthorization =
-        'Bearer ' +
-        `${access_token}`;
-
-
- fetch("http://localhost:3010/setting/upadte-banner", {
-  method: "PUT",
-    headers: {
-          Authorization: authAuthorization,
-          'Content-Type': 'application/json',
-        },
-  body: value,
-})
-  .then((response) => response.json())
-  .then((result) => {
-    getBanner();
+function updateBanner(value,setIsModalOpen,setSuccess,setData){
+ const token = localStorage.getItem('token');
+    let config = {
+      method: 'PUT',
+      maxBodyLength: Infinity,
+      url:'http://localhost:3010/setting/upadte-banner',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      data:value
+    }
+  axios(config)
+      .then((response) => {
+       getBanner(setData);
     setTimeout(()=>{
       setIsModalOpen(false)
     },2000)
      setSuccess({
               message: 'Banner update successfully',
             });
+      })
+      .catch((error) => {
+        console.log(error)
+  
+        // dispatch({ type: 'LOGIN_FAILURE' })
+      })
+
+
+
+
+
+//  var authAuthorization =
+//         'Bearer ' +
+//         `${access_token}`;
+
+
+//  fetch("http://localhost:3010/setting/upadte-banner", {
+//   method: "PUT",
+//     headers: {
+//           Authorization: authAuthorization,
+//           'Content-Type': 'application/json',
+//         },
+//   body: value,
+// })
+//   .then((response) => response.json())
+//   .then((result) => {
+//     getBanner();
+//     setTimeout(()=>{
+//       setIsModalOpen(false)
+//     },2000)
+//      setSuccess({
+//               message: 'Banner update successfully',
+//             });
      
-   })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
+//    })
+//   .catch((error) => {
+//     console.error("Error:", error);
+//   });
   
 }
 
 function changePassword(value,setSuccess,setIsTrue){
- var authAuthorization =
-        'Bearer ' +
-        `${access_token}`;
 
-
- fetch("http://localhost:3010/auth/change-password", {
-  method: "POST",
-    headers: {
-          Authorization: authAuthorization,
-          'Content-Type': 'application/json',
-        },
-  body: value,
-})
-  .then((response) => response.json())
-  .then((result) => {
-    setIsTrue(true)
+const token = localStorage.getItem('token');
+    let config = {
+      method: 'POST',
+      maxBodyLength: Infinity,
+      url:'http://localhost:3010/auth/change-password',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: value,
+    }
+  
+    axios(config)
+      .then((response) => {
+ setIsTrue(true)
    setSuccess({
               message: 'password change successfully',
             });
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-  });
+        
+      })
+      .catch((error) => {
+        console.log(error)
   
+        // dispatch({ type: 'LOGIN_FAILURE' })
+      })
+
+//  fetch("http://localhost:3010/auth/change-password", {
+//   method: "POST",
+//     headers: {
+//           Authorization: authAuthorization,
+//           'Content-Type': 'application/json',
+//         },
+//   body: value,
+// })
+//   .then((response) => response.json())
+//   .then((result) => {
+//     setIsTrue(true)
+//    setSuccess({
+//               message: 'password change successfully',
+//             });
+//   })
+//   .catch((error) => {
+//     console.error("Error:", error);
+//   });
+  
+}
+
+function updateProfile(value,setSuccess){
+  const token = localStorage.getItem('token');
+    let config = {
+      method: 'POST',
+      maxBodyLength: Infinity,
+      url:'http://localhost:3010/auth/update-user-profile',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      data:value
+    }
+  axios(config)
+      .then((response) => {
+        if (response.data.code == 200) {
+           setSuccess({
+              message: 'Profile update successfully',
+            });
+          console.log('if', response.data.data);
+          // setCurrentUserDetails(response.data.data)
+          // setFull_name(response.data.data.full_name)
+        } else {
+          console.log('else', response);
+          
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+  
+        // dispatch({ type: 'LOGIN_FAILURE' })
+      })
+}
+
+function getProfile(setCurrentUserDetails,setFull_name){
+  const token = localStorage.getItem('token');
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url:'http://localhost:3010/auth/current-user',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      data: {}
+    }
+  
+    axios(config)
+      .then((response) => {
+
+        if (response.data.code == 200) {
+
+          console.log('if', response.data.data);
+          setCurrentUserDetails(response.data.data)
+          setFull_name(response.data.data.full_name)
+        } else {
+          console.log('else', response);
+          
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+  
+        // dispatch({ type: 'LOGIN_FAILURE' })
+      })
 }

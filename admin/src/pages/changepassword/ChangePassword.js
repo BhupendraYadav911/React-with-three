@@ -121,7 +121,7 @@ function ChangePassword(props) {
               onBlur={validateTextField}
             />
             {error.currentPassword && (
-              <span className="err">{error.currentPassword}</span>
+              <span className={classes.err}>{error.currentPassword}</span>
             )}
             <TextField
               id="New Password"
@@ -142,7 +142,7 @@ function ChangePassword(props) {
               onBlur={validateTextField}
             />
             {error.newPassword && (
-              <span className="err">{error.newPassword}</span>
+              <span className={classes.err}>{error.newPassword}</span>
             )}
             <TextField
               id="Confirm Password"
@@ -163,7 +163,7 @@ function ChangePassword(props) {
               onBlur={validateTextField}
             />
             {error.confirmPassword && (
-              <span className="err">{error.confirmPassword}</span>
+              <span className={classes.err}>{error.confirmPassword}</span>
             )}
             <div>
               <div className={classes.creatingButtonContainer}>
