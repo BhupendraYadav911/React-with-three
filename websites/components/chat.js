@@ -1,5 +1,6 @@
 import React from 'react'
-import { AppRegistry,StyleSheet, View, VrButton, Text, Animated, Image, asset } from 'react-vr'
+import { AppRegistry,StyleSheet, View, VrLine, Text, Animated, Image, asset } from 'react-vr'
+
 class Chat extends React.Component {
   constructor() {
     super()
@@ -12,11 +13,11 @@ class Chat extends React.Component {
       <View style={{
           //flexDirection: 'column',
         
-          width:1.7,
+          width:1.3,
           backgroundColor: "#fff",
           position: 'absolute',
           borderRadius: 0.10,
-          layoutOrigin: [1.1, 0.01],
+          layoutOrigin: [1.18, -0.06],
       }}>
           <Animated.View style={{
                borderTopLeftRadius: 0.08,
@@ -30,7 +31,7 @@ class Chat extends React.Component {
               <Image
                   style={{
                       marginTop: 0.07,
-                      marginBottom: 0.14,
+                      marginBottom: 0.07,
                       width: 0.3,
                       height: 0.3,
                   }}
@@ -49,10 +50,10 @@ class Chat extends React.Component {
     </Text>
     </Animated.View>
     <View style={{
-      marginLeft:0.7,
-      marginTop:0.2,
+      marginLeft:0.2,
+      marginTop:0.15,
         borderRadius: 0.03,
-        width:0.9,
+        width:1.0,
         textAlignVertical: 'right',
         // padding:0.02,
         backgroundColor: '#4092DF',
@@ -61,11 +62,12 @@ class Chat extends React.Component {
     <Text
       style={{
         padding:0.01,
-        marginRight:0.02,
+        marginRight:0.06,
         textAlign: 'right',
         textAlignVertical: 'right',
         color: '#fffff',
         fontSize:0.07,
+        marginBottom:0.02,
       }}
     >
   I want to buy a policy, please help me!
@@ -75,10 +77,10 @@ class Chat extends React.Component {
    
     <View style={{
       
-      marginTop:0.1,
+      marginTop:0.07,
       marginLeft:0.1,
         borderRadius: 0.03,
-        width:0.9,
+        width:1.0,
         textAlignVertical: 'left',
         // padding:0.02,
         backgroundColor: '#F4F6F8',
@@ -86,8 +88,10 @@ class Chat extends React.Component {
       }}>
     <Text
       style={{
-        padding:0.01,
-        margin:0.04,
+         padding:0.01,
+         marginBottom:0.02,
+        marginLeft:0.06,
+
         textAlign: 'left',
         textAlignVertical: 'left',
         color: '#213141',
@@ -98,8 +102,9 @@ class Chat extends React.Component {
     </Text>
     </View>
     <View style={{
-      marginLeft:1.3,
-      marginTop:0.1,
+      marginLeft:0.9,
+      marginTop:0.07,
+      marginBottom:0.04,
         borderRadius: 0.03,
         width:0.3,
         textAlignVertical: 'right',
@@ -109,8 +114,10 @@ class Chat extends React.Component {
       }}>
     <Text
       style={{
-        padding:0.01,
-        marginRight:0.02,
+        // padding:0.04,
+        // paddingLeft:0.01,
+        // paddingRight:0.05,
+        marginRight:0.06,
         textAlign: 'right',
         textAlignVertical: 'right',
         color: '#fffff',
@@ -120,17 +127,19 @@ class Chat extends React.Component {
   Surajit
     </Text>
     </View>
+   
+              
  <View
           style={{
+            borderTopWidth:0.004,
+            borderColor:'#DDDDDD',
             borderBottomLeftRadius: 0.08,
             borderBottomRightRadius: 0.08,
-           
+            // marginBottom:0.04,
             flexDirection: 'row',
-            paddingLeft: 0.1,
-            paddingRight: 0.1,
+            padding: 0.02,
           
-           
-
+            // paddingRight: 0.01,
           }}>
 <Text  style={{    color: '#8B8B8B',
                   textAlign: 'center',
@@ -145,7 +154,7 @@ class Chat extends React.Component {
                   width: 0.07,
                   height: 0.07,
                   marginTop:0.04,
-                  marginLeft:0.09
+                  marginLeft:0.2
                 }}
                 source={asset('send.png')}
               />

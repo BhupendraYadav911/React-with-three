@@ -16,9 +16,11 @@ import ProductTile from './components/ProductTile';
 import testData from './data/testData';
 import Voice from './components/Voice';
 import Visit from './components/Visit';
+import Wealth from './components/Wealth';
 import Chat from './components/chat';
 import ProductTile1 from './components/ProductTile1';
 import Accordion from './components/Accordion';
+
 // import ThankPage from './components/thanksPage';
 
 const INFO_BUTTON_IMAGE = asset('help-desk.png');
@@ -256,6 +258,7 @@ export default class App extends React.Component {
         <ProductTile />
         
         <Voice/>
+        {/* <Wealth/> */}
         {/* <Chat/> */}
 
         {/* <ThankPage/> */}

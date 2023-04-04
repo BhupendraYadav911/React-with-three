@@ -12,24 +12,24 @@ class Voice extends React.Component {
       rotateY: new Animated.Value(0),
       active: false
     }
+    this.onButtonEnter1 = this.onButtonEnter1.bind(this)
+    this.onButtonExit1 = this.onButtonExit1.bind(this)
     this.onButtonEnter = this.onButtonEnter.bind(this)
-    this.onButtonExit = this.onButtonExit.bind(this)
-    this.onButtonEnter2 = this.onButtonEnter2.bind(this)
-    this.onButtonExit2 = this.onButtonExit2.bind(this)
+    this.onButtonExit= this.onButtonExit.bind(this)
   }
  
-  onButtonEnter() {
+  onButtonEnter1() {
     this.setState({ showTooltip: true })
   }
 
-  onButtonExit() {
+  onButtonExit1() {
     this.setState({ showTooltip: false })
   }
-  onButtonEnter2() {
+  onButtonEnter() {
     this.setState({ chatting: true })
   }
 
-  onButtonExit2() {
+  onButtonExit() {
     this.setState({ chatting: false })
   }
   render() {
@@ -65,14 +65,14 @@ class Voice extends React.Component {
                   marginTop:0.04,
                   marginLeft:0.09
                 }}
-                onEnter={this.onButtonEnter2}
-             
+                onEnter={this.onButtonEnter}
+                // onExit={this.onButtonExit} 
                 source={asset('send.png')}
               />
            
      
           </View>
-          {this.state.chatting && <Chat onExit={this.onButtonExit2} />}
+          {this.state.chatting && <Chat/>}
       <VrButton
             style={{
             //  borderColor: 'black',
@@ -92,8 +92,8 @@ class Voice extends React.Component {
                 height: 0.170
               }}
               source={asset('noun-voice.png')}
-              onEnter={this.onButtonEnter}
-              onExit={this.onButtonExit}
+              onEnter={this.onButtonEnter1}
+              onExit={this.onButtonExit1}
             />
              {/* <Image
               style={{
