@@ -2,7 +2,7 @@
 import React from 'react'
 import { asset, View, Image, Text, VrButton, Animated } from 'react-vr'
 import Accordion from './Accordion'
-import ThankPage from './thanksPage'
+
 /*
  AddButton Component
 
@@ -18,7 +18,7 @@ class ProductTile extends React.Component {
       isHovering: false,
       isHovering2: false,
       nested: false,
-      msg: true,
+      msg: false,
       translateY: new Animated.Value(0),
       opacity: new Animated.Value(0),
       rotateY: new Animated.Value(0),
@@ -220,13 +220,93 @@ class ProductTile extends React.Component {
                 width: 0.170,
                 height: 0.170
               }}
-            onEnter={this.onButtonExit3}
+            onEnter={this.onButtonEnter3}
               source={asset('noun-financial.png')}
               
             />
           </VrButton>
-          {this.state.msg&& <ThankPage   />}
-          {/* <ThankPage/> */}
+          {this.state.msg&& 
+           <Animated.View>
+           <View style={{
+               //flexDirection: 'column',
+               padding: 0.11,
+               width:1.3,
+               backgroundColor: "#fff",
+               position: 'absolute',
+               borderRadius: 0.10,
+               layoutOrigin: [1.3, 0.5],
+           }}>
+               <Animated.View style={{
+                  
+                   padding: 0.11,
+                   alignItems: 'center',
+                   justifyContent: 'center',
+                       
+               }}>
+                   <Image
+                       style={{
+                           marginTop: -0.07,
+                           marginBottom: 0.14,
+                           width: 0.3,
+                           height: 0.3,
+                       }}
+                       source={asset('0402f191875dee6fa4cdec21c5a0bd1a.png')}
+                   />
+                    
+         <Text
+           style={{
+             textAlign: 'center',
+             textAlignVertical: 'center',
+             fontWeight: '500',
+             color: '#000000'
+           }}
+         >
+         Thank You!
+         </Text>
+         <Text
+           style={{
+               marginBottom: 0.11,
+             textAlign: 'center',
+             textAlignVertical: 'center',
+             color: '#000000',
+             fontSize:0.07
+           }}
+         >
+        Thanks! you will receive a copy of this communication on your registered Email id. Please expect a response within 10 working days. 
+         </Text>
+       
+               </Animated.View>
+               <VrButton
+       style={{
+         borderRadius: 0.03,
+         borderWidth: 0.005,
+         backgroundColor:'#4092DF',
+         borderColor: '#4092DF',
+         padding: 0.05,
+         paddingLeft: 0.1,
+         paddingRight: 0.1,
+       }}
+       onEnter={this.onButtonExit3}
+     >
+       <Text
+         style={{
+           color: '#fffff',
+           fontWeight: '500',
+           textAlign: 'center',
+           textAlignVertical: 'center',
+           fontSize: 0.075
+         }}
+       >
+        OK
+       </Text>
+     </VrButton>
+             
+           </View >
+           </Animated.View>
+          
+          
+          
+          }
           <VrButton
             style={{
               borderColor: 'transparent',
