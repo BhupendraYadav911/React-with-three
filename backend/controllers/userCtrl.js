@@ -283,7 +283,8 @@ async function forgotPassword(req, res) {
                 /*  return res.status(404).send(Response(404, `Invalid old password ${req.body.oldPassword}`)); */
             }
             // send email to register email
-            Sendemail(req.body.email, 'Forgot password', resetToken);
+           // Sendemail(req.body.email, 'Forgot password', resetToken);
+            console.log(resetToken)
             res.status(201).send(Response(200, "Please check your email for reset instructions! "));
         }).catch(err => {
             res.status(500).send(Response(500, "Some error occurred while retrieving user."));
@@ -309,6 +310,7 @@ async function resetPassword(req, res) {
         // bcrypt.compare(req.body.confirmPassword, req.body.newPassword, function (err, result) {
         //     console.log('passUser',req.body,result);
         //     if (result == true) {
+            
         req.body.newPassword = bcrypt.hashSync(req.body.newPassword, saltRounds);
         User.findOneAndUpdate(
             { _id: passUser._id },
@@ -322,6 +324,7 @@ async function resetPassword(req, res) {
         }).catch(err => {
             res.status(500).send(Response(500, "Some error occurred while retrieving user."));
         });
+// res.status(201).send(Response(200, "You have successfully reset your password.", {}));
         //     } else {
         //         res.json({ status: "false", response: "The password and confirmation password do not match.", data: {} });
         //     }

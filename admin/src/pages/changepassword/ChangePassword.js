@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
  message,
  Alert
@@ -6,7 +6,7 @@ import {
 import { Grid, Button, Tab, TextField } from "@material-ui/core";
 import classNames from "classnames";
 import { useHistory ,useParams} from "react-router-dom";
-import { useUserDispatch, updateBanner,changePassword } from '../../context/UserContext'
+import { useUserDispatch, updateBanner,changePassword,getProfile } from '../../context/UserContext'
 // styles
 
 import useStyles from "./styles";

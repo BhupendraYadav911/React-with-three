@@ -4,11 +4,9 @@ import {
  message
 } from 'antd';
  const access_token = localStorage.getItem('token')
-
-
 var UserStateContext = React.createContext()
 var UserDispatchContext = React.createContext()
-var baseURL = "http://103.120.178.54:3010";
+var baseURL = process.env.REACT_APP_API_URL;
 function userReducer(state, action) {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
@@ -51,7 +49,7 @@ function useUserDispatch() {
   return context
 }
 
-export { UserProvider, useUserState, useUserDispatch, loginUser, forgetPass, resetPassUser, signOut, currentUser,updateBanner ,getBanner,changePassword,updateProfile,getProfile}
+export { UserProvider, useUserState, useUserDispatch, loginUser, forgetPass, resetPassUser, signOut, currentUser,updateBanner ,getBanner,changePassword,updateProfile,getProfile,forgotPassword}
 
 // ###########################################################
 
@@ -135,43 +133,95 @@ function forgetPass(emailValue) {
       // dispatch({ type: 'LOGIN_FAILURE' })
     })
 }
-function resetPassUser(dispatch, resetToken, passwordValue, passwordConfirmValue, history, setIsLoading, setError) {
-  setError(false)
-  setIsLoading(true)
+// function resetPassUser(dispatch, passwordValue, passwordConfirmValue, history, setIsLoading, setError,setMessage,setRrrr) {
+//  // setError(false)
+//   //setIsLoading(true)
+//   const a = window.location.href;
+//   const b = "http://localhost:3011/#/resetpassword/token="
+//   const isToken = a.substring(b.length)
+//   let data = JSON.stringify({
+//     resetToken: isToken,
+//     newPassword: passwordValue,
+//     confirmPassword: passwordConfirmValue
+//   })
+
+//   let config = {
+//     method: 'post',
+//     maxBodyLength: Infinity,
+//     url: baseURL + '/auth/reset-password',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     data: data
+//   }
+
+//   axios(config)
+//     .then((response) => {
+//       if (response.data.code == 200) {
+//         console.log('if', response);
+//         console.log(response.data.message)
+//         return response;
+//       } else {
+//         console.log('else', response);
+//       }
+//     })
+//     .catch((error) => {
+//       console.log(error)
+//       setError(true)
+//       setIsLoading(false)
+//       // dispatch({ type: 'LOGIN_FAILURE' })
+//     })
+// }
+
+function resetPassUser(
+  passwordValue,
+  confirmpasswordValue,
+  setIsLoading,
+  setMessage,
+  setError,
+  history
+) {
+  const a = window.location.href;
+  const b = "http://localhost:3011/#/resetpassword/token=";
+  const isToken = a.substring(b.length);
   let data = JSON.stringify({
-    resetToken: resetToken,
+    resetToken: isToken,
     newPassword: passwordValue,
-    confirmPassword: passwordConfirmValue
-  })
+    confirmPassword: confirmpasswordValue,
+  });
 
   let config = {
-    method: 'post',
+    method: "post",
     maxBodyLength: Infinity,
-    url: baseURL + '/auth/reset-password',
+    url: "http://103.120.178.54:3010/auth/reset-password",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    data: data
-  }
+    data: data,
+  };
 
   axios(config)
     .then((response) => {
       if (response.data.code == 200) {
-        setError(null)
-        setIsLoading(false)
-        console.log('if', response);
-        alert(response.data.message);
-        history.push('/login')
+        setError(null);
+        setIsLoading(false);
+        setMessage(response.data.message);
+        // console.log('if', response);
+        // alert(response.data.message);
+        setTimeout(()=>{
+        history.push("/login")}
+        ,10000);
       } else {
-        console.log('else', response);
+        console.log("else", response);
+        setError(response.data.message)
       }
     })
     .catch((error) => {
-      console.log(error)
-      setError(true)
-      setIsLoading(false)
+      console.log(error);
+      setError(true);
+      setIsLoading(false);
       // dispatch({ type: 'LOGIN_FAILURE' })
-    })
+    });
 }
 function signOut(dispatch, history) {
   localStorage.removeItem('token')
@@ -218,7 +268,7 @@ function getBanner(setData){
     let config = {
       method: 'GET',
       maxBodyLength: Infinity,
-      url:'http://localhost:3010/setting/banner',
+      url: baseURL + '/setting/banner',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
@@ -234,18 +284,6 @@ function getBanner(setData){
   
         // dispatch({ type: 'LOGIN_FAILURE' })
       })
-
-
-
-
-
-
-
-
-
-  // fetch('http://localhost:3010/setting/banner')
-  //   .then(response => response.json())
-  //     .then(json => setData(json.data))
 }
 
 
@@ -254,7 +292,7 @@ function updateBanner(value,setIsModalOpen,setSuccess,setData){
     let config = {
       method: 'PUT',
       maxBodyLength: Infinity,
-      url:'http://localhost:3010/setting/upadte-banner',
+      url: baseURL + '/setting/upadte-banner',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
@@ -276,48 +314,15 @@ function updateBanner(value,setIsModalOpen,setSuccess,setData){
   
         // dispatch({ type: 'LOGIN_FAILURE' })
       })
-
-
-
-
-
-//  var authAuthorization =
-//         'Bearer ' +
-//         `${access_token}`;
-
-
-//  fetch("http://localhost:3010/setting/upadte-banner", {
-//   method: "PUT",
-//     headers: {
-//           Authorization: authAuthorization,
-//           'Content-Type': 'application/json',
-//         },
-//   body: value,
-// })
-//   .then((response) => response.json())
-//   .then((result) => {
-//     getBanner();
-//     setTimeout(()=>{
-//       setIsModalOpen(false)
-//     },2000)
-//      setSuccess({
-//               message: 'Banner update successfully',
-//             });
-     
-//    })
-//   .catch((error) => {
-//     console.error("Error:", error);
-//   });
   
 }
 
-function changePassword(value,setSuccess,setIsTrue){
-
+function changePassword(value,setSuccess,setIsTrue,setErrors){
 const token = localStorage.getItem('token');
     let config = {
       method: 'POST',
       maxBodyLength: Infinity,
-      url:'http://localhost:3010/auth/change-password',
+      url: baseURL + '/auth/change-password',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
@@ -327,7 +332,7 @@ const token = localStorage.getItem('token');
   
     axios(config)
       .then((response) => {
- setIsTrue(true)
+     setIsTrue(true)
    setSuccess({
               message: 'password change successfully',
             });
@@ -338,26 +343,6 @@ const token = localStorage.getItem('token');
   
         // dispatch({ type: 'LOGIN_FAILURE' })
       })
-
-//  fetch("http://localhost:3010/auth/change-password", {
-//   method: "POST",
-//     headers: {
-//           Authorization: authAuthorization,
-//           'Content-Type': 'application/json',
-//         },
-//   body: value,
-// })
-//   .then((response) => response.json())
-//   .then((result) => {
-//     setIsTrue(true)
-//    setSuccess({
-//               message: 'password change successfully',
-//             });
-//   })
-//   .catch((error) => {
-//     console.error("Error:", error);
-//   });
-  
 }
 
 function updateProfile(value,setSuccess){
@@ -365,7 +350,7 @@ function updateProfile(value,setSuccess){
     let config = {
       method: 'POST',
       maxBodyLength: Infinity,
-      url:'http://localhost:3010/auth/update-user-profile',
+      url: baseURL + '/auth/update-user-profile',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
@@ -398,7 +383,7 @@ function getProfile(setCurrentUserDetails,setFull_name){
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url:'http://localhost:3010/auth/current-user',
+      url: baseURL + '/auth/current-user',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
@@ -424,4 +409,32 @@ function getProfile(setCurrentUserDetails,setFull_name){
   
         // dispatch({ type: 'LOGIN_FAILURE' })
       })
+}
+
+function forgotPassword(email,setMessage,setEmail){
+    let data = JSON.stringify({
+      email: email
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'http://localhost:3010/auth/forgot-password',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+      setEmail("");
+      setMessage('Password Reset Link Send Successfully')
+    })
+    .catch((error) => {
+      console.log(error);
+      setEmail("");
+      setMessage('Enter Registered Email Id')
+    });
 }

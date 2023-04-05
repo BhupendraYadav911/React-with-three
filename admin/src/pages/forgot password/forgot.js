@@ -18,7 +18,7 @@ import useStyles from "./styles";
 import newbanner from '../login/newbanner.avif'
 
 // context
-import { useUserDispatch, loginUser } from "../../context/UserContext";
+import { useUserDispatch, loginUser,forgotPassword } from "../../context/UserContext";
 import { toast } from "react-toastify";
 
 const ForgotPassword = (props) => {
@@ -50,32 +50,7 @@ const ForgotPassword = (props) => {
     setMessage(false)
   }
   const sendLink = async (e) => {    
-    // const axios =  require('axios');
-    let data = JSON.stringify({
-      email: email
-    });
-    
-    let config = {
-      method: 'post',
-      maxBodyLength: Infinity,
-      url: 'http://103.120.178.54:3010/auth/forgot-password',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      data : data
-    };
-    
-    axios.request(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-      setEmail("");
-      setMessage('Password Reset Link Send Successfully')
-    })
-    .catch((error) => {
-      console.log(error);
-      setEmail("");
-      setMessage('Enter Registered Email Id')
-    });
+    forgotPassword(email,setMessage,setEmail)
   }
 
   return (

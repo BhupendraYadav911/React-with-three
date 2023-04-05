@@ -21,7 +21,7 @@ function Profile(props) {
   const [full_name,setFull_name]=useState('')
   const [user_photo,setUserphoto]=useState()
   const [success,setSuccess] = useState('')
-console.log(success)
+
  useEffect(() => {
    getProfile(setCurrentUserDetails,setFull_name)
   }, [])
