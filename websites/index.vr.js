@@ -16,6 +16,7 @@ import ProductTile from './components/ProductTile';
 import testData from './data/testData';
 import Voice from './components/Voice';
 import Visit from './components/Visit';
+import ServiceAccordion from './components/ServiceAccordion';
 import Wealth from './components/Wealth';
 import Chat from './components/chat';
 import ProductTile1 from './components/ProductTile1';
@@ -215,6 +216,7 @@ export default class App extends React.Component {
           }}
           source={asset('hdfc3.jpeg')}
         />
+        <ServiceAccordion/>
          
         {/* righit bannar */}
         {/* <Video

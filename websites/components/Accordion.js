@@ -3,12 +3,10 @@ import { AppRegistry, View, VrButton, Text, Animated, Image, asset } from 'react
 
 class Accordion extends React.Component {
   constructor() {
-
- 
     super()
     this.state = {
       isHovering: false, nested:false,
-      translateZ: new Animated.Value(0),
+      translateY: new Animated.Value(0),
       opacity: new Animated.Value(0),
       rotateY: new Animated.Value(0),
       active: false,
@@ -18,8 +16,6 @@ class Accordion extends React.Component {
   onButtonEnter1() {
     this.setState({ isHovering: true })
   }
-
-
   // componentDidMount() {
   //   setTimeout(() => {
   //     this.setState({ isHovering: true })
@@ -27,16 +23,14 @@ class Accordion extends React.Component {
   // }
   render() {
     return (
-      
       <Animated.View style={{
         //AlignVertical: 'left',
-         layoutOrigin: [0.9, 0.3],
-        //  layoutOrigin: [1.01, 0.1],
-         position: 'absolute', 
-          zIndex: 100,
-         opacity: this.state.opacity,
+         layoutOrigin: [1.01, 0.1],
+         position: 'absolute',  zIndex: 100,
+  
+        // opacity: this.state.opacity,
         transform: [
-          {translateZ: this.state.translateZ},
+          {translateY: this.state.translateY},
           {rotateY: this.state.rotateY}
         ]
         }}>
@@ -51,7 +45,10 @@ class Accordion extends React.Component {
           <VrButton
             style={{
               flexDirection: 'row',
-              paddingBottom: 0.1
+              paddingBottom: 0.1,
+              justifyContent:'space-between',
+              paddingLeft:0.02,
+              paddingRight:0.08,
             }}
             onClick={this.onButtonEnter1}>
             <Text
@@ -65,9 +62,9 @@ class Accordion extends React.Component {
             <Image
               style={{
                 width: 0.1,
-                height: 0.1,
-                marginLeft: 0.74,
-                textAlign: 'right'
+                // height: 0.1,
+                // marginLeft: 0.74,
+                // textAlign: 'right'
               }}
               source={asset('right.jpg')}
             />
@@ -87,6 +84,9 @@ class Accordion extends React.Component {
           <VrButton
             style={{
               flexDirection: 'row',
+              justifyContent:'space-between',
+              paddingLeft:0.02,
+              paddingRight:0.08,
               paddingTop: 0.1,
               paddingBottom: 0.1
             }}>
@@ -102,8 +102,8 @@ class Accordion extends React.Component {
               style={{
                 width: 0.1,
                 height: 0.1,
-                marginLeft: 0.72,
-                textAlign: 'right'
+                // marginLeft: 0.72,
+                // textAlign: 'right'
               }}
               source={asset('right.jpg')}
             />
@@ -111,6 +111,9 @@ class Accordion extends React.Component {
           <VrButton
             style={{
               flexDirection: 'row',
+              justifyContent:'space-between',
+              paddingLeft:0.02,
+              paddingRight:0.08,
               paddingTop: 0.1,
               paddingBottom: 0.1
             }}>
@@ -126,8 +129,8 @@ class Accordion extends React.Component {
               style={{
                 width: 0.1,
                 height: 0.1,
-                marginLeft: 0.42,
-                textAlign: 'right'
+                // marginLeft: 0.42,
+                // textAlign: 'right'
               }}
               source={asset('right.jpg')}
             />
@@ -135,6 +138,9 @@ class Accordion extends React.Component {
           <VrButton
             style={{
               flexDirection: 'row',
+              justifyContent:'space-between',
+              paddingLeft:0.02,
+              paddingRight:0.08,
               paddingTop: 0.1,
               paddingBottom: 0.1
             }}>
@@ -150,8 +156,8 @@ class Accordion extends React.Component {
               style={{
                 width: 0.1,
                 height: 0.1,
-                marginLeft: 0.65,
-                textAlign: 'right'
+                // marginLeft: 0.65,
+                // textAlign: 'right'
               }}
               source={asset('right.jpg')}
             />
@@ -159,6 +165,9 @@ class Accordion extends React.Component {
           <VrButton
             style={{
               flexDirection: 'row',
+              justifyContent:'space-between',
+              paddingLeft:0.02,
+              paddingRight:0.08,
               paddingTop: 0.1
             }}>
             <Text
@@ -173,8 +182,8 @@ class Accordion extends React.Component {
               style={{
                 width: 0.1,
                 height: 0.1,
-                textAlign: 'right',
-                marginLeft: 0.10,
+                // textAlign: 'right',
+                // marginLeft: 0.10,
               }}
               source={asset('right.jpg')}
             />
@@ -210,16 +219,16 @@ class Accordion extends React.Component {
       </Animated.View>
     )
   }
- 
+  
   componentDidMount() {
-    this.state.translateZ.setValue(1);
-    //this.state.opacity.setValue(0);
+    this.state.translateY.setValue(1);
+    this.state.opacity.setValue(0);
     Animated.parallel([
       Animated.timing(
-        this.state.translateZ,
+        this.state.translateY,
         {
           toValue: 0,
-          duration: 2000,
+          duration: 750,
           delay: this.props.animationDelay || 0
          
         }
@@ -228,7 +237,7 @@ class Accordion extends React.Component {
         this.state.opacity,
         {
           toValue: 1,
-          duration: 2750,
+          duration: 750,
            delay: this.props.animationDelay || 0
         }
       )
@@ -241,7 +250,7 @@ class Accordion extends React.Component {
       Animated.timing(
         this.state.rotateY,
         {
-          toValue: 90,
+          toValue: 180,
           duration: 750
         }
       ).start();
