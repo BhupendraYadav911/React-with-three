@@ -283,7 +283,7 @@ async function forgotPassword(req, res) {
                 /*  return res.status(404).send(Response(404, `Invalid old password ${req.body.oldPassword}`)); */
             }
             // send email to register email
-           // Sendemail(req.body.email, 'Forgot password', resetToken);
+            Sendemail(req.body.email, 'Forgot password', resetToken);
             console.log(resetToken)
             res.status(201).send(Response(200, "Please check your email for reset instructions! "));
         }).catch(err => {

@@ -135,8 +135,13 @@ export default makeStyles(theme => ({
     height: 1,
     backgroundColor: theme.palette.text.hint + "40",
   },
-  errorMessage: {
+ errorMessage: {
     textAlign: "center",
+    color: "#ff3333",
+  },
+ 
+  errorSuccesMessage: {
+    color: "#4BB543",
   },
   textFieldUnderline: {
     "&:before": {

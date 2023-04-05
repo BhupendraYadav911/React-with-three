@@ -86,10 +86,13 @@ function ResetPassword(props) {
             <Tabs centered>
               <Tab label="Reset Password" classes={{ root: classes.tab }} />
             </Tabs>
-             <Typography color="primary" className={classes.errorMessage}>
+            
+  <Typography className={classes.errorMessage}>
           {error}
+          </Typography>
+          <Typography className={classes.succesMessage}>
           {message}
-        </Typography>
+          </Typography>
             {activeTabId === 0 && (
               <React.Fragment>
                 <TextField
