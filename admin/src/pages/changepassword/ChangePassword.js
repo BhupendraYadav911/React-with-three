@@ -1,19 +1,30 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
- message,
- Alert
-} from 'antd';
-import { Grid, Button, Tab, TextField } from "@material-ui/core";
-import classNames from "classnames";
-import { useHistory ,useParams} from "react-router-dom";
-import { useUserDispatch, updateBanner,changePassword,getProfile } from '../../context/UserContext'
+  Grid,
+  Button,
+  Tab,
+  TextField,
+  Typography,
+  CircularProgress,
+  InputAdornment,
+} from "@material-ui/core";
+
+import { changePassword, getProfile } from "../../context/UserContext";
 // styles
 
 import useStyles from "./styles";
+import {
+  EmailRounded,
+  VisibilityOffRounded,
+  VisibilityRounded,
+} from "@material-ui/icons";
 function ChangePassword(props) {
-  const[success,setSuccess]=useState('')
-  const[isTrue,setIsTrue]=useState(false)
-   const [input, setTextField] = useState({
+  const [success, setSuccess] = useState("");
+  const [isTrue, setIsTrue] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [input, setTextField] = useState({
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
@@ -25,23 +36,17 @@ function ChangePassword(props) {
     confirmPassword: "",
   });
   var classes = useStyles();
-    const id = useParams();
-    var value = JSON.stringify({
-        _id:id,
-        oldPassword:input.currentPassword,
-        newPassword:input.newPassword
-      })
+  const value = {
+    oldPass: input.currentPassword,
+    newPass: input.newPassword,
+  };
 
   function handleSubmit(e) {
     e.preventDefault();
-    changePassword(value,setSuccess,setIsTrue)
-
+    changePassword(value, setSuccess, setIsTrue, setMessage, setIsLoading);
   }
 
- 
-
   const onTextFieldChange = (e) => {
-   
     const { name, value } = e.target;
     setTextField((prev) => ({
       ...prev,
@@ -55,38 +60,6 @@ function ChangePassword(props) {
     setError((prev) => {
       const stateObj = { ...prev, [name]: "" };
 
-      switch (name) {
-        case "currentPassword":
-          if (!value) {
-            stateObj[name] = "Please enter Current Password.";
-          }
-          break;
-
-        case "newPassword":
-          if (!value) {
-            stateObj[name] = "Please enter New Password.";
-          } else if (input.confirmPassword && value !== input.confirmPassword) {
-            stateObj["confirmPassword"] =
-              "New Password and Confirm Password does not match.";
-          } else {
-            stateObj["confirmPassword"] = input.confirmPassword
-              ? ""
-              : error.confirmPassword;
-          }
-          break;
-
-        case "confirmPassword":
-          if (!value) {
-            stateObj[name] = "Please enter Confirm Password.";
-          } else if (input.newPassword && value !== input.newPassword) {
-            stateObj[name] = "NewPassword and Confirm Password does not match.";
-          }
-          break;
-
-        default:
-          break;
-      }
-
       return stateObj;
     });
   };
@@ -95,12 +68,9 @@ function ChangePassword(props) {
       <div className={classes.formContainer}>
         <React.Fragment>
           <Tab label="Change Password" classes={{ root: classes.tab }} />
-         {success && (
-                <Alert
-                  message={success.message}
-                  type="success"
-                />
-              )}
+
+          <Typography className={classes.succesMessage}>{message}</Typography>
+
           <form onSubmit={handleSubmit}>
             <TextField
               id="Current Password"
@@ -110,18 +80,26 @@ function ChangePassword(props) {
                   underline: classes.textFieldUnderline,
                   input: classes.textField,
                 },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <VisibilityRounded />
+                  </InputAdornment>
+                ),
               }}
               margin="normal"
               placeholder="Current Password"
               type="password"
               variant="outlined"
               name="currentPassword"
+              fullWidth
               value={input.currentPassword}
               onChange={onTextFieldChange}
               onBlur={validateTextField}
             />
             {error.currentPassword && (
-              <span className={classes.err}>{error.currentPassword}</span>
+              <Typography className={classes.err}>
+                {error.currentPassword}
+              </Typography>
             )}
             <TextField
               id="New Password"
@@ -131,18 +109,26 @@ function ChangePassword(props) {
                   underline: classes.textFieldUnderline,
                   input: classes.textField,
                 },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <VisibilityRounded />
+                  </InputAdornment>
+                ),
               }}
               margin="normal"
               placeholder="New Password"
               type="password"
               variant="outlined"
               name="newPassword"
+              fullWidth
               value={input.newPassword}
               onChange={onTextFieldChange}
               onBlur={validateTextField}
             />
             {error.newPassword && (
-              <span className={classes.err}>{error.newPassword}</span>
+              <Typography className={classes.err}>
+                {error.newPassword}
+              </Typography>
             )}
             <TextField
               id="Confirm Password"
@@ -152,26 +138,41 @@ function ChangePassword(props) {
                   underline: classes.textFieldUnderline,
                   input: classes.textField,
                 },
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <VisibilityRounded />
+                  </InputAdornment>
+                ),
               }}
               margin="normal"
               placeholder="Confirm Password"
               type="password"
               variant="outlined"
               name="confirmPassword"
+              fullWidth
               value={input.confirmPassword}
               onChange={onTextFieldChange}
               onBlur={validateTextField}
             />
             {error.confirmPassword && (
-              <span className={classes.err}>{error.confirmPassword}</span>
+              <Typography className={classes.err}>
+                {error.confirmPassword}
+              </Typography>
             )}
             <div>
               <div className={classes.creatingButtonContainer}>
                 <Button
+                  disabled={
+                    input.newPassword != input.confirmPassword ||
+                    !input.currentPassword ||
+                    !input.newPassword ||
+                    !input.confirmPassword
+                  }
                   variant="contained"
                   color="primary"
                   size="large"
-                  type="submit">
+                  type="submit"
+                >
                   Change Password
                 </Button>
               </div>

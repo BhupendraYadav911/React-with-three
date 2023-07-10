@@ -5,15 +5,22 @@ export default makeStyles((theme) => ({
     height: "100vh",
     width: "100vw",
     display: "flex",
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
     position: "absolute",
     top: 0,
     left: 0,
   },
+  container1: {
+    width: "30%",
+    margin: "0 auto",
+    [theme.breakpoints.down("xs")]: {
+      width: "auto",
+    },
+  },
   logotypeContainer: {
-    backgroundColor: theme.palette.primary.main,
-    width: "60%",
+    // backgroundColor: theme.palette.primary.main,
+    width: "50%",
     height: "100%",
     display: "flex",
     flexDirection: "column",
@@ -22,9 +29,17 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       width: "50%",
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "none",
     },
+  },
+  imagetypeContainer: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   logotypeImage: {
     width: 165,
@@ -38,30 +53,28 @@ export default makeStyles((theme) => ({
       fontSize: 48,
     },
   },
+
   formContainer: {
-    width: "30%",
-    height: "50%",
+    width: "100%",
+    maxWidth: "600px",
+
+    padding: "24px",
+    margin: 12,
+
+    backgroundColor: "white",
+    boxShadow: "0 2px 8px 1px rgb(64 60 67 / 24%)",
+    borderRadius: "15px",
+    textAlign: "center",
+
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
-    borderRadius: "7px",
-    borderRadius:30,
-    boxShadow: "0 2px 8px 1px rgb(64 60 67 / 24%)",
-    margin: "4em",
-    padding: "2em",
-    [theme.breakpoints.down("md")]: {
-      width: "50%",
-    },
   },
-  form: {
-    width: 320,
-  },
+
   tab: {
     fontWeight: 400,
-    fontSize: 18,
-    paddingBottom: 30,
+    fontSize: 16,
   },
   greeting: {
     fontWeight: 500,
@@ -114,7 +127,11 @@ export default makeStyles((theme) => ({
     backgroundColor: theme.palette.text.hint + "40",
   },
   errorMessage: {
+    color: "red",
+  },
+  succesMessage: {
     textAlign: "center",
+    color: "green",
   },
   textFieldUnderline: {
     "&:before": {
@@ -129,7 +146,7 @@ export default makeStyles((theme) => ({
   },
 
   textField: {
-    width: 300,
+    // width: 300,
     height: "3px",
   },
   formButtons: {
@@ -140,20 +157,20 @@ export default makeStyles((theme) => ({
     alignItems: "center",
   },
 
-  formButtons1: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
   forgetButton: {
     textTransform: "none",
     fontWeight: 400,
   },
   loginLoader: {
     marginLeft: theme.spacing(4),
+  },
+  loginLoaders: {
+    width: "100px",
+    height: "100px",
+    borderRadius: "50%",
+    top: "50%",
+    left: "50%",
+    position: "absolute",
   },
   copyright: {
     marginTop: theme.spacing(4),
@@ -163,14 +180,14 @@ export default makeStyles((theme) => ({
       bottom: theme.spacing(2),
     },
   },
-  image:{
-    width:100,
-    height:100,
-    borderRadius:52
+  image: {
+    width: 100,
+    height: 100,
+    borderRadius: 52,
   },
-  circle:{
-    borderRadius:52,
-    width:50,
-    height:50
-  }
+  circle: {
+    borderRadius: 52,
+    width: 50,
+    height: 50,
+  },
 }));

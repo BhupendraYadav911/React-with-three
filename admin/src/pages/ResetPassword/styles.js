@@ -14,6 +14,9 @@ export default makeStyles(theme => ({
   container1: {
     width: "30%",
   margin: "0 auto",
+  [theme.breakpoints.down("xs")]: {	
+    width: "auto",	
+  },
   },
   logotypeContainer: {
     // backgroundColor: theme.palette.primary.main,
@@ -26,7 +29,7 @@ export default makeStyles(theme => ({
     [theme.breakpoints.down("md")]: {
       width: "50%",
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "none",
     },
   },
@@ -75,15 +78,15 @@ export default makeStyles(theme => ({
     // margin: "5em",
     padding: "3em",
     [theme.breakpoints.down("md")]: {
-      width: "50%",
+      // width: "50%",
     },
   },
   form: {
-    width: 320,
+    // width: 320,
   },
   tab: {
     fontWeight: 400,
-    fontSize: 18,
+    fontSize: 16,
   },
   greeting: {
     fontWeight: 500,
@@ -155,23 +158,23 @@ export default makeStyles(theme => ({
     },
   },
   textField: {
-    width: 300,
+    // width: 300,
     height: "3px",
   },
   formButtons: {
     width: "100%",
     marginTop: theme.spacing(4),
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  formButtons1: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-    display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
+  // formButtons1: {
+  //   width: "100%",
+  //   marginTop: theme.spacing(1),
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
   forgetButton: {
     textTransform: "none",
     fontWeight: 400,

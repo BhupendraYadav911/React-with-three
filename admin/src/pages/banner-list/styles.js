@@ -136,6 +136,11 @@ export default makeStyles(theme => ({
   },
   loginLoader: {
     marginLeft: theme.spacing(4),
+    
+  },
+  loginLoader1: {
+    width: "100px",  height: "100px",  borderRadius: "50%", top: "50%", left: "50%",position: "absolute"
+    
   },
   copyright: {
     marginTop: theme.spacing(4),

@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/styles";
-
 export default makeStyles(theme => ({
+  
   container: {
     height: "100vh",
     width: "100vw",
@@ -13,6 +13,13 @@ export default makeStyles(theme => ({
   container1: {
     width: "30%",
   margin: "0 auto",
+  [theme.breakpoints.down("xs")]: {
+    width: "auto!important",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "37%",
+  },
+
   },
   logotypeContainer: {
     // backgroundColor: theme.palette.primary.main,
@@ -25,7 +32,7 @@ export default makeStyles(theme => ({
     [theme.breakpoints.down("md")]: {
       width: "50%",
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "none",
     },
   },
@@ -64,7 +71,7 @@ export default makeStyles(theme => ({
   formContainer: {
     // width: "30%",
     // height: "45%",
-    display: "flex",
+    // display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
@@ -74,12 +81,12 @@ export default makeStyles(theme => ({
     // margin: "5em",
     padding: "3em",
     [theme.breakpoints.down("md")]: {
-      width: "50%",
+      // width: "50%",
     },
   },
-  form: {
-    width: 320,
-  },
+  // form: {
+  //   width: 320,
+  // },
   tab: {
     fontWeight: 400,
     fontSize: 18,
@@ -149,14 +156,16 @@ export default makeStyles(theme => ({
     },
   },
   textField: {
-    width: 300,
+    // width: 300,
     height: "3px",
   },
+  
+  
   formButtons: {
     width: "100%",
     marginTop: theme.spacing(4),
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
   },
   forgetButton: {
@@ -174,4 +183,5 @@ export default makeStyles(theme => ({
       bottom: theme.spacing(2),
     },
   },
-}));
+})
+);

@@ -26,7 +26,7 @@ const overrides = {
 };
 
 const themes = {
-  default: unstable_createMuiStrictModeTheme({ ...defaultTheme, ...overrides }),
+  default: unstable_createMuiStrictModeTheme({ ...defaultTheme, ...overrides}),
 };
 
 export default themes;

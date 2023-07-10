@@ -8,7 +8,10 @@ import {
   Tab,
   TextField,
   Fade,
+  InputAdornment,
 } from "@material-ui/core";
+import { EmailRounded, Lock as ChangepasswordIcon } from "@material-ui/icons";
+
 import { withRouter, useHistory } from "react-router-dom";
 
 // styles
@@ -79,20 +82,14 @@ function ResetPassword(props) {
         />
       </div>
       <Grid className={classes.container1}>
-       
-
         <div className={classes.formContainer}>
           <div className={classes.form}>
             <Tabs centered>
               <Tab label="Reset Password" classes={{ root: classes.tab }} />
             </Tabs>
-            
-  <Typography className={classes.errorMessage}>
-          {error}
-          </Typography>
-          <Typography className={classes.succesMessage}>
-          {message}
-          </Typography>
+
+            <Typography className={classes.errorMessage}>{error}</Typography>
+            <Typography className={classes.succesMessage}>{message}</Typography>
             {activeTabId === 0 && (
               <React.Fragment>
                 <TextField
@@ -103,8 +100,14 @@ function ResetPassword(props) {
                       underline: classes.textFieldUnderline,
                       input: classes.textField,
                     },
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <ChangepasswordIcon />
+                      </InputAdornment>
+                    ),
                   }}
                   value={passwordValue}
+                  fullWidth
                   onChange={setValue}
                   margin="normal"
                   type="password"
@@ -118,16 +121,22 @@ function ResetPassword(props) {
                       underline: classes.textFieldUnderline,
                       input: classes.textField,
                     },
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <ChangepasswordIcon />
+                      </InputAdornment>
+                    ),
                   }}
                   value={confirmpasswordValue}
                   onChange={(e) => checkValidation(e)}
+                  fullWidth
                   margin="normal"
                   placeholder="Confirm Password"
                   type="password"
                   variant="outlined"
                 />
 
-                <div className={classes.formButtons1}>
+                <div className={classes.formButtons}>
                   {isLoading ? (
                     <CircularProgress
                       size={26}
@@ -138,7 +147,6 @@ function ResetPassword(props) {
                       disabled={
                         passwordValue != confirmpasswordValue ||
                         (!passwordValue && !confirmpasswordValue)
-                        // confirmpasswordValue.length === 0 || passwordValue.length === 0
                       }
                       // onClick={() =>
                       //   loginUser(

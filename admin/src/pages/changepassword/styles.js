@@ -11,8 +11,15 @@ export default makeStyles((theme) => ({
     top: 0,
     left: 0,
   },
+  container1: {
+    width: "30%",
+  margin: "0 auto",
+  [theme.breakpoints.down("xs")]: { 
+    width: "auto",  
+  },
+  },
   logotypeContainer: {
-    backgroundColor: theme.palette.primary.main,
+    // backgroundColor: theme.palette.primary.main,
     width: "50%",
     height: "100%",
     display: "flex",
@@ -22,7 +29,7 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down("md")]: {
       width: "50%",
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "none",
     },
   },
@@ -39,25 +46,26 @@ export default makeStyles((theme) => ({
     },
   },
   formContainer: {
-    width: "45%",
-    height: "63%",
+    width: "100%",
+    maxWidth: "600px",
+
+    padding: "24px",
+    margin: 12,
+
+    backgroundColor: "white",
+    boxShadow: "0 2px 8px 1px rgb(64 60 67 / 24%)",
+    borderRadius: "15px",
+    textAlign: "center",
+
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
-    boxShadow: "0 2px 8px 1px rgb(64 60 67 / 24%)",
-    borderRadius: "30px",
-    textAlign:'center',
-    margin: "4em",
-    padding: "2em",
-    [theme.breakpoints.down("md")]: {
-      width: "50%",
-    },
+    
   },
 
   form: {
-    width: 320,
+    // width: 320,
   },
   tab: {
     fontWeight: 400,
@@ -116,6 +124,10 @@ export default makeStyles((theme) => ({
   },
   errorMessage: {
     textAlign: "center",
+    color: "#ff3333",
+  },
+  errorSuccesMessage: {
+    color: "#4BB543",
   },
   textFieldUnderline: {
     "&:before": {
@@ -130,7 +142,7 @@ export default makeStyles((theme) => ({
   },
 
   textField: {
-    width: 500,
+    // width: 500,
     height:"3px",
   },
 

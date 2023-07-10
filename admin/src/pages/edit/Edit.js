@@ -33,9 +33,10 @@ function Edit(props) {
             id="Banner type"
             margin="normal"
             placeholder=" Banner type"
+            fullWidth
             type="text"
             InputProps={{ disableUnderline: true }}
-            style={{ width: 320, border: " 1px solid ",borderRadius: '4px' }}
+            style={{  border: " 1px solid ",borderRadius: '4px' }}
           />
           <TextField
             className={classes.profileMenuIcon}
@@ -43,8 +44,9 @@ function Edit(props) {
             margin="normal"
             placeholder="Edit Photo"
             type="file"
+            fullWidth
             InputProps={{ disableUnderline: true }}
-            style={{ width: 320, border: "1px solid" ,borderRadius: '4px'}}
+            style={{  border: "1px solid" ,borderRadius: '4px'}}
           />
           <div>
             <div className={classes.creatingButtonContainer}>

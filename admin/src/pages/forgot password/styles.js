@@ -13,7 +13,11 @@ export default makeStyles(theme => ({
   container1: {
     width: "30%",
   margin: "0 auto",
+
+  [theme.breakpoints.down("xs")]: {
+    width: "auto",
   },
+},
   logotypeContainer: {
     // backgroundColor: theme.palette.primary.main,
     width: "50%",
@@ -25,9 +29,10 @@ export default makeStyles(theme => ({
     [theme.breakpoints.down("md")]: {
       width: "50%",
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("xs")]: {
       display: "none",
     },
+  
   },
   imagetypeContainer: {
     width: "100%",
@@ -64,7 +69,7 @@ export default makeStyles(theme => ({
   formContainer: {
     // width: "30%",
     // height: "30%",
-    display: "flex",
+    // display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
@@ -74,12 +79,12 @@ export default makeStyles(theme => ({
     // margin: "5em",
     padding: "3em",
     [theme.breakpoints.down("md")]: {
-      width: "50%",
+      // width: "50%",
     },
   },
-  form: {
-    width: 320,
-  },
+  // form: {
+  //   width: 320,
+  // },
   tab: {
     fontWeight: 400,
     fontSize: 18,
@@ -136,6 +141,11 @@ export default makeStyles(theme => ({
   },
   errorMessage: {
     textAlign: "center",
+    color:"red"
+  },
+  succesMessage: {
+    textAlign: "center",
+    color:"green"
   },
   textFieldUnderline: {
     "&:before": {
@@ -149,7 +159,7 @@ export default makeStyles(theme => ({
     },
   },
   textField: {
-    width: 300,
+    // width: 300,
     height: "3px",
   },
   formButtons: {
@@ -159,12 +169,18 @@ export default makeStyles(theme => ({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  formButtons1: {
-    width: "100%",
-    marginTop: theme.spacing(1),
-    display: "flex",
-    justifyContent: "space-between",    alignItems: "center",
-  },
+  // formButtons1: {
+  //   // width: "100%",
+  //   // marginTop: theme.spacing(2.5),
+  //   // display: "flex",
+  //   // justifyContent: "space-between",   
+  //   //  alignItems: "center",
+  //   marginTop: theme.spacing(2.5),
+  //   height: 46,
+  //   display: "flex",
+  //   justifyContent: "space-between",
+  //   alignItems: "center",
+  // },
   forgetButton: {
     textTransform: "none",
     fontWeight: 400,

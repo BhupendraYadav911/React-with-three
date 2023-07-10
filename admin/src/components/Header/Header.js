@@ -8,6 +8,7 @@ import {
   Menu,
   MenuItem,
   Fab,
+  Avatar,
   // Link
 } from "@material-ui/core";
 import {
@@ -15,6 +16,7 @@ import {
   // MailOutline as MailIcon,
   // NotificationsNone as NotificationsIcon,
   Person as AccountIcon,
+  Lock as ChangepasswordIcon,
   // Search as SearchIcon,
   Send as SendIcon,
   ArrowBack as ArrowBackIcon,
@@ -244,7 +246,8 @@ export default function Header(props) {
           aria-controls="profile-menu"
           onClick={e => setProfileMenu(e.currentTarget)}
         >
-          <AccountIcon classes={{ root: classes.headerIcon }} />
+          <Avatar alt="Remy Sharp" src={currentUserDetails?.user_photo} />
+          {/* <AccountIcon classes={{ root: classes.headerIcon }} /> */}
         </IconButton>
         <Menu
           id="mail-menu"
@@ -371,7 +374,7 @@ export default function Header(props) {
               classes.headerMenuItem,
             )}
             onClick={changePasswordRedict}>
-            <AccountIcon className={classes.profileMenuIcon} /> Change Password
+            <ChangepasswordIcon className={classes.profileMenuIcon} /> Change Password
           </MenuItem>
           <div className={classes.profileMenuUser}>
             <Typography

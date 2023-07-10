@@ -262,8 +262,8 @@ function currentUser() {
 
 
 
-function getBanner(setData){
-
+function getBanner(setIsLoading, setData){
+  setIsLoading(true);
  const token = localStorage.getItem('token');
     let config = {
       method: 'GET',
@@ -278,16 +278,18 @@ function getBanner(setData){
       .then((response) => {
      console.log(response.data.data)
      setData(response.data.data)
+     setIsLoading(false);
       })
       .catch((error) => {
         console.log(error)
+        setIsLoading(false);
   
         // dispatch({ type: 'LOGIN_FAILURE' })
       })
 }
 
 
-function updateBanner(value,setIsModalOpen,setSuccess,setData){
+function updateBanner(value,setIsModalOpen,setSuccess,ref,setRef){
  const token = localStorage.getItem('token');
     let config = {
       method: 'PUT',
@@ -301,13 +303,12 @@ function updateBanner(value,setIsModalOpen,setSuccess,setData){
     }
   axios(config)
       .then((response) => {
-       getBanner(setData);
-    setTimeout(()=>{
-      setIsModalOpen(false)
+      //  getBanner(setData);
+      setSuccess({message: response.data.message});
+      setTimeout(()=>{
+        setIsModalOpen(false)
+        setRef(!ref);
     },2000)
-     setSuccess({
-              message: 'Banner update successfully',
-            });
       })
       .catch((error) => {
         console.log(error)
@@ -317,33 +318,66 @@ function updateBanner(value,setIsModalOpen,setSuccess,setData){
   
 }
 
-function changePassword(value,setSuccess,setIsTrue,setErrors){
-const token = localStorage.getItem('token');
-    let config = {
-      method: 'POST',
-      maxBodyLength: Infinity,
-      url: baseURL + '/auth/change-password',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: value,
-    }
-  
-    axios(config)
-      .then((response) => {
-     setIsTrue(true)
-   setSuccess({
-              message: 'password change successfully',
-            });
-        
-      })
-      .catch((error) => {
-        console.log(error)
-  
-        // dispatch({ type: 'LOGIN_FAILURE' })
-      })
+function changePassword(value,setSuccess,setIsTrue,setIsLoading,setMessage,setErrors){
+  var data = JSON.stringify({
+      oldPassword:value.oldPass,
+      newPassword:value.newPass
+    })
+  console.log(data)
+  const token = localStorage.getItem('token');
+  let config = {
+    method: 'POST',
+    maxBodyLength: Infinity,
+    url: baseURL + '/auth/change-password',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    data: data,
+  }
+
+  axios(config)
+    .then((response) => {
+
+      if (response.data.code == 200) {
+        setIsTrue(true)
+        // setError(null);
+        setIsLoading(false);
+        setMessage(response.data.message);
+        // console.log('if', response);
+        // alert(response.data.message);
+        // setTimeout(()=>{
+        // history.push("/login")}
+        // ,10000);
+      } else {
+        console.log("else", response);
+        setMessage(response.data.response)
+        setIsLoading(false);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      setIsLoading(false);
+      // setError(true);
+      // setIsLoading(false);
+      // dispatch({ type: 'LOGIN_FAILURE' })
+    });
 }
+
+
+     
+ // setSuccess({
+ //            message: 'password change successfully',
+ //          });
+      
+    
+//     .catch((error) => {
+//       console.log(error)
+//       setErrors(response.response);
+
+//       // dispatch({ type: 'LOGIN_FAILURE' })
+//     })
+// }
 
 function updateProfile(value,setSuccess){
   const token = localStorage.getItem('token');
@@ -379,6 +413,7 @@ function updateProfile(value,setSuccess){
 }
 
 function getProfile(setCurrentUserDetails,setFull_name){
+  // setIsLoading(true);
   const token = localStorage.getItem('token');
     let config = {
       method: 'get',
@@ -395,17 +430,21 @@ function getProfile(setCurrentUserDetails,setFull_name){
       .then((response) => {
 
         if (response.data.code == 200) {
+          // setIsLoading(false);
 
           console.log('if', response.data.data);
           setCurrentUserDetails(response.data.data)
           setFull_name(response.data.data.full_name)
+          
         } else {
           console.log('else', response);
+          // setIsLoading(false);
           
         }
       })
       .catch((error) => {
         console.log(error)
+        // setIsLoading(false);
   
         // dispatch({ type: 'LOGIN_FAILURE' })
       })
